@@ -1,0 +1,95 @@
+{
+  "bicubic": {
+    "rgb_psnr": {
+      "mean": 25.47759198250429,
+      "n": 100
+    },
+    "rgb_ssim": {
+      "mean": 0.7092151636968802,
+      "n": 100
+    },
+    "y_psnr_shave4": {
+      "mean": 27.11402319467435,
+      "n": 100
+    },
+    "y_ssim_shave4": {
+      "mean": 0.7457878027723079,
+      "n": 100
+    }
+  },
+  "dit": {
+    "rgb_psnr": {
+      "mean": 21.87899226775902,
+      "n": 100
+    },
+    "rgb_ssim": {
+      "mean": 0.6140281991275234,
+      "n": 100
+    },
+    "y_psnr_shave4": {
+      "mean": 23.43597199280975,
+      "n": 100
+    },
+    "y_ssim_shave4": {
+      "mean": 0.6579756454729717,
+      "n": 100
+    }
+  },
+  "evidence_score_delta": 0,
+  "invented_psnr": false,
+  "n": 100,
+  "nearest": {
+    "rgb_psnr": {
+      "mean": 24.649166398187532,
+      "n": 100
+    },
+    "rgb_ssim": {
+      "mean": 0.6741864489323177,
+      "n": 100
+    },
+    "y_psnr_shave4": {
+      "mean": 26.22583325499199,
+      "n": 100
+    },
+    "y_ssim_shave4": {
+      "mean": 0.7117727897212687,
+      "n": 100
+    }
+  },
+  "note": "Metrics on TODAY box PNGs (same 100 stems). Do not attach 2026-08-23 laptop metrics. Not official 206.",
+  "official_full_table": false,
+  "paired_delta_dit_minus_bicubic": {
+    "rgb_psnr": {
+      "max": 4.015383134177814,
+      "mean_delta": -3.598599714745268,
+      "min": -11.053120949273197,
+      "n": 100
+    },
+    "y_psnr_shave4": {
+      "max": 4.050784169043194,
+      "mean_delta": -3.6780512018646063,
+      "min": -11.364908025424942,
+      "n": 100
+    }
+  },
+  "paired_delta_dit_minus_nearest": {
+    "rgb_psnr": {
+      "max": 5.947570436055614,
+      "mean_delta": -2.7701741304285092,
+      "min": -9.697771473499504,
+      "n": 100
+    },
+    "y_psnr_shave4": {
+      "max": 6.007966524154341,
+      "mean_delta": -2.789861262182238,
+      "min": -9.941937145966818,
+      "n": 100
+    }
+  },
+  "pixel_set": "2026-08-26-box-crop128",
+  "result_bucket": "subset_same_input_metrics",
+  "status": "ok",
+  "trusted_pair_eval_skipped": "evaluate-predictions pins 2026-08-23 reference SHA; must not pair today's pixels to that table",
+  "unlocks_004": false,
+  "written_utc": "20260826T122004Z"
+}

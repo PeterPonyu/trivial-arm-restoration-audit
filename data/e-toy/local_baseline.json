@@ -1,0 +1,74 @@
+{
+  "package_id": "005-dit4sr-eval",
+  "tier": "local_baseline",
+  "status": "ok",
+  "metrics": {
+    "unet_result.json": {
+      "model": "unet_baseline",
+      "args": {
+        "steps": 50,
+        "batch_size": 8,
+        "lr": 0.0002,
+        "device": "cuda",
+        "eval_steps": 30,
+        "seed": 0,
+        "out": "../findings_assets/unet_result.json"
+      },
+      "train": {
+        "final_loss": 0.08101406693458557,
+        "mean_last10_loss": 0.12453926876187324,
+        "elapsed_sec": 47.45730900764465,
+        "n_params": 16058179,
+        "n_steps": 50,
+        "batch_size": 8
+      },
+      "eval": {
+        "restored_psnr_mean": 14.72174519469468,
+        "restored_ssim_mean": 0.18981653238672305,
+        "degraded_input_psnr_mean": 20.752884960569773,
+        "degraded_input_ssim_mean": 0.45966576054526936,
+        "n_test_pairs": 10,
+        "num_inference_steps": 30
+      }
+    },
+    "dit_result.json": {
+      "model": "dit_restoration",
+      "args": {
+        "steps": 50,
+        "batch_size": 8,
+        "lr": 0.0002,
+        "device": "cuda",
+        "eval_steps": 30,
+        "seed": 0,
+        "out": "../findings_assets/dit_result.json"
+      },
+      "train": {
+        "final_loss": 0.991173267364502,
+        "mean_last10_loss": 0.9879925072193145,
+        "elapsed_sec": 1.584662675857544,
+        "n_params": 17961024,
+        "n_steps": 50,
+        "batch_size": 8
+      },
+      "eval": {
+        "restored_psnr_mean": 6.569656077565893,
+        "restored_ssim_mean": 0.0049536919979851005,
+        "degraded_input_psnr_mean": 20.752884960569773,
+        "degraded_input_ssim_mean": 0.45966576054526936,
+        "n_test_pairs": 10,
+        "num_inference_steps": 30
+      }
+    }
+  },
+  "vendor": {
+    "DiT4SR": true,
+    "DiffBIR": true
+  },
+  "sku_required": "24gb",
+  "notes": "Local smoke metrics re-export. Official DiT4SR eval on 24GB after weights.",
+  "blockers": [
+    "SD3.5-M + dit4sr weights",
+    "fr-005 env"
+  ],
+  "written_utc": "2026-08-11T05:16:23Z"
+}

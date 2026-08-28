@@ -1,0 +1,2583 @@
+{
+  "status": "ok",
+  "entry": "vendor/DiT4SR/test/test_wollava.py",
+  "model": "stable-diffusion-3.5-medium+dit4sr_q",
+  "vendor_help_ok": false,
+  "output_dir": "source-tree/005-dit-blind-restoration/vendor/DiT4SR/results",
+  "n_output_png": 13,
+  "sample": "100.png",
+  "sample_bytes": 374454,
+  "stems_ran": [
+    "100",
+    "101",
+    "102",
+    "103",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "110",
+    "111",
+    "112"
+  ],
+  "skipped_oom": [
+    "Canon_001_LR4",
+    "Canon_002_LR4",
+    "Canon_003_LR4",
+    "Canon_004_LR4",
+    "Canon_005_LR4",
+    "Canon_006_LR4",
+    "Canon_007_LR4",
+    "Canon_008_LR4",
+    "Canon_009_LR4",
+    "Canon_010_LR4",
+    "Canon_011_LR4",
+    "Canon_012_LR4",
+    "Canon_013_LR4",
+    "Canon_014_LR4",
+    "Canon_015_LR4",
+    "Canon_016_LR4",
+    "Canon_017_LR4",
+    "Canon_018_LR4",
+    "Canon_019_LR4",
+    "Canon_020_LR4",
+    "Canon_021_LR4",
+    "Canon_022_LR4",
+    "Canon_023_LR4",
+    "Canon_024_LR4",
+    "Canon_025_LR4",
+    "Canon_026_LR4",
+    "Canon_027_LR4",
+    "Canon_028_LR4",
+    "Canon_029_LR4",
+    "Canon_030_LR4",
+    "Canon_031_LR4",
+    "Canon_032_LR4",
+    "Canon_033_LR4",
+    "Canon_034_LR4",
+    "Canon_035_LR4",
+    "Canon_036_LR4",
+    "Canon_037_LR4",
+    "Canon_038_LR4",
+    "Canon_039_LR4",
+    "Canon_040_LR4",
+    "Canon_041_LR4",
+    "Canon_042_LR4",
+    "Canon_043_LR4",
+    "Canon_044_LR4",
+    "Canon_045_LR4",
+    "Canon_046_LR4",
+    "Canon_047_LR4",
+    "Canon_048_LR4",
+    "Canon_049_LR4",
+    "Canon_050_LR4",
+    "Canon_10_x1",
+    "Canon_14_x1",
+    "Canon_40_x1",
+    "Canon_42_x1",
+    "Canon_56_x1",
+    "DSC_0988_x1",
+    "DSC_1045_x1",
+    "DSC_1057_x1",
+    "DSC_1137_x1",
+    "DSC_1233_x1",
+    "DSC_1241_x1",
+    "DSC_1245_x1",
+    "DSC_1265_x1",
+    "DSC_1286_x1",
+    "DSC_1326_x1",
+    "DSC_1404_x1",
+    "DSC_1412_x1",
+    "DSC_1425_x1",
+    "DSC_1454_x1",
+    "DSC_1462_x1",
+    "DSC_1474_x1",
+    "DSC_1575_x1",
+    "DSC_1583_x1",
+    "DSC_1599_x1",
+    "DSC_1603_x1",
+    "IMG_107_x1",
+    "IMG_113_x1",
+    "IMG_118_x1",
+    "IMG_125_x1",
+    "IMG_130_x1",
+    "IMG_140_x1",
+    "IMG_143_x1",
+    "IMG_150_x1",
+    "IMG_181_x1",
+    "IMG_190_x1",
+    "IMG_203_x1",
+    "IMG_210_x1",
+    "Nikon_001_LR4",
+    "Nikon_002_LR4",
+    "Nikon_003_LR4",
+    "Nikon_004_LR4",
+    "Nikon_005_LR4",
+    "Nikon_006_LR4",
+    "Nikon_007_LR4",
+    "Nikon_008_LR4",
+    "Nikon_009_LR4",
+    "Nikon_010_LR4",
+    "Nikon_011_LR4",
+    "Nikon_012_LR4",
+    "Nikon_013_LR4",
+    "Nikon_014_LR4",
+    "Nikon_015_LR4",
+    "Nikon_016_LR4",
+    "Nikon_017_LR4",
+    "Nikon_018_LR4",
+    "Nikon_019_LR4",
+    "Nikon_020_LR4",
+    "Nikon_021_LR4",
+    "Nikon_022_LR4",
+    "Nikon_023_LR4",
+    "Nikon_024_LR4",
+    "Nikon_025_LR4",
+    "Nikon_026_LR4",
+    "Nikon_027_LR4",
+    "Nikon_028_LR4",
+    "Nikon_029_LR4",
+    "Nikon_030_LR4",
+    "Nikon_031_LR4",
+    "Nikon_032_LR4",
+    "Nikon_033_LR4",
+    "Nikon_034_LR4",
+    "Nikon_035_LR4",
+    "Nikon_036_LR4",
+    "Nikon_037_LR4",
+    "Nikon_038_LR4",
+    "Nikon_039_LR4",
+    "Nikon_040_LR4",
+    "Nikon_041_LR4",
+    "Nikon_042_LR4",
+    "Nikon_043_LR4",
+    "Nikon_044_LR4",
+    "Nikon_045_LR4",
+    "Nikon_046_LR4",
+    "Nikon_047_LR4",
+    "Nikon_048_LR4",
+    "Nikon_049_LR4",
+    "Nikon_050_LR4",
+    "P1140090_x1",
+    "P1140122_x1",
+    "P1140126_x1",
+    "P1140134_x1",
+    "P1140138_x1",
+    "P1140177_x1",
+    "P1140189_x1",
+    "P1140279_x1",
+    "P1140388_x1",
+    "P1140401_x1",
+    "P1140417_x1",
+    "P1140434_x1",
+    "P1160566_x1",
+    "P1160646_x1",
+    "P1160772_x1",
+    "P1160776_x1",
+    "P1171010_x1",
+    "P1171031_x1",
+    "P1171051_x1",
+    "panasonic_103_x1",
+    "panasonic_123_x1",
+    "panasonic_128_x1",
+    "panasonic_132_x1",
+    "panasonic_145_x1",
+    "panasonic_158_x1",
+    "panasonic_16_x1",
+    "panasonic_182_x1",
+    "panasonic_187_x1",
+    "panasonic_196_x1",
+    "panasonic_197_x1",
+    "panasonic_202_x1",
+    "panasonic_206_x1",
+    "panasonic_233_x1",
+    "panasonic_43_x1",
+    "panasonic_50_x1",
+    "panasonic_57_x1",
+    "panasonic_60_x1",
+    "panasonic_62_x1",
+    "panasonic_85_x1",
+    "sony_100_x1",
+    "sony_107_x1",
+    "sony_116_x1",
+    "sony_11_x1",
+    "sony_120_x1",
+    "sony_129_x1",
+    "sony_158_x1",
+    "sony_160_x1",
+    "sony_169_x1",
+    "sony_183_x1",
+    "sony_189_x1",
+    "sony_1_x1",
+    "sony_49_x1",
+    "sony_53_x1",
+    "sony_54_x1",
+    "sony_80_x1",
+    "sony_82_x1"
+  ],
+  "n_skipped_oom": 193,
+  "skipped_oom_detail": [
+    {
+      "stem": "Canon_001_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_002_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_003_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_004_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_005_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_006_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_007_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_008_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_009_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_010_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_011_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_012_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_013_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_014_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_015_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_016_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_017_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_018_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_019_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_020_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_021_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_022_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_023_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_024_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_025_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_026_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_027_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_028_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_029_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_030_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_031_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_032_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_033_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_034_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_035_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_036_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_037_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_038_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_039_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_040_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_041_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_042_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_043_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_044_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_045_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_046_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_047_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_048_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_049_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_050_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_10_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_14_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_40_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_42_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Canon_56_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_0988_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1045_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1057_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1137_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1233_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1241_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1245_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1265_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1286_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1326_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1404_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1412_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1425_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1454_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1462_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1474_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1575_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1583_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1599_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "DSC_1603_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_107_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_113_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_118_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_125_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_130_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_140_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_143_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_150_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_181_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_190_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_203_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "IMG_210_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_001_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_002_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_003_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_004_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_005_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_006_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_007_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_008_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_009_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_010_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_011_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_012_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_013_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_014_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_015_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_016_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_017_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_018_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_019_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_020_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_021_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_022_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_023_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_024_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_025_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_026_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_027_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_028_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_029_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_030_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_031_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_032_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_033_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_034_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_035_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_036_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_037_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_038_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_039_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_040_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_041_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_042_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_043_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_044_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_045_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_046_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_047_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_048_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_049_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "Nikon_050_LR4",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140090_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140122_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140126_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140134_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140138_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140177_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140189_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140279_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140388_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140401_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140417_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1140434_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1160566_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1160646_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1160772_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1160776_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1171010_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1171031_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "P1171051_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_103_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_123_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_128_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_132_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_145_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_158_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_16_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_182_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_187_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_196_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_197_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_202_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_206_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_233_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_43_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_50_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_57_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_60_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_62_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "panasonic_85_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_100_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_107_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_116_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_11_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_120_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_129_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_158_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_160_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_169_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_183_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_189_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_1_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_49_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_53_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_54_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_80_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    },
+    {
+      "stem": "sony_82_x1",
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    }
+  ],
+  "vram_budget": {
+    "max_upscaled_pixels": 393216,
+    "max_upscaled_long": 768,
+    "vram_mib": 32760,
+    "note": "32GB-safe: skip LQ whose vendor x4 upscaled H*W exceeds this budget. 128px class (512 output) is known-good; 512px RealSR (2048 output) OOM."
+  },
+  "blocker": "193 LQ skipped on vGPU-32GB (upscaled H*W exceeds 393216 px or long side 768; 512px RealSR x4->2048). PSNR is not computed and must not be invented.",
+  "note": "Official DiT4SR test_wollava wrote real PNGs for stems_ran only. 512px RealSR skipped for 32GB VRAM. PSNR is not computed here and must not be invented.",
+  "sd35_path": "source-tree/005-dit-blind-restoration/vendor/DiT4SR/preset/models/stable-diffusion-3.5-medium",
+  "dit4sr_q_path": "source-tree/005-dit-blind-restoration/vendor/DiT4SR/preset/models/dit4sr_q",
+  "sd35_ok": true,
+  "dit4sr_q_ok": true,
+  "free_gib": 36,
+  "min_gib": 30,
+  "config_only_rejected": true,
+  "local_snapshot_only": true,
+  "n_lq": 206,
+  "n_run": 13,
+  "stems_planned_run": [
+    "100",
+    "101",
+    "102",
+    "103",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "110",
+    "111",
+    "112"
+  ],
+  "n_skipped_no_prompt": 0,
+  "skipped_no_prompt": [],
+  "load_dir_sd35": "source-tree/005-dit-blind-restoration/results/sota_copy/core/local_snaps/sd35",
+  "load_dir_dit4sr_q": "source-tree/005-dit-blind-restoration/results/sota_copy/core/local_snaps/dit4sr_q",
+  "weight_snapshot_sd35": "source-tree/005-dit-blind-restoration/vendor/DiT4SR/preset/models/stable-diffusion-3.5-medium",
+  "weight_snapshot_dit4sr_q": "source-tree/005-dit-blind-restoration/vendor/DiT4SR/preset/models/dit4sr_q",
+  "package_id": "005-dit4sr-eval",
+  "mode": "REMOTE_SOTA",
+  "written_utc": "2026-08-16T06:29:08Z",
+  "do_not_invent_gpu_numbers": true,
+  "invented_psnr": false
+}

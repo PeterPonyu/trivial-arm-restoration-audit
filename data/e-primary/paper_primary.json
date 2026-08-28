@@ -1,0 +1,12 @@
+{
+  "direction": "005",
+  "tier": "paper_primary",
+  "name": "dit4sr_test_wollava",
+  "status": "blocked",
+  "source": "data/e-eval/sota_dit4sr_eval.json",
+  "metrics": null,
+  "blocker": "sota_dit4sr_eval.json present; PSNR not computed; official RealSR table missing; REMOTE_SOTA_READY=false. Configured next run is RealSRVal_crop128 subset — still not the official 206-image table. Do not invent GPU numbers.",
+  "note": null,
+  "not_official_sota": true,
+  "written_utc": "2026-08-20T13:15:27Z"
+}

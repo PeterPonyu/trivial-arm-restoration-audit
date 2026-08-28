@@ -1,0 +1,166 @@
+{
+  "table_id": "005-T3",
+  "kind": "13stem_identity_vs_toy_M",
+  "source_eval": "data/e-eval/sota_dit4sr_eval.json",
+  "populations_joined": false,
+  "gt_present_for_stems_100_112": false,
+  "metric_on_13_stems": "not_computed",
+  "stems": [
+    {
+      "stem": "100",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/100.png",
+      "on_disk": true,
+      "bytes": 374454,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "101",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/101.png",
+      "on_disk": true,
+      "bytes": 419016,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "102",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/102.png",
+      "on_disk": true,
+      "bytes": 446187,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "103",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/103.png",
+      "on_disk": true,
+      "bytes": 421516,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "104",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/104.png",
+      "on_disk": true,
+      "bytes": 310618,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "105",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/105.png",
+      "on_disk": true,
+      "bytes": 475607,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "106",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/106.png",
+      "on_disk": true,
+      "bytes": 419672,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "107",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/107.png",
+      "on_disk": true,
+      "bytes": 443341,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "108",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/108.png",
+      "on_disk": true,
+      "bytes": 351597,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "109",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/109.png",
+      "on_disk": true,
+      "bytes": 410791,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "110",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/110.png",
+      "on_disk": true,
+      "bytes": 610308,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "111",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/111.png",
+      "on_disk": true,
+      "bytes": 433319,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    },
+    {
+      "stem": "112",
+      "output_png": "source-tree/005-dit-blind-restoration/results/sota_copy/dit4sr_samples/sample00/112.png",
+      "on_disk": true,
+      "bytes": 350831,
+      "gt_path": null,
+      "metric": "not_computed",
+      "do_not_join_div2k_0801": true,
+      "do_not_join_toy_00000": true
+    }
+  ],
+  "toy_matched_budget_M": {
+    "label": "toy matched-budget M",
+    "joined_to_13_stems": false,
+    "not_official_realsr": true,
+    "n_test_pairs": 10,
+    "static_degraded_input_psnr_mean": 20.752884960569773,
+    "naive_unet_restored_psnr_mean": 14.72174519469468,
+    "simple_dit_restored_psnr_mean": 6.569656077565893,
+    "official_dit4sr_realsr": "missing",
+    "sku_used": "local_5090_24gb",
+    "not_extra_4090": true,
+    "source": "data/e-withdrawn/paper_measurement_toy_matched_budget.json",
+    "adaln_zero_plumbing_caveat": "Toy DiT 50-step run stalled at AdaLN-Zero (loss ~0.99); UNet PSNR 14.72 > DiT 6.57 on n=10 is a plumbing/matched-budget M, not a fair architecture ceiling and not official RealSR."
+  },
+  "do_not_join": {
+    "div2k_valid_hr_0801_0900": "different stem scheme",
+    "toy_test_00000": "10 patches, not stems 100\u2013112",
+    "official_realsr_hr": "absent on laptop"
+  },
+  "png": "source-tree/005-dit-blind-restoration/results/sota_copy/complements/complement_dit4sr_13stem_identity.png",
+  "complement": true,
+  "not_official_r": true,
+  "not_official_realsr_psnr": true,
+  "invented_psnr": false,
+  "gt_present": false,
+  "written_utc": "2026-08-16T12:56:20Z"
+}

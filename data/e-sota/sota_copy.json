@@ -1,0 +1,12 @@
+{
+  "direction": "005",
+  "tier": "sota_copy",
+  "name": "dit4sr_realsr_official",
+  "status": "blocked",
+  "source": null,
+  "metrics": null,
+  "blocker": "sota_dit4sr_eval.json present but official RealSR PSNR table missing (OOM skips; invented_psnr=false). Configured next run is the RealSRVal_crop128 subset (100 stems), which is still NOT the official 206-image table and does not by itself make this tier ok. REMOTE_SOTA_READY stays false. Do not invent GPU numbers.",
+  "note": null,
+  "not_official_sota": true,
+  "written_utc": "2026-08-20T13:15:27Z"
+}

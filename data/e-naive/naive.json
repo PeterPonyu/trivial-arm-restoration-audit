@@ -1,0 +1,14 @@
+{
+  "direction": "005",
+  "tier": "naive",
+  "name": "tiny_unet",
+  "status": "ok",
+  "source": "data/e-toy/local_baseline.json",
+  "metrics": {
+    "restored_psnr_mean": 14.72174519469468
+  },
+  "blocker": null,
+  "note": "Local 5090 toy; not extra-4090 GPU numbers.",
+  "not_official_sota": true,
+  "written_utc": "2026-08-20T13:15:27Z"
+}

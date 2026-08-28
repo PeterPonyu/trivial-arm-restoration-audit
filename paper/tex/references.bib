@@ -1,0 +1,213 @@
+% References for the 005 working draft.
+%
+% Two tiers, deliberately separated by the comment blocks below.
+%
+% Tier 1 entries are established methods, models and statistical results whose
+% bibliographic details are stable and independently checkable.
+%
+% Tier 2 entries are third-party artifacts identified from this project's own
+% on-disk records rather than from a verified bibliographic lookup. None may be
+% treated as verified until a human closes the bibliography gate recorded
+% alongside this manuscript. Venues are deliberately omitted where the record
+% did not confirm one; do not add a venue to make an entry look finished.
+%
+% Note for the bibliography gate: this manuscript reports a fidelity-only
+% comparison in which a released restoration model is ranked below two
+% interpolations on a subset of one benchmark, with no perceptual measure
+% computed. That is a statement about the measurement, and the manuscript says so
+% in several places. Attribution of the model and of the benchmark subset has to
+% be exactly right for that distinction to survive citation, so neither entry may
+% be completed from memory.
+
+% ---------------------------------------------------------------------------
+% Tier 1 -- established methods, models and statistical results
+% ---------------------------------------------------------------------------
+
+@inproceedings{peebles2023dit,
+  author    = {Peebles, William and Xie, Saining},
+  title     = {Scalable diffusion models with transformers},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer
+               Vision (ICCV)},
+  pages     = {4195--4205},
+  year      = {2023}
+}
+
+@inproceedings{ronneberger2015unet,
+  author    = {Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+  title     = {{U-Net}: convolutional networks for biomedical image
+               segmentation},
+  booktitle = {Medical Image Computing and Computer-Assisted Intervention
+               (MICCAI)},
+  pages     = {234--241},
+  year      = {2015}
+}
+
+@inproceedings{ho2020ddpm,
+  author    = {Ho, Jonathan and Jain, Ajay and Abbeel, Pieter},
+  title     = {Denoising diffusion probabilistic models},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  pages     = {6840--6851},
+  year      = {2020}
+}
+
+@inproceedings{rombach2022ldm,
+  author    = {Rombach, Robin and Blattmann, Andreas and Lorenz, Dominik and
+               Esser, Patrick and Ommer, Bj\"{o}rn},
+  title     = {High-resolution image synthesis with latent diffusion models},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and
+               Pattern Recognition (CVPR)},
+  pages     = {10684--10695},
+  year      = {2022}
+}
+
+@inproceedings{blau2018perception,
+  author    = {Blau, Yochai and Michaeli, Tomer},
+  title     = {The perception-distortion tradeoff},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and
+               Pattern Recognition (CVPR)},
+  pages     = {6228--6237},
+  year      = {2018}
+}
+
+@inproceedings{ledig2017srgan,
+  author    = {Ledig, Christian and Theis, Lucas and Husz\'{a}r, Ferenc and
+               Caballero, Jose and Cunningham, Andrew and Acosta, Alejandro and
+               Aitken, Andrew and Tejani, Alykhan and Totz, Johannes and Wang,
+               Zehan and Shi, Wenzhe},
+  title     = {Photo-realistic single image super-resolution using a generative
+               adversarial network},
+  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern
+               Recognition (CVPR)},
+  pages     = {4681--4690},
+  year      = {2017}
+}
+
+@article{wang2004ssim,
+  author  = {Wang, Zhou and Bovik, Alan C. and Sheikh, Hamid R. and Simoncelli,
+             Eero P.},
+  title   = {Image quality assessment: from error visibility to structural
+             similarity},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {13},
+  number  = {4},
+  pages   = {600--612},
+  year    = {2004}
+}
+
+@inproceedings{zhang2018lpips,
+  author    = {Zhang, Richard and Isola, Phillip and Efros, Alexei A. and
+               Shechtman, Eli and Wang, Oliver},
+  title     = {The unreasonable effectiveness of deep features as a perceptual
+               metric},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and
+               Pattern Recognition (CVPR)},
+  pages     = {586--595},
+  year      = {2018}
+}
+
+@article{wilcoxon1945individual,
+  author  = {Wilcoxon, Frank},
+  title   = {Individual comparisons by ranking methods},
+  journal = {Biometrics Bulletin},
+  volume  = {1},
+  number  = {6},
+  pages   = {80--83},
+  year    = {1945}
+}
+
+@article{dixon1946sign,
+  author  = {Dixon, W. J. and Mood, A. M.},
+  title   = {The statistical sign test},
+  journal = {Journal of the American Statistical Association},
+  volume  = {41},
+  number  = {236},
+  pages   = {557--566},
+  year    = {1946}
+}
+
+@article{student1908probable,
+  author  = {Student},
+  title   = {The probable error of a mean},
+  journal = {Biometrika},
+  volume  = {6},
+  number  = {1},
+  pages   = {1--25},
+  year    = {1908}
+}
+
+@article{efron1979bootstrap,
+  author  = {Efron, B.},
+  title   = {Bootstrap methods: another look at the jackknife},
+  journal = {The Annals of Statistics},
+  volume  = {7},
+  number  = {1},
+  pages   = {1--26},
+  year    = {1979}
+}
+
+@article{rubin1976inference,
+  author  = {Rubin, Donald B.},
+  title   = {Inference and missing data},
+  journal = {Biometrika},
+  volume  = {63},
+  number  = {3},
+  pages   = {581--592},
+  year    = {1976}
+}
+
+@article{sculley2018winners,
+  author  = {Sculley, D. and Snoek, Jasper and Wiltschko, Alex and Rahimi, Ali},
+  title   = {Winner's curse? On pace, progress, and empirical rigor},
+  journal = {International Conference on Learning Representations Workshop
+             Track},
+  year    = {2018}
+}
+
+@article{dacrema2019worrying,
+  author  = {Dacrema, Maurizio Ferrari and Cremonesi, Paolo and Jannach,
+             Dietmar},
+  title   = {Are we really making much progress? A worrying analysis of recent
+             neural recommendation approaches},
+  journal = {Proceedings of the 13th ACM Conference on Recommender Systems
+             (RecSys)},
+  pages   = {101--109},
+  year    = {2019}
+}
+
+@article{lin2019neural,
+  author  = {Lin, Jimmy},
+  title   = {The neural hype and comparisons against weak baselines},
+  journal = {ACM SIGIR Forum},
+  volume  = {52},
+  number  = {2},
+  pages   = {40--51},
+  year    = {2019}
+}
+
+% ---------------------------------------------------------------------------
+% Tier 2 -- identified from this project's on-disk records.
+% UNVERIFIED pending the bibliography gate. Do not add venues.
+% ---------------------------------------------------------------------------
+
+@misc{releasedmodel,
+  key   = {Released restoration model},
+  title = {A diffusion transformer for real-world image super-resolution},
+  note  = {Recorded in this project only as the released restoration model whose
+           published weights were run over the crop subset reported here, on top
+           of a third-party text-to-image backbone also identified by name in the
+           project's records. Authorship, exact title wording, venue and year are
+           UNVERIFIED: all were taken from this project's own recorded state and
+           none was re-checked against the official record during drafting},
+  year  = {2025}
+}
+
+@misc{benchmarksubset,
+  key   = {Real-world super-resolution validation set},
+  title = {A real-world paired super-resolution benchmark},
+  note  = {Recorded in this project only as the origin of the low-resolution
+           inputs and reference images used here. The crops measured are a subset
+           of it selected by output size under a memory budget, not a released
+           split. Authorship, title wording, venue and year are UNVERIFIED and
+           were taken from this project's own recorded state},
+  year  = {2019}
+}

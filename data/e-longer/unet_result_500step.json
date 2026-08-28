@@ -1,0 +1,28 @@
+{
+  "model": "unet_baseline",
+  "args": {
+    "steps": 500,
+    "batch_size": 8,
+    "lr": 0.0002,
+    "device": "cuda",
+    "eval_steps": 30,
+    "seed": 0,
+    "out": "../findings_assets/unet_result_500step.json"
+  },
+  "train": {
+    "final_loss": 0.03380945697426796,
+    "mean_last10_loss": 0.06844192184507847,
+    "elapsed_sec": 478.16856050491333,
+    "n_params": 16058179,
+    "n_steps": 500,
+    "batch_size": 8
+  },
+  "eval": {
+    "restored_psnr_mean": 14.048280185144407,
+    "restored_ssim_mean": 0.2416661776166638,
+    "degraded_input_psnr_mean": 20.752884960569773,
+    "degraded_input_ssim_mean": 0.45966576054526936,
+    "n_test_pairs": 10,
+    "num_inference_steps": 30
+  }
+}

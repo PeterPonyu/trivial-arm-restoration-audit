@@ -1,0 +1,58 @@
+{
+  "direction": "005",
+  "paper_kind": [],
+  "withdrawn_kinds": [
+    "M"
+  ],
+  "claim": "WITHDRAWN AS A PORTFOLIO CLAIM (2026-08-18). The earlier wording \"Toy matched-budget does not show DiT advantage (UNet restored PSNR > DiT on n=10 pairs)\" is not supportable and must not be quoted. The toy DiT never trained: its loss stayed flat at ~0.99 (AdaLN-Zero zero-initializes every block's residual gate, so all blocks start as no-ops), so 6.57 dB measures an initialization stall, not an architecture. The budget was also never matched: params differ (DiT 17,961,024 vs UNet 16,058,179, DiT ~11.8% larger), and matched-steps vs matched-wall-clock give opposite verdicts because the DiT is ~30x faster per step. n=10 test pairs, seed 0, single run, no repeats. What this file does support is only: on one 50-step seed-0 toy run, the UNet reached 14.72 dB and the stalled DiT 6.57 dB, and BOTH are below the 20.75 dB degraded input, i.e. neither toy model restored anything.",
+  "claim_status": "withdrawn_as_portfolio_claim",
+  "supportable_statement": "Neither toy model beat its own degraded input at 50 steps (UNet 14.72 dB, DiT 6.57 dB, degraded input 20.75 dB, n=10, seed 0); the DiT figure is an AdaLN-Zero initialization stall, so no DiT-vs-UNet verdict is available from this run.",
+  "claim_superseded_utc": "2026-08-18T00:00:00Z",
+  "why_withdrawn": [
+    "adaln_zero_stall: toy DiT loss flat at ~0.99 at 50 steps; 6.57 dB is a stall artifact, not an architecture ceiling.",
+    "params_not_matched: dit_n_params=17961024 vs unet_n_params=16058179 (DiT ~11.8% larger).",
+    "budget_definition_disagreement: DiT is ~30x faster per step (1.58s vs 47.46s for 50 steps), so matched-steps and matched-wall-clock give opposite verdicts.",
+    "no_statistics: n=10 test pairs, seed 0, one run per model, no repeats, no confidence interval.",
+    "both_below_baseline: both toy models score below the 20.75 dB degraded input, so neither restored anything.",
+    "orphan_500step_counterevidence: findings_assets/unet_result_500step.json (500 steps, same seed/n) restores to 14.048 dB, slightly worse than the 50-step 14.722 dB — 10x more training did not help."
+  ],
+  "params_matched": false,
+  "unet_n_params": 16058179,
+  "dit_n_params": 17961024,
+  "seed": 0,
+  "n_runs_per_model": 1,
+  "train_steps": 50,
+  "counterevidence": {
+    "unet_500step_orphan": {
+      "path": "data/e-longer/unet_result_500step.json",
+      "present": true,
+      "steps": 500,
+      "restored_psnr_mean": 14.048280185144407,
+      "restored_ssim_mean": 0.2416661776166638,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "n_test_pairs": 10,
+      "implication": "10x the training budget made restored PSNR slightly worse and stayed far below the degraded input; the toy UNet is not a valid matched-budget winner."
+    }
+  },
+  "official_eval_note": "The 2026-08-16 official DiT4SR run produced 13 real output PNGs out of 206 LQ inputs (193 skipped OOM on vGPU-32GB). No PSNR/SSIM/LPIPS was computed and none may be invented; the 13 stems have no ground truth on disk. The official R claim remains unmet, and this toy M measurement must not be used as a stand-in for it.",
+  "do_not_join_toy_to_official": true,
+  "n_test_pairs": 10,
+  "static_degraded_input_psnr_mean": 20.752884960569773,
+  "naive_unet_restored_psnr_mean": 14.72174519469468,
+  "simple_dit_restored_psnr_mean": 6.569656077565893,
+  "official_dit4sr_realsr": "missing",
+  "sota_dit4sr_eval_json": "data/e-eval/sota_dit4sr_eval.json",
+  "sota_dit4sr_eval_status": "ok",
+  "sota_dit4sr_eval_written_utc": "2026-08-16T06:29:08Z",
+  "n_lq": 206,
+  "n_run": 13,
+  "n_skipped_oom": 193,
+  "psnr": "not_computed",
+  "invented_psnr": false,
+  "REMOTE_SOTA_READY": false,
+  "do_not_invent_gpu_numbers": true,
+  "sku_used": "local_5090_24gb",
+  "not_extra_4090": true,
+  "source": "data/e-toy/local_baseline.json",
+  "written_utc": "2026-08-20T13:15:27Z"
+}

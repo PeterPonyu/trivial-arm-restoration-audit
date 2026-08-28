@@ -1,0 +1,14 @@
+{
+  "direction": "005",
+  "tier": "simple",
+  "name": "tiny_dit",
+  "status": "ok",
+  "source": "data/e-toy/local_baseline.json",
+  "metrics": {
+    "restored_psnr_mean": 6.569656077565893
+  },
+  "blocker": null,
+  "note": "Matched-budget toy; DiT does not beat UNet here.",
+  "not_official_sota": true,
+  "written_utc": "2026-08-20T13:15:27Z"
+}

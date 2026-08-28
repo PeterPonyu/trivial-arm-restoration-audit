@@ -1,0 +1,23 @@
+# Archived bindings. Tab-separated: id<TAB>path<TAB>role<TAB>note
+#
+# id	path	role	note
+E-TOY	data/e-toy/local_baseline.json	derived_table	the toy run's own record for both learned arms and for the degraded input they were scored against
+E-WITHDRAWN	data/e-withdrawn/paper_measurement_toy_matched_budget.json	recorded_state	the project's withdrawal of its own toy comparison, with the reasons it listed and the statement it kept
+E-STATIC	data/e-static/static.json	recorded_state	the do-nothing tier, recording the degraded input as a scored arm in its own right
+E-NAIVE	data/e-naive/naive.json	recorded_state	the convolutional toy arm as the comparison ladder records it
+E-SIMPLE	data/e-simple/simple.json	recorded_state	the transformer toy arm as the comparison ladder records it, with the sentence the withdrawal later contradicted
+E-LONGER	data/e-longer/unet_result_500step.json	derived_table	the same convolutional arm at ten times the budget, written outside the results tree and never promoted
+E-DIT	data/e-dit/sota_dit4sr_metrics_today_dit.json	derived_table	per-crop fidelity for the published method on the subset, with its bootstrap interval
+E-BICUBIC	data/e-bicubic/sota_dit4sr_metrics_today_bicubic.json	derived_table	per-crop fidelity for bicubic upsampling on the same crops, from the same metric pass
+E-NEAREST	data/e-nearest/sota_dit4sr_metrics_today_nearest.json	derived_table	per-crop fidelity for nearest-neighbour upsampling on the same crops
+E-BICUBIC-AUDIT	data/e-bicubic-audit/metrics.json	derived_table	an independently written record of the bicubic arm, used to check the two agree crop for crop
+E-DIT-EARLIER	data/e-dit-earlier/sota_dit4sr_metrics.json	derived_table	an earlier pixel set from the same method on the same crops, used to bound run-to-run variation
+E-SUMMARY	data/e-summary/sota_dit4sr_metrics_today.json	derived_table	the three-arm summary and the paired differences the metric pass computed
+E-STRATA	data/e-strata/sota_dit4sr_metrics_today_reviewer.json	derived_table	win and loss counts overall and by camera, with bootstrap intervals on the paired difference
+E-EVAL	data/e-eval/sota_dit4sr_eval.json	recorded_state	the completed subset inference run, its scope note, and the state of the reference images it needed
+E-EVAL-EARLIER	data/e-eval-earlier/sota_dit4sr_eval_20260816T062908Z.json	recorded_state	the earlier attempt on the full input set, retained under history, that ran thirteen of two hundred and six
+E-SKIP	data/e-skip/complement_dit4sr_skip_census.json	derived_table	the census of what that attempt skipped and the memory budget that decided it
+E-SIZES	data/e-sizes/complement_dit4sr_lq_size_histogram.json	derived_table	the input sizes behind those skips, and the camera the skipped inputs came from
+E-ORPHANS	data/e-orphans/complement_dit4sr_13stem_identity.json	derived_table	the thirteen outputs that attempt did produce, each recorded without a reference image
+E-PRIMARY	data/e-primary/paper_primary.json	recorded_state	the reference-comparison tier, recorded as blocked with the subset explicitly not promoting it
+E-SOTA	data/e-sota/sota_copy.json	recorded_state	the full-replication tier, recorded as blocked for the same reason

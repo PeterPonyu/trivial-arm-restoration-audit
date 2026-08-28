@@ -1,0 +1,65 @@
+{
+  "bicubic_rgb_psnr_mean": 25.47759198250429,
+  "binds_20260823_sha": false,
+  "camera_strata": {
+    "Canon": {
+      "bootstrap": {
+        "high": -3.3845301329720696,
+        "low": -4.440242446194971,
+        "mean": -3.931993816756829,
+        "n": 50,
+        "samples": 1000,
+        "seed": 20260822
+      },
+      "losses": 48,
+      "mean_delta": -3.931993816756829,
+      "n": 50,
+      "ties": 0,
+      "wins": 2
+    },
+    "Nikon": {
+      "bootstrap": {
+        "high": -2.558713003962679,
+        "low": -3.9714642796634227,
+        "mean": -3.2652056127337064,
+        "n": 50,
+        "samples": 1000,
+        "seed": 20260822
+      },
+      "losses": 49,
+      "mean_delta": -3.2652056127337064,
+      "n": 50,
+      "ties": 0,
+      "wins": 1
+    }
+  },
+  "claim_scope": "crop128_same_input_dit_vs_bicubic",
+  "claim_zh": "crop128 同输入 DiT 输给 bicubic",
+  "dit_rgb_psnr_mean": 21.87899226775902,
+  "evidence_score_delta": 0,
+  "n": 100,
+  "note": "Subset same-input metrics on TODAY box PNGs. Not official 206. Do not attach 2026-08-23 laptop metrics.",
+  "official_full_table": false,
+  "paired_delta_dit_minus_bicubic": {
+    "rgb_psnr": {
+      "bootstrap": {
+        "high": -3.1179376450750507,
+        "low": -4.040393028830387,
+        "mean": -3.598599714745268,
+        "n": 100,
+        "samples": 1000,
+        "seed": 20260822
+      },
+      "mean_delta": -3.598599714745268
+    }
+  },
+  "pixel_set": "2026-08-26-box-crop128",
+  "result_bucket": "subset_same_input_metrics",
+  "unlocks_004": false,
+  "win_rate_dit_vs_bicubic_rgb_psnr": {
+    "losses": 97,
+    "n": 100,
+    "ties": 0,
+    "wins": 3
+  }
+}

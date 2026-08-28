@@ -1,0 +1,15 @@
+{
+  "direction": "005",
+  "tier": "static",
+  "name": "degraded_input_identity",
+  "status": "ok",
+  "source": "data/e-toy/local_baseline.json",
+  "metrics": {
+    "degraded_input_psnr_mean": 20.752884960569773,
+    "n_test_pairs": 10
+  },
+  "blocker": null,
+  "note": "No-restore input PSNR already recorded in toy eval. Not bicubic-upsample SOTA.",
+  "not_official_sota": true,
+  "written_utc": "2026-08-20T13:15:27Z"
+}

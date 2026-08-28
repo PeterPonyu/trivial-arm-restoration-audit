@@ -1,0 +1,115 @@
+%% Self-contained captions. No cross-references, no section numbers: each
+%% caption must be readable on its own if the figure is lifted out.
+
+\newcommand{\CapToy}{%
+Three trained arms, all below the input they were asked to repair. A toy-scale
+restoration run trained a small convolutional network and a small transformer of
+comparable size under a matched step budget on the same data, and scored both
+against the same \ToyN{} held-out pairs at \ToyEvalSteps{} sampling steps. Points
+are mean peak signal-to-noise ratio of the restored output against the reference
+image; higher is closer to the reference. The vertical rule is the same quantity
+for the degraded input passed through unchanged, which the same record scores as
+an arm in its own right. No trained arm reaches it, so the run supports no
+comparison between the two architectures: the shortfall of the best of them is
+\ToyConvShortfall{} decibels. The transformer arm's training objective sat at
+\ToyTransLoss{} at the last step, against a mean of \ToyTransLastTen{} over the
+last ten steps and \ToyConvLoss{} for the convolutional arm at the same step
+count: it did not fall, and a denoising objective that stays at unity is what a
+network contributing nothing to its own residual stream produces.%
+}
+
+\newcommand{\CapBudget}{%
+The training budget raised \BudgetFold{}, read on both axes at once. The same
+small convolutional restoration network was trained for \ToySteps{} and for
+\ToyLongSteps{} steps on the same data at the same learning rate and seed, and
+evaluated on the same \ToyN{} held-out pairs at \ToyEvalSteps{} sampling steps.
+The left panel is the training objective at the last step; the right panel is
+mean peak signal-to-noise ratio of the restored output against the reference
+image, with the horizontal rule marking the same quantity for the degraded input
+passed through unchanged. The objective falls by a factor of \ToyLossDrop{}. The
+fidelity of the output falls with it, by \ToyLongRegression{} decibels, and stays
+below the untouched input at both budgets. Read alone, either panel would give
+the opposite impression of what the extra budget bought. The longer run was
+written outside the results tree and was never promoted.%
+}
+
+\newcommand{\CapSubset}{%
+Every crop, the released model against an interpolation. Each point is one crop
+of a \SubsetN{}-crop subset drawn from a real-world super-resolution validation
+set. The horizontal position is the peak signal-to-noise ratio of bicubic
+upsampling of the low-resolution input against the reference image; the vertical
+position is the same quantity for a released diffusion restoration model given
+the same input, scored by the same metric pass over the same crops. The diagonal
+is equality. Points below it are crops on which the interpolation is closer to
+the reference. Symbols distinguish the two camera groups the subset is drawn
+from, in equal numbers. Peak signal-to-noise ratio measures distance from the
+reference and not perceptual quality; no perceptual measure was computed for
+these crops, so the panel reports which output is closer to the reference and
+not which is better.%
+}
+
+\newcommand{\CapPaired}{%
+The paired differences, and the width the model varies by against itself. The
+left panel plots one point per crop: the peak signal-to-noise ratio of a released
+diffusion restoration model minus that of bicubic upsampling of the same
+low-resolution input, over a \SubsetN{}-crop subset, ordered by that difference.
+Negative values are crops on which the interpolation is closer to the reference.
+The solid rule is zero and the dashed rule is the mean difference. The shaded
+band is the largest per-crop shift the same model shows between two of its own
+runs over the same crops, so it is an upper bound on how much of the gap could be
+run-to-run variation; the gap is \NoiseMargin{} times that width. The right panel
+gives the mean difference overall and within each camera group, with 95\%
+percentile bootstrap intervals over the crops. Camera group is a recorded
+property of each crop and was fixed before these differences were computed.%
+}
+
+\newcommand{\CapCeiling}{%
+What a memory ceiling selected, and what it removed. An earlier attempt ran a
+released diffusion restoration model over the full set of \CensusTotal{} inputs
+under a fixed budget of \BudgetPixels{} output pixels and a maximum output side
+of \BudgetLong{} pixels; inputs whose upsampled output would exceed it were
+skipped before inference. The left panel gives, for that attempt and for the
+later \SubsetN{}-crop run, what became of every input the run was given: dropped
+before inference, run but left with no reference image to score against, or run
+and scored. Neither the drop nor the absence of references was a sampling
+decision. The right panel breaks the dropped inputs down by the source group
+their file names record, and shades the two groups that appear in the later
+subset. Every dropped input was of a single larger size class, so what survived
+the ceiling was fixed by output dimensions rather than chosen.%
+}
+
+\newcommand{\CapToyTable}{%
+The toy-scale arms as their own training records describe them. Parameter
+counts, step counts, wall clock and the training objective at the last step are
+read from the manifest each run wrote; fidelity is mean peak signal-to-noise
+ratio of the restored output against the reference image over the same
+\ToyN{} held-out pairs at \ToyEvalSteps{} sampling steps, and the first row is
+the degraded input passed through unchanged, which has no training record.
+The two arms trained at \ToySteps{} steps differ by \ToyParamExcess{} per cent in
+parameter count, so the budget they share is a step budget and not a capacity
+budget, and their wall clocks differ by a factor of \ToySpeedRatio{}, so it is
+not a wall-clock budget either.%
+}
+
+\newcommand{\CapSubsetTable}{%
+The subset comparison, all four recorded fidelity measures. Rows are the two
+interpolations and the released diffusion restoration model, each scored over the
+same \SubsetN{} crops against the same reference images by the same metric pass.
+Peak signal-to-noise ratio and structural similarity are reported over the full
+colour image and again over the luma channel with a four-pixel border removed.
+The two final rows are paired differences, computed crop by crop and then
+averaged, so a negative value means the model was further from the reference than
+the interpolation on average. All four measures compare an output with its
+reference; none of them measures perceptual quality, and no perceptual measure
+was computed for these crops.%
+}
+
+\newcommand{\CapCensusTable}{%
+Which inputs a memory ceiling removed, by source group. An earlier attempt over
+the full set of \CensusTotal{} inputs skipped every input whose upsampled output
+would have exceeded \BudgetPixels{} pixels, which removed \CensusSkipped{} of
+them. Groups are the prefixes the input file names carry, which correspond to the
+capture device. The final column records whether that group appears in the
+\SubsetN{}-crop subset measured later. Of the \CensusCameras{} groups the ceiling
+touched, \AbsentGroups{} are absent from every measured result in this study.%
+}

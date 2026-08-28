@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: >-
+  Code and data for: Print the trivial arm: three scales at which a do-nothing baseline decided what an image restoration comparison could conclude
+message: If you use this code or data, please cite this archive and the manuscript.
+type: dataset
+authors:
+  - given-names: Zeyu
+    family-names: Fu
+    email: fuzeyu99@126.com
+    orcid: 'https://orcid.org/0009-0001-8329-0108'
+    affiliation: 'Army Medical University, Chongqing, China'
+abstract: >-
+  Toy training records, per-crop fidelity tables for a released restoration model and two interpolations, inference manifests, a memory-ceiling skip census, figure code and manuscript source for a study showing that at three scales of one restoration project the untouched input or the cheapest interpolation determined what the comparison could conclude.
+keywords:
+  - image restoration
+  - super-resolution
+  - baselines
+  - perception-distortion tradeoff
+  - evaluation
+  - selection effect
+  - negative result
+license: MIT
+version: 0.1.0
+date-released: '2026-08-28'
+# No DOI: this work has not been deposited in a public archive.
+# The field is added when the archive exists, not before.

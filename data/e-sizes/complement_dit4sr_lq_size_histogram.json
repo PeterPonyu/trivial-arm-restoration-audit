@@ -1,0 +1,69 @@
+{
+  "table_id": "005-T2",
+  "kind": "lq_size_skip_histogram",
+  "source": "data/e-eval/sota_dit4sr_eval.json",
+  "psnr_computed": false,
+  "png_decoded_for_quality": false,
+  "bins": [
+    {
+      "bin": "32GB-safe (ran)",
+      "n": 13,
+      "lq_class": "128-class \u2192 512 output (eval note / inventory)",
+      "stems": [
+        "100",
+        "101",
+        "102",
+        "103",
+        "104",
+        "105",
+        "106",
+        "107",
+        "108",
+        "109",
+        "110",
+        "111",
+        "112"
+      ]
+    },
+    {
+      "bin": "512px RealSR-class skipped",
+      "n": 193,
+      "lq_hw": [
+        512,
+        512
+      ],
+      "upscaled_hw": [
+        2048,
+        2048
+      ],
+      "reason": "upscaled_hw_exceeds_32gb_budget"
+    }
+  ],
+  "skip_reason_counts": {
+    "upscaled_hw_exceeds_32gb_budget": 193
+  },
+  "skipped_lq_hw_counts": {
+    "(512, 512)": 193
+  },
+  "skipped_upscaled_hw_counts": {
+    "(2048, 2048)": 193
+  },
+  "skipped_camera_prefix_counts": {
+    "Canon": 55,
+    "DSC": 20,
+    "IMG": 12,
+    "Nikon": 50,
+    "P114": 12,
+    "P116": 4,
+    "P117": 3,
+    "panasonic": 20,
+    "sony": 17
+  },
+  "png": "source-tree/005-dit-blind-restoration/results/sota_copy/complements/complement_dit4sr_lq_size_histogram.png",
+  "complement": true,
+  "not_official_r": true,
+  "not_official_realsr_psnr": true,
+  "invented_psnr": false,
+  "gt_present": false,
+  "written_utc": "2026-08-16T12:56:20Z"
+}

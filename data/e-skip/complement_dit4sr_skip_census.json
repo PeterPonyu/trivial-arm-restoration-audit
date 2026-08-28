@@ -1,0 +1,41 @@
+{
+  "table_id": "005-T1",
+  "kind": "skip_census",
+  "source": "data/e-eval/sota_dit4sr_eval.json",
+  "n_lq": 206,
+  "n_run": 13,
+  "n_skipped_oom": 193,
+  "n_skipped_no_prompt": 0,
+  "n_total": 206,
+  "invented_psnr": false,
+  "status": "ok",
+  "stems_ran": [
+    "100",
+    "101",
+    "102",
+    "103",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "110",
+    "111",
+    "112"
+  ],
+  "vram_budget": {
+    "max_upscaled_pixels": 393216,
+    "max_upscaled_long": 768,
+    "vram_mib": 32760,
+    "note": "32GB-safe: skip LQ whose vendor x4 upscaled H*W exceeds this budget. 128px class (512 output) is known-good; 512px RealSR (2048 output) OOM."
+  },
+  "blocker": "193 LQ skipped on vGPU-32GB (upscaled H*W exceeds 393216 px or long side 768; 512px RealSR x4->2048). PSNR is not computed and must not be invented.",
+  "note": "Official DiT4SR test_wollava wrote real PNGs for stems_ran only. 512px RealSR skipped for 32GB VRAM. PSNR is not computed here and must not be invented.",
+  "png": "source-tree/005-dit-blind-restoration/results/sota_copy/complements/complement_dit4sr_skip_census.png",
+  "complement": true,
+  "not_official_r": true,
+  "not_official_realsr_psnr": true,
+  "gt_present": false,
+  "written_utc": "2026-08-16T12:56:20Z"
+}

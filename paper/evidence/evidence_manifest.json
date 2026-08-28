@@ -1,0 +1,172 @@
+{
+  "schema": "evidence-manifest/v1",
+  "state": "BOUND",
+  "bound_utc": "2026-08-28T13:37:57Z",
+  "allowed_roots": [
+    "data",
+    "paper/evidence"
+  ],
+  "allowed_roots_note": "Archived layout. Artifacts the paper produced itself stay beside the paper; everything else was copied into data/. Digests describe the archived bytes; files whose recorded paths were redacted are listed in REDACTION.md with both digests.",
+  "entries": [
+    {
+      "id": "E-TOY",
+      "path": "data/e-toy/local_baseline.json",
+      "role": "derived_table",
+      "note": "the toy run's own record for both learned arms and for the degraded input they were scored against",
+      "bytes": 2023,
+      "sha256": "739e2a787c3308d945ba27468d9510c7a54498987e98ddebc81ec2d946a1b68a"
+    },
+    {
+      "id": "E-WITHDRAWN",
+      "path": "data/e-withdrawn/paper_measurement_toy_matched_budget.json",
+      "role": "recorded_state",
+      "note": "the project's withdrawal of its own toy comparison, with the reasons it listed and the statement it kept",
+      "bytes": 3916,
+      "sha256": "7363376c6b16e0a47d38b9a8b21db8a6fc659ed8c96bd2139a979b7a2ce18442"
+    },
+    {
+      "id": "E-STATIC",
+      "path": "data/e-static/static.json",
+      "role": "recorded_state",
+      "note": "the do-nothing tier, recording the degraded input as a scored arm in its own right",
+      "bytes": 422,
+      "sha256": "c8f6eea65f526592b0aa4226660ed39e791799f49bf8f0d6eac21c1ea871399c"
+    },
+    {
+      "id": "E-NAIVE",
+      "path": "data/e-naive/naive.json",
+      "role": "recorded_state",
+      "note": "the convolutional toy arm as the comparison ladder records it",
+      "bytes": 341,
+      "sha256": "83a46f404e0f1c18c0ee2ff6ac5bb4ac48a032b77a5bb8bd0137327bb7e69b22"
+    },
+    {
+      "id": "E-SIMPLE",
+      "path": "data/e-simple/simple.json",
+      "role": "recorded_state",
+      "note": "the transformer toy arm as the comparison ladder records it, with the sentence the withdrawal later contradicted",
+      "bytes": 346,
+      "sha256": "ffa2fb4863926cc611d4a12d57a8587be526f45f9d0de3096b815a91b1015697"
+    },
+    {
+      "id": "E-LONGER",
+      "path": "data/e-longer/unet_result_500step.json",
+      "role": "derived_table",
+      "note": "the same convolutional arm at ten times the budget, written outside the results tree and never promoted",
+      "bytes": 695,
+      "sha256": "eab0586ef99b6c43a984aae16a74737558960614fe9d738c09a8b36eb712f696"
+    },
+    {
+      "id": "E-DIT",
+      "path": "data/e-dit/sota_dit4sr_metrics_today_dit.json",
+      "role": "derived_table",
+      "note": "per-crop fidelity for the published method on the subset, with its bootstrap interval",
+      "bytes": 21405,
+      "sha256": "06249f3c7ad2335ea656243c1fedb213b0fe8c138b0e7ad5c1766e0c98331e1d"
+    },
+    {
+      "id": "E-BICUBIC",
+      "path": "data/e-bicubic/sota_dit4sr_metrics_today_bicubic.json",
+      "role": "derived_table",
+      "note": "per-crop fidelity for bicubic upsampling on the same crops, from the same metric pass",
+      "bytes": 21394,
+      "sha256": "ed3054bcd5107a2ae0095725eb421991e7bdc35bd8de4c86aa008e0255481a37"
+    },
+    {
+      "id": "E-NEAREST",
+      "path": "data/e-nearest/sota_dit4sr_metrics_today_nearest.json",
+      "role": "derived_table",
+      "note": "per-crop fidelity for nearest-neighbour upsampling on the same crops",
+      "bytes": 21411,
+      "sha256": "b48533beca953d54e5d70ed395d3640958acdae2b445433e6c12279ef3617db7"
+    },
+    {
+      "id": "E-BICUBIC-AUDIT",
+      "path": "data/e-bicubic-audit/metrics.json",
+      "role": "derived_table",
+      "note": "an independently written record of the bicubic arm, used to check the two agree crop for crop",
+      "bytes": 21394,
+      "sha256": "ed3054bcd5107a2ae0095725eb421991e7bdc35bd8de4c86aa008e0255481a37"
+    },
+    {
+      "id": "E-DIT-EARLIER",
+      "path": "data/e-dit-earlier/sota_dit4sr_metrics.json",
+      "role": "derived_table",
+      "note": "an earlier pixel set from the same method on the same crops, used to bound run-to-run variation",
+      "bytes": 21442,
+      "sha256": "04b1d355a235496bbb8a29170566810d02955b0cd5f50ae1025d33df29b7b249"
+    },
+    {
+      "id": "E-SUMMARY",
+      "path": "data/e-summary/sota_dit4sr_metrics_today.json",
+      "role": "derived_table",
+      "note": "the three-arm summary and the paired differences the metric pass computed",
+      "bytes": 2159,
+      "sha256": "81e21116feaffd9cdb289931d1cf1bc6c31e2d6a7966db53f172c53acb36a944"
+    },
+    {
+      "id": "E-STRATA",
+      "path": "data/e-strata/sota_dit4sr_metrics_today_reviewer.json",
+      "role": "derived_table",
+      "note": "win and loss counts overall and by camera, with bootstrap intervals on the paired difference",
+      "bytes": 1648,
+      "sha256": "8f92de95e9a3b6795f0f0b4cffb9228d9b5a139401e1eb0cb78d497a88d37a4a"
+    },
+    {
+      "id": "E-EVAL",
+      "path": "data/e-eval/sota_dit4sr_eval.json",
+      "role": "recorded_state",
+      "note": "the completed subset inference run, its scope note, and the state of the reference images it needed",
+      "bytes": 10354,
+      "sha256": "749af50fc0e86631b94177e0b122599c567d3d8146f95583da1bbc0d8736af3a"
+    },
+    {
+      "id": "E-EVAL-EARLIER",
+      "path": "data/e-eval-earlier/sota_dit4sr_eval_20260816T062908Z.json",
+      "role": "recorded_state",
+      "note": "the earlier attempt on the full input set, retained under history, that ran thirteen of two hundred and six",
+      "bytes": 45545,
+      "sha256": "06fd3b65c5ae9b413b1d8e0fb191ca5c375a85de618eade3fed977863c13ce78"
+    },
+    {
+      "id": "E-SKIP",
+      "path": "data/e-skip/complement_dit4sr_skip_census.json",
+      "role": "derived_table",
+      "note": "the census of what that attempt skipped and the memory budget that decided it",
+      "bytes": 1269,
+      "sha256": "1409232fa989e43efe62799f61007b8fb023a86efd55f3a0619222366585dfce"
+    },
+    {
+      "id": "E-SIZES",
+      "path": "data/e-sizes/complement_dit4sr_lq_size_histogram.json",
+      "role": "derived_table",
+      "note": "the input sizes behind those skips, and the camera the skipped inputs came from",
+      "bytes": 1447,
+      "sha256": "30695b5cd548443a9896de4c3480f233c57b5ae794c1916e336c6b758e6c8c28"
+    },
+    {
+      "id": "E-ORPHANS",
+      "path": "data/e-orphans/complement_dit4sr_13stem_identity.json",
+      "role": "derived_table",
+      "note": "the thirteen outputs that attempt did produce, each recorded without a reference image",
+      "bytes": 5613,
+      "sha256": "5d4bfb206a23f8dc35a4a57a16ed4c4ef02e2a43a3f914089ce0c5f70292856a"
+    },
+    {
+      "id": "E-PRIMARY",
+      "path": "data/e-primary/paper_primary.json",
+      "role": "recorded_state",
+      "note": "the reference-comparison tier, recorded as blocked with the subset explicitly not promoting it",
+      "bytes": 503,
+      "sha256": "97e416747aa78a654e3ae5aefc023180e55156cb87b8eecee24edaf275e742d2"
+    },
+    {
+      "id": "E-SOTA",
+      "path": "data/e-sota/sota_copy.json",
+      "role": "recorded_state",
+      "note": "the full-replication tier, recorded as blocked for the same reason",
+      "bytes": 562,
+      "sha256": "cdfb73588e424076e4e202aa3f91063dd738d480f5689eb57e7389ea38526549"
+    }
+  ]
+}

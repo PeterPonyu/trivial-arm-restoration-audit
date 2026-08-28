@@ -1,0 +1,127 @@
+\subsection{What was already on disk}
+
+Nothing in this study was generated for it. Every quantity comes from records
+written by runs that finished before this analysis began, and each record is
+bound to the manuscript by its SHA-256 digest; the figure code re-hashes each
+file before reading it and stops the build on any mismatch. No model was
+trained, no image was restored, and no evaluation was launched.
+
+Three comparisons are read. The first is a toy-scale training run in which a
+small convolutional restoration network and a small transformer of comparable
+size were trained under a matched step budget on the same data, evaluated on the
+same \ToyN{} held-out pairs at the same number of sampling steps, and scored
+against the same degraded inputs. The second is the same convolutional arm
+retrained at \BudgetMultiple{} times the budget, written outside the results tree
+and never promoted. The third is a released diffusion restoration model run over a
+\SubsetN{}-crop subset drawn from a real-world super-resolution validation set,
+scored against reference images, alongside bicubic and nearest-neighbour
+upsampling of the same inputs.
+
+\subsection{The trivial arms, and why they are arms}
+
+Each comparison has an arm that performs no restoration. At toy scale it is the
+degraded input passed through unchanged, which the training record scores
+alongside the two trained networks. At subset scale there are two: bicubic and
+nearest-neighbour upsampling of the same low-resolution inputs, scored by the
+same metric pass over the same crops.
+
+These are treated here as arms rather than as context. An arm that does nothing
+is the weakest hypothesis a restoration comparison can be asked to beat, and a
+method that does not beat it has not been shown to restore anything, whatever
+its ranking against other methods. The three comparisons below differ in what
+the trivial arm reveals, not in whether it should have been reported.
+
+\subsection{What the fidelity measures are, and what they are not}
+
+Two fidelity measures appear: peak signal-to-noise ratio, computed over the full
+colour image and separately over the luma channel with a four-pixel border
+removed, and structural similarity~\cite{wang2004ssim} under the same two
+conventions. Both compare a restored image with a reference pixel by pixel or
+window by window, and both reward outputs that stay close to the reference.
+
+Neither is a measure of perceptual quality, and the difference matters for
+everything reported at subset scale. Restoration methods that synthesise
+plausible detail are known to score worse on distortion measures than methods
+that produce a blurrier output closer to the conditional
+mean~\cite{blau2018perception,ledig2017srgan}, and the trade-off is a property
+of the estimator rather than a defect of any particular
+model~\cite{blau2018perception}. The perceptual measure that would sit on the
+other side of that trade-off is recorded on disk as \PerceptualState{} for these
+crops, and it is not computed here. A comparison with a distortion measure and
+no perceptual measure can establish which output is closer to the reference. It
+cannot establish which output is better.
+
+\subsection{Checks the build enforces}
+
+Several sentences in this paper are enforced as build-time checks rather than
+asserted in prose, and the figure code stops rather than reporting a number that
+would contradict them.
+
+The one-line ladder entries that summarise the toy run must still restate the
+values the training record holds. The record that withdrew the toy comparison
+must agree with the training record on both parameter counts and with the
+unpromoted longer run on its restored fidelity. Every mean printed in the subset
+summary must be the mean of the per-crop rows it claims to summarise, and every
+recorded interval must be centred on that same mean. The recorded paired
+difference, its extremes, and the recorded win and loss counts, overall and
+within each source group, must all reproduce from the per-crop rows. The per-crop
+rows themselves are joined across arms on the crop name rather than on position,
+so a reordering cannot silently pair the wrong crops.
+
+Two bound paths hold the record for the bicubic arm. Comparing their digests
+establishes whether that is a second measurement or a second copy, and the
+manuscript reports which; comparing their rows establishes that they still agree
+either way.
+
+\subsection{Bounding the model against itself}
+
+Two pixel sets exist for the released model over the same \SubsetN{} crops,
+produced by separate runs and scored by the same protocol. The per-crop
+differences between them are not used as a result. They are used once, as an
+upper bound on how much of any gap could be the model's own run-to-run
+variability, and the largest of them is drawn on the figure that reports the
+gap. This is a weak bound --- two runs cannot estimate a variance --- and it is
+reported as a largest observed shift rather than as an interval.
+
+\subsection{Tests}
+
+The paired difference between the released model and bicubic upsampling is
+tested three ways on the same \SubsetN{} crops: the exact two-sided sign
+test~\cite{dixon1946sign}, which counts how many crops fall each way and assumes
+nothing about their distribution; the Wilcoxon signed-rank
+test~\cite{wilcoxon1945individual} on the same pairs; and the paired $t$
+test~\cite{student1908probable} with its interval, which is the only one of the
+three that assumes a distributional shape. A percentile
+bootstrap~\cite{efron1979bootstrap} over the paired differences is reported
+beside the interval each record already carries, so the two constructions can be
+compared rather than one standing in for the other. Source group is a recorded
+property of each crop and is reported as a stratum, not as a covariate: the
+strata were not chosen after seeing the differences, and no adjustment is made.
+
+\subsection{The census of an attempt, and the path it names}
+
+An earlier attempt ran the same released model over the full set of
+\CensusTotal{} inputs under a fixed memory budget, expressed as a maximum number
+of output pixels and a maximum output side length. Inputs whose upsampled output
+would exceed the budget were skipped before inference. The counts, the budget,
+the size distribution of what was skipped and the source-group composition of
+what was skipped are all recorded.
+
+The census names a live path as its source, and that path \CensusPathState{}:
+the later subset run overwrote it. A snapshot of the earlier state was retained
+under a history directory, and the census is checked against that snapshot
+rather than against the live path. The check is what makes the census usable;
+without the retained snapshot the counts would be unverifiable, and the paper
+reports the near miss rather than passing over it.
+
+\subsection{What is deliberately not computed}
+
+No perceptual measure is computed. No value is imputed for the \CensusRan{}
+outputs of the earlier attempt, which have no reference images on disk; the
+build stops if any of them ever acquires one, because their absence is the
+reason those outputs cannot be scored. The full-length reference comparison this
+line of work would eventually be measured against was never produced, and both
+the tier that would hold it and the tier above it are recorded as
+\PrimaryTier{} and \SotaTier{}. Completing the subset does not change either,
+the records say so in their own words, and this paper does not present the
+subset as an approximation of the full comparison.
