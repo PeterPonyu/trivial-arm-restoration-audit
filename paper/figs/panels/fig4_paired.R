@@ -48,4 +48,4 @@ forest <- ggplot(means, aes(x = mean_delta, y = pos)) +
 
 p <- patchwork::wrap_plots(spread, forest, widths = c(1.35, 1))
 
-save_fig(p, "fig4_paired", width = 6.0, height = 2.9)
+save_fig(p, "fig4_paired", width = FIGURE_TEXT_WIDTH_IN, height = 2.9)

@@ -34,4 +34,4 @@ p <- ggplot(long, aes(x = steps, y = value)) +
   rtx_theme() +
   theme(strip.text = element_text(size = 7.5))
 
-save_fig(p, "fig2_budget", width = 5.6, height = 2.3)
+save_fig(p, "fig2_budget", width = FIGURE_TEXT_WIDTH_IN, height = 2.3)

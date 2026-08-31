@@ -20,4 +20,4 @@ p <- ggplot(crops, aes(x = bicubic_psnr, y = dit_psnr, shape = camera)) +
         legend.background = element_blank(), legend.title = element_text(size = 7),
         legend.text = element_text(size = 7), legend.key.size = unit(9, "pt"))
 
-save_fig(p, "fig3_subset", width = 3.6, height = 3.6)
+save_fig(p, "fig3_subset", width = 0.62 * FIGURE_TEXT_WIDTH_IN, height = 3.6)

@@ -7,8 +7,9 @@ deposit. Describing the rules below without reproducing the paths they remove is
 the point of this file, so the left column names each class of string rather
 than quoting it.
 
-The rewrite is textual and total: it substitutes path strings and nothing else.
-Rules are applied longest match first.
+The rewrite is textual and total: it substitutes path strings and refreshes the
+explicit source/hash links in derived receipts, without changing a numeric or
+structural value. Rules are applied longest match first.
 
 | replaced | with |
 |---|---|
@@ -38,15 +39,15 @@ The digest on the left is the file as the run wrote it; the digest on the right
 is the file in this archive, and it is the one the manifest binds and the build
 verifies.
 
-| path | substitutions | original sha256 | archived sha256 |
-|---|---|---|---|
-| `data/e-withdrawn/paper_measurement_toy_matched_budget.json` | 3 | `86cd354d3755cd5c…` | `7363376c6b16e0a4…` |
-| `data/e-static/static.json` | 1 | `796a625165ef89fc…` | `c8f6eea65f526592…` |
-| `data/e-naive/naive.json` | 1 | `60e471d87da0a806…` | `83a46f404e0f1c18…` |
-| `data/e-simple/simple.json` | 1 | `3c1dcc256d343228…` | `ffa2fb4863926cc6…` |
-| `data/e-eval/sota_dit4sr_eval.json` | 16 | `edf199d9ff933899…` | `749af50fc0e86631…` |
-| `data/e-eval-earlier/sota_dit4sr_eval_20260816T062908Z.json` | 14 | `02a45088e6bf89d8…` | `06fd3b65c5ae9b41…` |
-| `data/e-skip/complement_dit4sr_skip_census.json` | 2 | `4b8b3782939fb14c…` | `1409232fa989e43e…` |
-| `data/e-sizes/complement_dit4sr_lq_size_histogram.json` | 2 | `564db0f199545884…` | `30695b5cd548443a…` |
-| `data/e-orphans/complement_dit4sr_13stem_identity.json` | 16 | `9ae6a47f8f0e5a74…` | `5d4bfb206a23f8dc…` |
-| `data/e-primary/paper_primary.json` | 1 | `4e43b7e0a78cf196…` | `97e416747aa78a65…` |
+| path | path substitutions | receipt-link refreshes | original sha256 | archived sha256 |
+|---|---:|---:|---|---|
+| `data/e-withdrawn/paper_measurement_toy_matched_budget.json` | 3 | 0 | `86cd354d3755cd5c…` | `7363376c6b16e0a4…` |
+| `data/e-static/static.json` | 1 | 0 | `796a625165ef89fc…` | `c8f6eea65f526592…` |
+| `data/e-naive/naive.json` | 1 | 0 | `60e471d87da0a806…` | `83a46f404e0f1c18…` |
+| `data/e-simple/simple.json` | 1 | 0 | `3c1dcc256d343228…` | `ffa2fb4863926cc6…` |
+| `data/e-eval/sota_dit4sr_eval.json` | 16 | 0 | `edf199d9ff933899…` | `749af50fc0e86631…` |
+| `data/e-eval-earlier/sota_dit4sr_eval_20260816T062908Z.json` | 14 | 0 | `02a45088e6bf89d8…` | `06fd3b65c5ae9b41…` |
+| `data/e-skip/complement_dit4sr_skip_census.json` | 2 | 0 | `4b8b3782939fb14c…` | `1409232fa989e43e…` |
+| `data/e-sizes/complement_dit4sr_lq_size_histogram.json` | 2 | 0 | `564db0f199545884…` | `30695b5cd548443a…` |
+| `data/e-orphans/complement_dit4sr_13stem_identity.json` | 16 | 0 | `9ae6a47f8f0e5a74…` | `5d4bfb206a23f8dc…` |
+| `data/e-primary/paper_primary.json` | 1 | 0 | `4e43b7e0a78cf196…` | `97e416747aa78a65…` |

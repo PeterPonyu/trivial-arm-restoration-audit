@@ -60,4 +60,4 @@ composition <- ggplot(dropped, aes(x = camera, y = n, fill = measured)) +
 
 p <- patchwork::wrap_plots(survival, composition, widths = c(1.15, 1))
 
-save_fig(p, "fig5_ceiling", width = 6.0, height = 3.0)
+save_fig(p, "fig5_ceiling", width = FIGURE_TEXT_WIDTH_IN, height = 3.0)

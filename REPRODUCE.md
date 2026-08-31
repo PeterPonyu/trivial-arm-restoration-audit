@@ -30,7 +30,7 @@ the build instead of producing a stale number.
 | `data/e-primary/paper_primary.json` | recorded_state | 503 | `97e416747aa78a65…` |
 | `data/e-sota/sota_copy.json` | recorded_state | 562 | `cdfb73588e424076…` |
 
-Some of these files recorded the paths of the machine that produced them. Those path strings were rewritten before deposit; `REDACTION.md` states the rules, lists every file touched with both digests, and describes the check that proves no number changed.
+Some of these files recorded the paths of the machine that produced them. Those path strings and source links were refreshed before deposit; `REDACTION.md` states the rules, lists every file touched with both digests, and describes the check that proves no number changed.
 
 ## Not redistributed
 

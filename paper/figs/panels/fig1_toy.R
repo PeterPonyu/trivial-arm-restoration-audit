@@ -22,4 +22,4 @@ p <- ggplot(toy_plot, aes(x = pos, y = psnr)) +
   labs(x = NULL, y = "Restored fidelity against the reference image (dB)") +
   rtx_theme()
 
-save_fig(p, "fig1_toy", width = 5.6, height = 2.2)
+save_fig(p, "fig1_toy", width = FIGURE_TEXT_WIDTH_IN, height = 2.2)
