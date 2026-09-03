@@ -307,7 +307,9 @@ write_generated(c(
   macro("EvalReferences", eval_now$gt$n_gt_matched),
   macro("PrimaryTier", tier_primary$status),
   macro("SotaTier", tier_sota$status),
-  macro("PerceptualState", if (isTRUE(dit$lpips$computed)) "computed" else "not computed")
+  macro("PerceptualState", if (isTRUE(dit$lpips$computed)) "computed" else "not computed"),
+  macro("NEvidence", nrow(manifest$entries)),
+  macro("EvidenceBytes", format(sum(manifest$entries$bytes), big.mark = ","))
 ), "generated_numbers.tex")
 
 write_generated(c(
@@ -366,4 +368,8 @@ write_generated(c(
   "\\end{tabular}"
 ), "generated_table_census.tex")
 
-message("wrote 5 figures to figs/out and 4 generated tex files to tex/")
+## The manifest itself, so the evidence discipline can be checked rather than believed.
+
+write_generated(evidence_table(manifest), "generated_table_evidence.tex")
+
+message("wrote 5 figures to figs/out and 5 generated tex files to tex/")

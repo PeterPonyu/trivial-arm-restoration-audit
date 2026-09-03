@@ -1,7 +1,7 @@
 # Figure 4. The paired differences, and the width the method varies by against
-# itself. The shaded band in the left panel is the largest per-crop shift between
+# itself. The shaded band in Panel A is the largest per-crop shift between
 # two pixel sets of the same method: the gap has to be read against that width,
-# not against zero alone. The right panel is the same differences averaged,
+# not against zero alone. Panel B is the same differences averaged,
 # overall and within each source group.
 
 ordered <- crops[order(crops$d_bicubic), ]
@@ -46,6 +46,7 @@ forest <- ggplot(means, aes(x = mean_delta, y = pos)) +
   theme(plot.subtitle = element_text(size = 7, colour = "grey25"),
         axis.text.y = element_text(size = 7))
 
-p <- patchwork::wrap_plots(spread, forest, widths = c(1.35, 1))
+p <- patchwork::wrap_plots(panel_label(spread, "A"), panel_label(forest, "B"),
+                           widths = c(1.35, 1))
 
 save_fig(p, "fig4_paired", width = FIGURE_TEXT_WIDTH_IN, height = 2.9)

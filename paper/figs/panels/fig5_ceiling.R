@@ -1,6 +1,6 @@
-# Figure 5. What the memory ceiling selected. The left panel is what became of
-# every input each run was given; the right panel is which source groups the
-# ceiling removed. The middle outcome on the left is the one that matters: an
+# Figure 5. What the memory ceiling selected. Panel A is what became of
+# every input each run was given; Panel B is which source groups the
+# ceiling removed. The middle outcome in Panel A is the one that matters: an
 # input can survive the ceiling and still not be scorable.
 
 ORPHANS_SCORED <- sum(orphans$stems$metric != "not_computed")
@@ -58,6 +58,7 @@ composition <- ggplot(dropped, aes(x = camera, y = n, fill = measured)) +
   theme(legend.position = "bottom", legend.text = element_text(size = 7),
         legend.key.size = unit(8, "pt"), axis.text.y = element_text(size = 7))
 
-p <- patchwork::wrap_plots(survival, composition, widths = c(1.15, 1))
+p <- patchwork::wrap_plots(panel_label(survival, "A"), panel_label(composition, "B"),
+                           widths = c(1.15, 1))
 
 save_fig(p, "fig5_ceiling", width = FIGURE_TEXT_WIDTH_IN, height = 3.0)

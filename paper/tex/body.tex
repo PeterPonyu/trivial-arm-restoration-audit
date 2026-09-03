@@ -72,12 +72,69 @@ arm in the experiment is the one that determines whether the expensive arms mean
 anything, together with the arithmetic showing exactly what it determined in each
 case.
 
+\section{Related work}
+
+Two of this paper's results look, at first glance, like indictments of the
+methods involved. Neither is, and the literature explains why in both cases. The
+third result has less precedent, and is the one we think is most worth having.
+
+The architectural setting is conventional. Denoising diffusion established the
+generative framework~\cite{ho2020ddpm}, the convolutional encoder--decoder with
+skip connections remains the default backbone for dense image
+prediction~\cite{ronneberger2015unet}, operating in a latent space made
+high-resolution work tractable~\cite{rombach2022ldm}, and transformer backbones
+with adaptive layer normalisation are now a standard
+alternative~\cite{peebles2023dit}. Our toy-scale observation concerns the
+conditioning path of that last family and is reported as a property of one small
+run, not of the architecture.
+
+The metric result needs the most care. On the subset measured here an
+interpolation is closer to the reference than the published method on
+fidelity metrics, and read naively that is an embarrassing outcome for the
+method. It is not, and the reason has been known since the perception--distortion
+tradeoff was made precise: distortion and perceptual quality cannot both be
+optimised without limit, so a method tuned for perceptual realism is
+\emph{expected} to lose on squared-error-derived measures~\cite{blau2018perception}.
+This was visible even before it was formalised, in the observation that
+adversarially trained super-resolution produces more convincing images while
+scoring worse on peak signal-to-noise
+ratio~\cite{ledig2017srgan}. Structural similarity~\cite{wang2004ssim} is a
+distortion measure in this sense and inherits the tradeoff; learned perceptual
+distances~\cite{zhang2018lpips} sit on the other side of it, which is why the
+absence of a perceptual measurement here is a stated limitation rather than an
+oversight. The honest reading of our subset result is therefore that it locates
+the arms on one axis of a two-axis problem, and says nothing about the other.
+
+Where we do claim a contribution is in evaluation hygiene, and there the
+precedent is direct. Careful reproductions have repeatedly found that simple,
+properly tuned baselines match or beat published neural methods once the
+comparison is conducted on equal terms~\cite{dacrema2019worrying}, and the
+broader argument that empirical progress is often an artifact of insufficiently
+rigorous comparison is by now well
+rehearsed~\cite{sculley2018winners,lin2019neural}. Our case adds a mechanism
+those critiques do not cover. The subset we measured was not chosen for
+scientific reasons: a memory ceiling determined which inputs could be processed,
+and the inputs it excluded were the larger ones from a particular source. That
+is missingness related to a property of the data itself, which is precisely the
+regime in which ignoring the missing cases biases the
+result~\cite{rubin1976inference}. A comparison conducted on the survivors of a
+resource constraint is a comparison on a non-random subsample, and the constraint
+is rarely reported because it feels like an implementation detail rather than a
+design choice. We report the census of what was excluded and the sizes behind
+each exclusion for that reason.
+
+The statistical treatment is deliberately unambitious. Intervals come from the
+bootstrap~\cite{efron1979bootstrap}, and paired comparisons use the sign
+test~\cite{dixon1946sign}, the signed-rank test~\cite{wilcoxon1945individual}
+and the paired $t$ test~\cite{student1908probable} in preference to any
+aggregate that would collapse the per-crop structure the measurement produced.
+
 \section{Methods}
 \input{methods}
 
 \section{At toy scale, no arm reached the input}
 
-Table~\ref{tab:toy} and Figure~\ref{fig:toy} give the toy-scale run as its own
+Table~\ref{tab:toy} and Fig.~\ref{fig:toy} give the toy-scale run as its own
 records describe it. Two networks were trained for \ToySteps{} steps on the same
 data at seed \ToySeed{}, and both were evaluated on the same \ToyN{} held-out
 pairs at \ToyEvalSteps{} sampling steps against the same degraded inputs. The
@@ -151,7 +208,7 @@ the convolutional arm's, so nothing about architectures follows from either.
 
 \section{The longer run, read on both axes}
 
-Figure~\ref{fig:budget} adds the one arm that tests whether the toy shortfall was
+Fig.~\ref{fig:budget} adds the one arm that tests whether the toy shortfall was
 a budget problem. The convolutional network was retrained at \ToyLongSteps{}
 steps, \BudgetMultiple{} times the original, on the same data at the same
 learning rate and seed, and evaluated identically.
@@ -209,7 +266,7 @@ those of \GapSSIM{}. All four measures agree, which
 is not surprising --- they are four views of the same kind of quantity --- but it
 does remove the possibility that the ordering is an artifact of one convention.
 
-Figure~\ref{fig:subset} plots the comparison crop by crop. The model is behind
+Fig.~\ref{fig:subset} plots the comparison crop by crop. The model is behind
 bicubic on \LossesBicubic{} of \SubsetN{} crops and behind nearest-neighbour on
 \LossesNearest{}. The mean paired difference against bicubic is \GapBicubic{}
 decibels, with a percentile bootstrap interval from \GapLower{} to \GapUpper{}
@@ -274,7 +331,7 @@ shifts. This is a weak bound and is reported as one: two runs cannot estimate a
 variance, and the quantity is a largest observed shift rather than an interval.
 It is enough for the purpose it is used for. A re-run would not close a gap
 \NoiseMargin{} times wider than the widest movement a re-run has been observed to
-produce. Figure~\ref{fig:paired} draws that width as a band so the two scales can
+produce. Fig.~\ref{fig:paired} draws that width as a band so the two scales can
 be seen against each other rather than quoted.
 
 The second is that the gap might be one camera group, one crop, or one tail. It
@@ -320,7 +377,7 @@ side, \SkippedPixels{} pixels in total, \BudgetExcess{} times the budget. Nothin
 was skipped for being hard, or unusual, or badly exposed. The evaluation set was
 partitioned by output dimensions, and one side of the partition was discarded.
 
-Table~\ref{tab:census} and Figure~\ref{fig:ceiling} give what that removed. The
+Table~\ref{tab:census} and Fig.~\ref{fig:ceiling} give what that removed. The
 dropped inputs span \CensusCameras{} source groups, of which \AbsentGroups{} do
 not appear anywhere in the measured subset and so are absent from every number in
 this study. Whether this matters depends on whether restoration difficulty varies
@@ -499,6 +556,54 @@ comparison, at every scale. When it loses, nothing is lost by having printed it.
 When it wins, what has been learned is that the comparison is reporting on its own
 measurement, and that is worth knowing before the table is published rather than
 after.
+
+\appendix
+
+\section{The bound evidence}
+\label{app:evidence}
+
+Table~\ref{tab:evidence} lists all \NEvidence{} artifacts behind this
+manuscript, totalling \EvidenceBytes{} bytes, in the order the analysis consumes
+them. Every number the text prints is computed from these bytes by the figure
+code, and the code recomputes each digest before reading, so a stale artifact
+stops the build rather than reaching the page.
+
+The table also makes visible a check that would otherwise be invisible. Two
+rows carry the same digest: the per-crop record for the bicubic arm and the
+independently written audit of that arm are byte-identical, which is the
+strongest available statement that the two agree crop for crop. They are listed
+as two rows because they are two records, and the shared digest is the result of
+comparing them, not an accident of bookkeeping.
+
+The discipline earns its place in a paper of this kind. The manuscript reports a
+toy comparison that the project withdrew, and a subset that was fixed as the
+deliverable rather than promoted into a claim about the full input set. Both the
+withdrawn comparison and the withdrawal are pinned here, as are the record of
+the earlier attempt that ran a fraction of its inputs and the census of what it
+skipped. A study whose findings are largely negative has no positive number
+anchoring it, so the guarantee that the account was not rewritten after the fact
+has to come from somewhere else. It comes from here.
+
+Two limits, so the table is not read as more than it is. A digest fixes bytes to
+a claim; it does not make the bytes true, and nothing here certifies an artifact
+was correct when written. And each artifact's internal identifier and path are
+omitted deliberately: they describe a private tree, they would tell a reader
+nothing, and keeping them out of the PDF is a property the build verifies.
+
+\begin{table}[htbp]
+\centering
+\caption{Every artifact this manuscript rests on, with its size and the first 16
+hexadecimal characters of its SHA-256 digest. Full digests, and the paths they
+apply to, are in the manifest accompanying the manuscript source; the prefix is
+shown here only because a 64-character digest does not set in a table column.
+Where two rows share a digest they are the same bytes recorded twice, which is
+how the bicubic arm and its independent audit are shown to agree. The figure and
+table code recomputes each digest from the bytes on disk before reading them and
+stops the build on any mismatch.}
+\label{tab:evidence}
+\scriptsize
+\input{generated_table_evidence}
+\end{table}
 
 \section*{Data and code availability}
 

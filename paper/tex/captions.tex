@@ -23,13 +23,14 @@ The training budget raised \BudgetFold{}, read on both axes at once. The same
 small convolutional restoration network was trained for \ToySteps{} and for
 \ToyLongSteps{} steps on the same data at the same learning rate and seed, and
 evaluated on the same \ToyN{} held-out pairs at \ToyEvalSteps{} sampling steps.
-The left panel is the training objective at the last step; the right panel is
-mean peak signal-to-noise ratio of the restored output against the reference
-image, with the horizontal rule marking the same quantity for the degraded input
-passed through unchanged. The objective falls by a factor of \ToyLossDrop{}. The
-fidelity of the output falls with it, by \ToyLongRegression{} decibels, and stays
-below the untouched input at both budgets. Read alone, either panel would give
-the opposite impression of what the extra budget bought. The longer run was
+The two facets carry their own labels: one is the training objective at the last
+step, the other the mean peak signal-to-noise ratio of the restored output
+against the reference image, where the horizontal rule marks the same quantity
+for the degraded input passed through unchanged. The objective falls by a factor
+of \ToyLossDrop{}. The fidelity of the output falls with it, by
+\ToyLongRegression{} decibels, and stays below the untouched input at both
+budgets. Read alone, either facet would give the opposite impression of what the
+extra budget bought. The longer run was
 written outside the results tree and was never promoted.%
 }
 
@@ -49,15 +50,15 @@ not which is better.%
 }
 
 \newcommand{\CapPaired}{%
-The paired differences, and the width the model varies by against itself. The
-left panel plots one point per crop: the peak signal-to-noise ratio of a released
+The paired differences, and the width the model varies by against itself. Panel
+A plots one point per crop: the peak signal-to-noise ratio of a released
 diffusion restoration model minus that of bicubic upsampling of the same
 low-resolution input, over a \SubsetN{}-crop subset, ordered by that difference.
 Negative values are crops on which the interpolation is closer to the reference.
 The solid rule is zero and the dashed rule is the mean difference. The shaded
 band is the largest per-crop shift the same model shows between two of its own
 runs over the same crops, so it is an upper bound on how much of the gap could be
-run-to-run variation; the gap is \NoiseMargin{} times that width. The right panel
+run-to-run variation; the gap is \NoiseMargin{} times that width. Panel B
 gives the mean difference overall and within each camera group, with 95\%
 percentile bootstrap intervals over the crops. Camera group is a recorded
 property of each crop and was fixed before these differences were computed.%
@@ -68,11 +69,11 @@ What a memory ceiling selected, and what it removed. An earlier attempt ran a
 released diffusion restoration model over the full set of \CensusTotal{} inputs
 under a fixed budget of \BudgetPixels{} output pixels and a maximum output side
 of \BudgetLong{} pixels; inputs whose upsampled output would exceed it were
-skipped before inference. The left panel gives, for that attempt and for the
+skipped before inference. Panel A gives, for that attempt and for the
 later \SubsetN{}-crop run, what became of every input the run was given: dropped
 before inference, run but left with no reference image to score against, or run
 and scored. Neither the drop nor the absence of references was a sampling
-decision. The right panel breaks the dropped inputs down by the source group
+decision. Panel B breaks the dropped inputs down by the source group
 their file names record, and shades the two groups that appear in the later
 subset. Every dropped input was of a single larger size class, so what survived
 the ceiling was fixed by output dimensions rather than chosen.%
