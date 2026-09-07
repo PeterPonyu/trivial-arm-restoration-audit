@@ -2,7 +2,7 @@
 
 Toy training records, per-crop fidelity tables for a released restoration model and two interpolations, inference manifests, a memory-ceiling skip census, figure code and manuscript source for a study showing that at three scales of one restoration project the untouched input or the cheapest interpolation determined what the comparison could conclude.
 
-This repository has not been deposited in a public archive, so it has no persistent identifier yet. One will be recorded here when an archive exists.
+Archived at [10.5281/zenodo.22647026](https://doi.org/10.5281/zenodo.22647026).
 
 Repository: https://github.com/PeterPonyu/trivial-arm-restoration-audit
 
