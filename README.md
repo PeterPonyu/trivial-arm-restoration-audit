@@ -4,6 +4,8 @@ Toy training records, per-crop fidelity tables for a released restoration model 
 
 This repository has not been deposited in a public archive, so it has no persistent identifier yet. One will be recorded here when an archive exists.
 
+Repository: https://github.com/PeterPonyu/trivial-arm-restoration-audit
+
 ## What is here
 
 - `paper/tex/` — manuscript source. The abstract, the methods and the figure

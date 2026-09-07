@@ -187,29 +187,48 @@
 }
 
 % ---------------------------------------------------------------------------
-% Tier 2 -- identified from this project's on-disk records.
-% UNVERIFIED pending the bibliography gate. Do not add venues.
+% Tier 2 -- the two third-party objects this study measured.
+%
+% Both were carried here as placeholders while their identity rested only on
+% this project's own on-disk records. They are now resolved. The restoration
+% model is the one whose official repository is vendored in this project's
+% experiment tree, so its author list, title and venue come from that
+% repository's own citation block and were re-checked against the arXiv record
+% for 2503.23580. The evaluation set is the one that repository's own
+% instructions name as the source of its RealSR test images; its author list,
+% title, venue and year were re-checked against the registered DOI.
 % ---------------------------------------------------------------------------
 
-@misc{releasedmodel,
-  key   = {Released restoration model},
-  title = {A diffusion transformer for real-world image super-resolution},
-  note  = {Recorded in this project only as the released restoration model whose
-           published weights were run over the crop subset reported here, on top
-           of a third-party text-to-image backbone also identified by name in the
-           project's records. Authorship, exact title wording, venue and year are
-           UNVERIFIED: all were taken from this project's own recorded state and
-           none was re-checked against the official record during drafting},
-  year  = {2025}
+@inproceedings{releasedmodel,
+  author    = {Duan, Zheng-Peng and Zhang, Jiawei and Jin, Xin and Zhang, Ziheng
+               and Xiong, Zheng and Zou, Dongqing and Ren, Jimmy S. and
+               Guo, Chun-Le and Li, Chongyi},
+  title     = {{DiT4SR}: Taming Diffusion Transformer for Real-World Image
+               Super-Resolution},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer
+               Vision (ICCV)},
+  year      = {2025},
+  eprint    = {2503.23580},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  note      = {The released model whose published weights were run over the crop
+               subset reported here. This study measures that model's published
+               weights as distributed; it does not re-train it and makes no claim
+               about its behaviour outside the subset described in the methods}
 }
 
-@misc{benchmarksubset,
-  key   = {Real-world super-resolution validation set},
-  title = {A real-world paired super-resolution benchmark},
-  note  = {Recorded in this project only as the origin of the low-resolution
-           inputs and reference images used here. The crops measured are a subset
-           of it selected by output size under a memory budget, not a released
-           split. Authorship, title wording, venue and year are UNVERIFIED and
-           were taken from this project's own recorded state},
-  year  = {2019}
+@inproceedings{benchmarksubset,
+  author    = {Cai, Jianrui and Zeng, Hui and Yong, Hongwei and Cao, Zisheng
+               and Zhang, Lei},
+  title     = {Toward Real-World Single Image Super-Resolution: A New Benchmark
+               and a New Model},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer
+               Vision (ICCV)},
+  year      = {2019},
+  doi       = {10.1109/ICCV.2019.00318},
+  note      = {The origin of the low-resolution inputs and reference images used
+               here. The crops measured are a subset of its validation images
+               selected by output size under a memory budget, not a released
+               split, so no number reported here is comparable to a score
+               reported on the full set}
 }
