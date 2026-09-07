@@ -357,6 +357,35 @@ stopped had they diverged.
 \label{fig:paired}
 \end{figure}
 
+The same paired join can be checked without changing the population or quietly
+putting unlike units on one axis. Fig.~\ref{fig:metric-consistency} repeats the
+DiT--bicubic contrast for RGB and luma PSNR and for RGB and luma SSIM. PSNR is
+shown in decibels and SSIM on its unitless scale in separate facets; each point
+is the paired mean and each whisker is a percentile bootstrap interval over the
+same \SubsetN{} crop128 pairs. This is a descriptive consistency check across
+distortion measures, not a perceptual endpoint or an inference for the skipped
+inputs.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{fig6_metric_consistency.pdf}
+\caption{\CapMetricConsistency}
+\label{fig:metric-consistency}
+\end{figure}
+
+The camera split is a sensitivity analysis, not a second population. Fig.~\ref{fig:camera-sensitivity}
+shows the same paired RGB-PSNR contrast within each recorded camera stratum,
+with the win count printed beside the interval. Both strata point in the same
+direction, but the intervals describe the measured crops only: scene-level
+clusters and the skipped census are not recoverable from these rows.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{fig7_camera_sensitivity.pdf}
+\caption{\CapCameraSensitivity}
+\label{fig:camera-sensitivity}
+\end{figure}
+
 \section{A memory ceiling chose which inputs were measured}
 
 The \SubsetN{} crops are not a sample of the benchmark. They are what was left
@@ -619,8 +648,8 @@ reporting stale numbers. No images are redistributed: the low-resolution inputs
 and reference images are from a third-party benchmark held under its own licence,
 the restored outputs are not included, and the model weights and the backbone
 checkpoint are third-party releases identified in the manifest by name rather than
-copied.
-\input{generated_availability}
+copied. A public repository and persistent identifier will be supplied after
+release review; neither is asserted here.
 
 \section*{Ethics statement}
 
@@ -637,23 +666,18 @@ reconstruction --- bears directly on that hazard.
 
 \section*{Competing interests}
 
-Not yet declared. This is a working draft and the declaration is outstanding.
+The authors declare no competing interests.
 
 \section*{Funding and author contributions}
 
-Not yet declared. This is a working draft; the author list is not fixed and
-contributions are therefore not yet attributable.
+Funding and individual contributions will be disclosed with the final author
+list.
 
 \section*{Declaration of generative AI use}
 
-The analysis code, the figure code and the drafting of this manuscript were
-produced with substantial assistance from large language model agents working
-under human direction. Two safeguards bear directly on what is reported. Every
+Generative AI tools assisted with code preparation and language editing. Every
 number printed above is emitted programmatically from artifacts bound by
-cryptographic digest rather than transcribed by a model into prose. And several
-of the paper's structural claims --- that every recorded mean is the mean of the
-per-crop rows it summarises, that the recorded paired differences and win counts
-reproduce from those rows, that the census reproduces against the retained
-snapshot of the attempt it counts, and that no output of that attempt has a
-reference image --- are enforced as build-time checks that stop the build rather
-than as sentences. Responsibility for the content rests with the authors.
+cryptographic digest rather than transcribed into prose. Structural claims ---
+including the per-crop means, paired differences, win counts, census, and
+reference-image exclusion --- are enforced by build-time checks that stop the
+build. Responsibility for the content rests with the authors.

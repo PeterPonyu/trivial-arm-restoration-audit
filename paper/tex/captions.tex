@@ -46,7 +46,8 @@ the reference. Symbols distinguish the two camera groups the subset is drawn
 from, in equal numbers. Peak signal-to-noise ratio measures distance from the
 reference and not perceptual quality; no perceptual measure was computed for
 these crops, so the panel reports which output is closer to the reference and
-not which is better.%
+not which is better. Filled and open symbols identify the two camera groups;
+the diagonal is the pre-specified equality reference, not a fitted trend.%
 }
 
 \newcommand{\CapPaired}{%
@@ -61,7 +62,10 @@ runs over the same crops, so it is an upper bound on how much of the gap could b
 run-to-run variation; the gap is \NoiseMargin{} times that width. Panel B
 gives the mean difference overall and within each camera group, with 95\%
 percentile bootstrap intervals over the crops. Camera group is a recorded
-property of each crop and was fixed before these differences were computed.%
+property of each crop and was fixed before these differences were computed. The
+zero rule is the equality point; the dashed rule is the observed mean, and the
+interval in Panel B is a bootstrap summary over this measured subset rather
+than uncertainty for the full census.%
 }
 
 \newcommand{\CapCeiling}{%
@@ -73,10 +77,38 @@ skipped before inference. Panel A gives, for that attempt and for the
 later \SubsetN{}-crop run, what became of every input the run was given: dropped
 before inference, run but left with no reference image to score against, or run
 and scored. Neither the drop nor the absence of references was a sampling
-decision. Panel B breaks the dropped inputs down by the source group
-their file names record, and shades the two groups that appear in the later
-subset. Every dropped input was of a single larger size class, so what survived
-the ceiling was fixed by output dimensions rather than chosen.%
+decision. Panel B breaks the dropped inputs down by the recorded source group
+and shades the two groups that appear in the later subset. Every dropped input
+was of a single larger size class, so what survived
+the ceiling was fixed by output dimensions rather than chosen. Segment labels
+are n/N and percentages: in Panel A, N is the number of inputs given to that
+attempt, and in Panel B it is the total number dropped for memory. An
+input that ran without a matched reference is counted as unscored rather than
+treated as a zero-fidelity observation; zero-height outcomes remain represented
+by the legend.%
+}
+
+\newcommand{\CapMetricConsistency}{%
+Four fidelity metrics on one paired population. Each point is the mean
+DiT--bicubic difference over the same \SubsetN{} crop128 pairs; the vertical
+rule is equality and each horizontal whisker is a 95\% percentile bootstrap
+interval over those paired differences. The facet labelled PSNR keeps RGB and
+luma peak signal-to-noise ratio on their native decibel scale; the facet
+labelled SSIM keeps RGB and luma structural similarity on its native unitless
+scale. Negative
+values mean that the model is farther from the reference under the displayed
+fidelity measure. The facets deliberately use separate axes, so their
+magnitudes are not compared across units; no perceptual-quality claim is made.%
+}
+
+\newcommand{\CapCameraSensitivity}{%
+Camera-stratified sensitivity of the paired RGB peak signal-to-noise ratio.
+Each point is the mean DiT--bicubic difference within one recorded camera
+stratum; the horizontal interval is the corresponding descriptive percentile
+bootstrap over paired crops, and the label gives the number of DiT wins out of
+the stratum's crops. The vertical rule is equality. Both strata are part of the
+same 100-crop, memory-selected subset, so this panel does not provide
+scene-level or full-census uncertainty and does not measure perceptual quality.%
 }
 
 \newcommand{\CapToyTable}{%
@@ -109,8 +141,8 @@ was computed for these crops.%
 Which inputs a memory ceiling removed, by source group. An earlier attempt over
 the full set of \CensusTotal{} inputs skipped every input whose upsampled output
 would have exceeded \BudgetPixels{} pixels, which removed \CensusSkipped{} of
-them. Groups are the prefixes the input file names carry, which correspond to the
-capture device. The final column records whether that group appears in the
+them. Groups are the recorded source labels, which correspond to the capture
+device. The final column records whether that group appears in the
 \SubsetN{}-crop subset measured later. Of the \CensusCameras{} groups the ceiling
 touched, \AbsentGroups{} are absent from every measured result in this study.%
 }

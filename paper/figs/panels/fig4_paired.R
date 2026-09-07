@@ -16,8 +16,8 @@ spread <- ggplot(ordered, aes(x = rank, y = d_bicubic)) +
   scale_shape_manual(values = c(1, 3), name = "Source group") +
   labs(x = "Crops, ordered by paired difference",
        y = "Published method minus bicubic (dB)",
-       subtitle = sprintf("shaded band: %.3f dB, the method against itself",
-                          noise$max_abs)) +
+       subtitle = sprintf("n = %d crops; band = %.3f dB, method against itself",
+                          nrow(crops), noise$max_abs)) +
   rtx_theme() +
   theme(plot.subtitle = element_text(size = 7, colour = "grey25"),
         legend.position = "bottom", legend.title = element_text(size = 7),
@@ -41,7 +41,7 @@ forest <- ggplot(means, aes(x = mean_delta, y = pos)) +
                      limits = c(0.5, nrow(means) + 0.5), expand = c(0, 0)) +
   scale_x_continuous(limits = c(min(means$lower) - 0.6, 0.6)) +
   labs(x = "Mean paired difference (dB)", y = NULL,
-       subtitle = "bars: 95% bootstrap interval") +
+       subtitle = sprintf("95%% bootstrap interval; n = %d crops in each row", nrow(crops))) +
   rtx_theme() +
   theme(plot.subtitle = element_text(size = 7, colour = "grey25"),
         axis.text.y = element_text(size = 7))

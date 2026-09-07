@@ -51,6 +51,21 @@ crops, and it is not computed here. A comparison with a distortion measure and
 no perceptual measure can establish which output is closer to the reference. It
 cannot establish which output is better.
 
+The measured population is conditional, and we use that word literally. Let
+\(\mathcal{U}\) be the candidate input set and let
+\[
+  \mathcal{M}
+  = \{i\in\mathcal{U}: i\text{ passes the declared crop and memory filters and
+      has a matched reference}\}.
+\]
+All subset means, paired differences, intervals, and win counts are functions
+of \(\mathcal{M}\), with denominator \(N_{\mathcal{M}}=|\mathcal{M}|\). An input
+that is skipped for memory or runs without a matched reference is outside
+\(\mathcal{M}\); it contributes a census count, not a zero-valued metric.
+Thus the reported comparison is conditional on the retained, scorable subset
+and cannot be read as an estimate for \(\mathcal{U}\) or for the released model
+on a full benchmark.
+
 \subsection{Checks the build enforces}
 
 Several sentences in this paper are enforced as build-time checks rather than
@@ -97,6 +112,25 @@ beside the interval each record already carries, so the two constructions can be
 compared rather than one standing in for the other. Source group is a recorded
 property of each crop and is reported as a stratum, not as a covariate: the
 strata were not chosen after seeing the differences, and no adjustment is made.
+The resampling unit is the crop, so these intervals describe this measured
+subset and do not provide camera-level or population-level uncertainty when
+crops from the same source are correlated.
+
+For a crop \(i\in\mathcal{M}\), the fidelity contrast is
+\(\Delta_i=\mathrm{PSNR}_{\mathrm{model},i}
+-\mathrm{PSNR}_{\mathrm{bicubic},i}\) (and analogously for SSIM). These are
+distortion contrasts, not latent perceptual-quality contrasts; a negative
+\(\overline{\Delta}\) says only that the model is farther from the available
+reference under that metric.
+
+The cross-metric consistency panel computes this contrast separately for each
+of RGB PSNR, luma PSNR, RGB SSIM and luma SSIM before taking the paired mean.
+Each interval is the 2.5th and 97.5th percentiles of 1,000 resamples of the
+corresponding paired differences. PSNR remains in decibels and SSIM remains
+unitless, so the two metric families are displayed on separate native axes
+rather than combined into a standardized score. This panel is descriptive: it
+does not add a multiplicity-adjusted test or turn distortion differences into a
+claim about perceptual quality.
 
 \subsection{The census of an attempt, and the path it names}
 

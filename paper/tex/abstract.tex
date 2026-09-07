@@ -1,27 +1,22 @@
-Image restoration results are reported as comparisons between methods, and the
-arm that does nothing is usually left out because its number is uninteresting.
-This paper reports three comparisons from one project in which that number was
-recorded anyway, and shows that in each case it decided what the comparison
-could conclude. At toy scale, two small networks were trained under a
-matched-step budget and compared with each other; both finished below the
-degraded input they were asked to repair, at \ToyConv{} and \ToyTrans{} decibels
-against \ToyDegraded{}, so no comparison between them was available, and the
-project withdrew its own recorded conclusion once that was noticed. Raising the
-training budget \BudgetFold{} on the better of the two cut the training objective by a
-factor of \ToyLossDrop{} and moved restored fidelity \ToyLongRegression{}
-decibels the wrong way. At subset scale, a released diffusion restoration model
-was run to completion over \SubsetN{} crops with reference images present, and
-lost to bicubic upsampling on \LossesBicubic{} of them, by \GapBicubicAbs{}
-decibels on average; the gap is \NoiseMargin{} times the largest per-crop shift
-the same model shows between two of its own runs on the same crops, so it is not
-run-to-run variation. No perceptual measure was computed for those crops, which
-is exactly why the comparison cannot be read as a verdict on the model: what it
-establishes is that a fidelity-only readout ranks an interpolation above it, and
-that reporting the model's \MethodPSNR{} decibels alone would have hidden that.
-The third case is an earlier attempt over the full set of \CensusTotal{} inputs,
-where a memory ceiling dropped \CensusSkipped{} of them, and the \CensusRan{}
-that survived had no reference images and were never scored; which inputs
-survived was fixed by output size rather than by design, so the measured set was
-a property of the hardware. One recommendation follows from all three: print the
-trivial arm beside the method, and treat any comparison the trivial arm wins as
-a statement about the measurement rather than about the method.
+Image-restoration comparisons often omit the arm that does nothing. We report
+three evidence-bounded comparisons from one project in which that arm was
+retained. At toy scale, two matched-budget networks both finish below the
+degraded input: \ToyConv{} and \ToyTrans{} dB versus \ToyDegraded{} dB. Giving
+the better arm a \BudgetFold{} budget lowers its training loss by
+\ToyLossDrop{} times but moves fidelity \ToyLongRegression{} dB in the wrong
+direction, so the toy run cannot rank a restoration method above its input.
+
+At subset scale, a released diffusion model completes on \SubsetN{} crops and
+loses to bicubic on \LossesBicubic{}; the mean fidelity gap is
+\GapBicubicAbs{} dB, \NoiseMargin{} times the largest shift the same model
+shows between two runs on the same crops. No perceptual measure was computed,
+so this is a fidelity-only ranking rather than a verdict on overall image
+quality. The earlier full-set census contains \CensusTotal{} inputs:
+\CensusSkipped{} are skipped by the memory rule and only \CensusRan{} survive;
+the survivors lack reference images and are not scored, making the measured
+set a property of hardware-dependent selection.
+
+The practical recommendation is narrow: print the trivial arm beside the
+method and describe any win by that arm as a statement about the measured
+endpoint. This audit does not promote a perceptual, mechanism, or
+population-wide conclusion.

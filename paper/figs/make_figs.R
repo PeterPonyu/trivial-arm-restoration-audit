@@ -91,12 +91,25 @@ crops$d_bicubic <- crops$dit_psnr - crops$bicubic_psnr
 crops$d_nearest <- crops$dit_psnr - crops$nearest_psnr
 
 # Every mean the summary prints has to be the mean of the rows it summarises,
-# and every bootstrap has to have been centred on that same mean.
+# and every recorded denominator has to describe the same paired population.
+# Keep all four metrics in this check: guarding only RGB PSNR would let a stale
+# SSIM or luma column reach the table and the new cross-metric panel.
+summary_metric_columns <- c(
+  rgb_psnr = "psnr",
+  rgb_ssim = "ssim",
+  y_psnr_shave4 = "ypsnr",
+  y_ssim_shave4 = "yssim"
+)
 for (arm in c("dit", "bicubic", "nearest")) {
-  assert_recorded_mean(crops[[paste0(arm, "_psnr")]],
-                       summary_rec[[arm]]$rgb_psnr$mean, paste(arm, "summary"))
-  if (!identical(as.integer(summary_rec[[arm]]$rgb_psnr$n), SUBSET_N)) {
-    stop(arm, ": the summary counts a different number of crops than the rows hold")
+  for (metric_name in names(summary_metric_columns)) {
+    crop_column <- paste0(arm, "_", summary_metric_columns[[metric_name]])
+    recorded <- summary_rec[[arm]][[metric_name]]
+    assert_recorded_mean(crops[[crop_column]], recorded$mean,
+                         paste(arm, metric_name, "summary"))
+    if (!identical(as.integer(recorded$n), SUBSET_N)) {
+      stop(arm, " ", metric_name,
+           ": the summary counts a different number of crops than the rows hold")
+    }
   }
 }
 assert_recorded_mean(crops$dit_psnr, dit$bootstrap$rgb_psnr$mean, "method bootstrap")
@@ -201,12 +214,52 @@ if (sum(skipped_frame$n) != census$n_skipped_oom) {
   stop("the per-group breakdown does not add up to the number of inputs dropped")
 }
 
+# A cross-metric view of the same paired population. Keep PSNR and SSIM on
+# their native scales: decibels and a unitless similarity score are not
+# commensurate effect sizes. The panel uses these rows for a descriptive
+# consistency check only; it adds no new evidence source or inferential test.
+metric_specs <- data.frame(
+  metric = c("RGB", "Y", "RGB", "Y"),
+  unit = c("PSNR (dB)", "PSNR (dB)", "SSIM (unitless)", "SSIM (unitless)"),
+  method_column = c("dit_psnr", "dit_ypsnr", "dit_ssim", "dit_yssim"),
+  baseline_column = c("bicubic_psnr", "bicubic_ypsnr", "bicubic_ssim", "bicubic_yssim"),
+  stringsAsFactors = FALSE
+)
+
+metric_effects <- do.call(rbind, lapply(seq_len(nrow(metric_specs)), function(i) {
+  spec <- metric_specs[i, ]
+  differences <- crops[[spec$method_column]] - crops[[spec$baseline_column]]
+  if (length(differences) != SUBSET_N || any(!is.finite(differences))) {
+    stop(spec$unit, " ", spec$metric,
+         ": paired metric vector is missing, non-finite, or has the wrong length")
+  }
+  mean_delta <- mean(differences)
+  interval <- bootstrap_mean(differences)
+  if (length(interval) != 2L || any(!is.finite(interval))) {
+    stop(spec$unit, " ", spec$metric, ": bootstrap interval is not finite")
+  }
+  if (!(interval[1] <= mean_delta && mean_delta <= interval[2])) {
+    stop(spec$unit, " ", spec$metric,
+         ": bootstrap interval does not contain its paired mean")
+  }
+  data.frame(metric = spec$metric, unit = spec$unit, n = length(differences),
+             mean_delta = mean_delta, lower = interval[1], upper = interval[2],
+             stringsAsFactors = FALSE)
+}))
+metric_effects$metric <- factor(metric_effects$metric, levels = c("Y", "RGB"))
+metric_effects$unit <- factor(metric_effects$unit,
+                              levels = c("PSNR (dB)", "SSIM (unitless)"))
+if (nrow(metric_effects) != 4L || any(metric_effects$n != SUBSET_N)) {
+  stop("cross-metric effect table does not contain one complete row per metric")
+}
+
 ## ---------------------------------------------------------------------------
 ## Figures. Each panel reads the objects above and writes one file.
 ## ---------------------------------------------------------------------------
 
 for (unit in c("fig1_toy.R", "fig2_budget.R", "fig3_subset.R",
-               "fig4_paired.R", "fig5_ceiling.R")) {
+               "fig4_paired.R", "fig5_ceiling.R", "fig6_metric_consistency.R",
+               "fig7_camera_sensitivity.R")) {
   source(file.path("figs", "panels", unit))
 }
 
@@ -372,4 +425,4 @@ write_generated(c(
 
 write_generated(evidence_table(manifest), "generated_table_evidence.tex")
 
-message("wrote 5 figures to figs/out and 5 generated tex files to tex/")
+message("wrote 6 figures to figs/out and 5 generated tex files to tex/")
