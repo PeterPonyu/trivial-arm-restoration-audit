@@ -78,15 +78,31 @@ Two of this paper's results look, at first glance, like indictments of the
 methods involved. Neither is, and the literature explains why in both cases. The
 third result has less precedent, and is the one we think is most worth having.
 
-The architectural setting is conventional. Denoising diffusion established the
-generative framework~\cite{ho2020ddpm}, the convolutional encoder--decoder with
-skip connections remains the default backbone for dense image
-prediction~\cite{ronneberger2015unet}, operating in a latent space made
-high-resolution work tractable~\cite{rombach2022ldm}, and transformer backbones
-with adaptive layer normalisation are now a standard
-alternative~\cite{peebles2023dit}. Our toy-scale observation concerns the
-conditioning path of that last family and is reported as a property of one small
-run, not of the architecture.
+The architectural setting is conventional. Super-resolution became a
+deep-learning problem once a convolutional network could be trained end-to-end
+against a
+reference~\cite{dong2016srcnn,dong2016fsrcnn,kim2016vdsr,kim2016drcn,
+shi2016espcn,wang2021survey}, then a residual one, then a residual-dense or
+back-projection
+one~\cite{he2016resnet,lim2017edsr,lai2017lapsrn,zhang2018rdn,zhang2017dncnn,
+haris2018dbpn}. Adversarial and perceptual losses moved the same task toward
+plausible texture~\cite{ledig2017srgan,johnson2016perceptual,wang2018esrgan},
+and later work trained against synthetic degradations meant to stand in for
+photographs~\cite{zhang2021bsrgan,wang2021realesrgan,agustsson2017div2k,
+benchmarksubset}. Transformer restorers and latent diffusion restorers are the
+current default
+alternatives~\cite{vaswani2017attention,dosovitskiy2021vit,liu2021swin,
+chen2021ipt,liang2021swinir,zamir2022restormer,ho2020ddpm,rombach2022ldm,
+saharia2023sr3,saharia2022palette,releasedmodel}. The convolutional
+encoder--decoder with skip connections remains the default dense-prediction
+backbone~\cite{ronneberger2015unet}; batch, instance and layer normalisation,
+then adaptive instance normalisation and feature conditioning layers, are the
+usual way to inject a side
+signal~\cite{ba2016layernorm,ulyanov2016instance,dumoulin2017style,
+huang2017adain,perez2018film}; transformer backbones with adaptive layer
+normalisation are now a standard alternative~\cite{peebles2023dit}. Our
+toy-scale observation concerns the conditioning path of that last family and is
+reported as a property of one small run, not of the architecture.
 
 The metric result needs the most care. On the subset measured here an
 interpolation is closer to the reference than the published method on
@@ -111,8 +127,9 @@ properly tuned baselines match or beat published neural methods once the
 comparison is conducted on equal terms~\cite{dacrema2019worrying}, and the
 broader argument that empirical progress is often an artifact of insufficiently
 rigorous comparison is by now well
-rehearsed~\cite{sculley2018winners,lin2019neural}. Our case adds a mechanism
-those critiques do not cover. The subset we measured was not chosen for
+rehearsed~\cite{sculley2018winners,lin2019neural,ioannidis2005why,
+simmons2011false,button2013power,cohen1992power,head2015phacking,
+amrhein2019retire}. Our case adds a mechanism those critiques do not cover. The subset we measured was not chosen for
 scientific reasons: a memory ceiling determined which inputs could be processed,
 and the inputs it excluded were the larger ones from a particular source. That
 is missingness related to a property of the data itself, which is precisely the
