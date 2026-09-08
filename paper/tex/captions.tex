@@ -1,6 +1,19 @@
 %% Self-contained captions. No cross-references, no section numbers: each
 %% caption must be readable on its own if the figure is lifted out.
 
+\newcommand{\CapScales}{%
+The three scales at which the cheapest arm decided what the comparison could
+conclude, placed on one page before those scales are read separately. The
+Toy-scale panel restates the toy run: the degraded input sits at
+\ToyDegraded{} decibels and the best trained arm at \ToyConv{}, so both
+architectures are below doing nothing. The Longer-budget panel restates the
+longer budget: the objective falls and fidelity falls with it to \ToyLong{},
+still below the untouched input. The Crop-128 panel restates the measured
+subset: the released model is behind bicubic on \LossesBicubic{} of
+\SubsetN{} crops, by \GapBicubicAbs{} decibels on average. No panel adds a
+perceptual endpoint or an official ground-truth score.%
+}
+
 \newcommand{\CapToy}{%
 Three trained arms, all below the input they were asked to repair. A toy-scale
 restoration run trained a small convolutional network and a small transformer of

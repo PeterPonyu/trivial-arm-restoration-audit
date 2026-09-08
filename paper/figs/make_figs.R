@@ -257,9 +257,9 @@ if (nrow(metric_effects) != 4L || any(metric_effects$n != SUBSET_N)) {
 ## Figures. Each panel reads the objects above and writes one file.
 ## ---------------------------------------------------------------------------
 
-for (unit in c("fig1_toy.R", "fig2_budget.R", "fig3_subset.R",
-               "fig4_paired.R", "fig5_ceiling.R", "fig6_metric_consistency.R",
-               "fig7_camera_sensitivity.R")) {
+for (unit in c("fig0_three_scales.R", "fig1_toy.R", "fig2_budget.R",
+               "fig3_subset.R", "fig4_paired.R", "fig5_ceiling.R",
+               "fig6_metric_consistency.R", "fig7_camera_sensitivity.R")) {
   source(file.path("figs", "panels", unit))
 }
 
@@ -425,4 +425,4 @@ write_generated(c(
 
 write_generated(evidence_table(manifest), "generated_table_evidence.tex")
 
-message("wrote 6 figures to figs/out and 5 generated tex files to tex/")
+message("wrote 8 figures to figs/out and 5 generated tex files to tex/")
