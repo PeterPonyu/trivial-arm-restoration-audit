@@ -2,7 +2,7 @@
 
 Nothing in this study was generated for it. Every quantity comes from records
 written by runs that finished before this analysis began, and each record is
-bound to the manuscript by its SHA-256 digest; the figure code re-hashes each
+tied to the manuscript by its SHA-256 checksum; the figure code re-hashes each
 file before reading it and stops the build on any mismatch. No model was
 trained, no image was restored, and no evaluation was launched.
 
@@ -83,7 +83,7 @@ within each source group, must all reproduce from the per-crop rows. The per-cro
 rows themselves are joined across arms on the crop name rather than on position,
 so a reordering cannot silently pair the wrong crops.
 
-Two bound paths hold the record for the bicubic arm. Comparing their digests
+Two recorded paths hold the record for the bicubic arm. Comparing their checksums
 establishes whether that is a second measurement or a second copy, and the
 manuscript reports which; comparing their rows establishes that they still agree
 either way.
@@ -154,8 +154,8 @@ No perceptual measure is computed. No value is imputed for the \CensusRan{}
 outputs of the earlier attempt, which have no reference images on disk; the
 build stops if any of them ever acquires one, because their absence is the
 reason those outputs cannot be scored. The full-length reference comparison this
-line of work would eventually be measured against was never produced, and both
-the tier that would hold it and the tier above it are recorded as
-\PrimaryTier{} and \SotaTier{}. Completing the subset does not change either,
-the records say so in their own words, and this paper does not present the
+line of work would eventually be measured against was never produced; its recorded
+status is \PrimaryTier{}, and that of the comparison against the strongest published
+method which would follow it is \SotaTier{}. Completing the subset changes
+neither, and this paper does not present the
 subset as an approximation of the full comparison.

@@ -43,7 +43,7 @@ model is behind bicubic on \LossesBicubic{} of \SubsetN{} crops, by
 \GapBicubicAbs{} decibels on average.
 
 That third result is the one that has to be stated carefully, and the care is
-most of the point. Peak signal-to-noise ratio measures distance from a reference.
+most of the point. Peak signal-to-noise ratio (PSNR) measures distance from a reference.
 A restoration model that synthesises plausible detail is expected to score worse
 on it than one that hedges toward the conditional
 mean~\cite{blau2018perception,ledig2017srgan}, and an interpolation is the
@@ -126,7 +126,7 @@ optimised without limit, so a method tuned for perceptual realism is
 This was visible even before it was formalised, in the observation that
 adversarially trained super-resolution produces more convincing images while
 scoring worse on peak signal-to-noise
-ratio~\cite{ledig2017srgan}. Structural similarity~\cite{wang2004ssim} is a
+ratio~\cite{ledig2017srgan}. Structural similarity (SSIM)~\cite{wang2004ssim} is a
 distortion measure in this sense and inherits the tradeoff; learned perceptual
 distances~\cite{zhang2018lpips} sit on the other side of it, which is why the
 absence of a perceptual measurement here is a stated limitation rather than an
@@ -262,8 +262,8 @@ inside that region is not informative about what a larger budget would do.
 This is the cheapest possible test of a budget explanation, and it is negative.
 It also explains the record's location: the longer run was written outside the
 results tree and was never promoted into the comparison ladder. It contradicts
-the promoted run, and it is bound here for exactly that reason. A record that
-disagrees with the one that was kept is the record most worth binding.
+the promoted run, and it is recorded here for exactly that reason. A record that
+disagrees with the one that was kept is the record most worth keeping.
 
 \begin{figure}[tbp]
 \centering
@@ -372,11 +372,11 @@ stratification and not a search. The model does win on \WinsBicubic{} crops
 against bicubic and \WinsNearest{} against nearest-neighbour, and the best of
 those is \GapBest{} decibels, so the ordering is not a floor effect either.
 
-One provenance detail belongs here rather than in a footnote. Two bound paths
+One provenance detail belongs here rather than in a footnote. Two recorded paths
 hold the bicubic arm, and they are \BicubicRecordState{}. The second path is
 therefore not an independent confirmation of the first, and this paper does not
 treat it as one; it is reported because a reader counting records would otherwise
-count two. The rows were compared as well as the digests, so the build would have
+count two. The rows were compared as well as the checksums, so the build would have
 stopped had they diverged.
 
 \begin{figure}[tbp]
@@ -455,10 +455,10 @@ deliverable was redefined, in an explicit and dated decision, as the smaller
 input class that fits the budget, with reference images required as a
 precondition. That is how the \SubsetN{} crops came to be the measured set. The
 decision is sound and the resulting run is complete. The point is only that the
-scope of the result is now set by a memory budget, and both tier records say so
-in their own words: the tier that would hold the full comparison is
-\PrimaryTier{} and the tier above it is \SotaTier{}, and completing the subset
-changes neither.
+scope of the result is now set by a memory budget. The full comparison on the
+released split was never produced (its recorded status is \PrimaryTier{}), nor was
+the comparison against the strongest published method that would follow it
+(\SotaTier{}), and completing the subset changes neither.
 
 One near miss is worth reporting because it very nearly removed the ability to
 say any of this. The census that counts \CensusSkipped{} skipped inputs cites a
@@ -541,7 +541,7 @@ practice any project can adopt without a tool.
 \paragraph{Derived tables should cite immutable sources.} The census survived only
 because a snapshot was retained. Derived summaries that name a live path are
 correct when written and become unverifiable the moment the path is rewritten, in
-a way that leaves no trace in the summary itself. Naming a digest instead of a
+a way that leaves no trace in the summary itself. Naming a checksum instead of a
 path is a schema change, not a process change.
 
 \section{What this study does not claim}
@@ -555,9 +555,9 @@ establish, not about the model.
 
 No claim is made about the model's performance on the benchmark it was released
 against. The crops measured here are a subset chosen by a memory budget, not a
-released split, and the full comparison was never produced. Both the tier that
-would hold it and the tier above it are recorded as \PrimaryTier{} and
-\SotaTier{}, and completing the subset does not change either. No value is
+released split, and the full comparison was never produced. Its recorded status is
+\PrimaryTier{}, that of the comparison against the strongest published method which
+would follow it is \SotaTier{}, and completing the subset changes neither. No value is
 imputed for the full comparison and no substitute is introduced.
 
 No claim is made about diffusion transformers as an architecture for restoration.
@@ -617,20 +617,20 @@ after.
 
 \appendix
 
-\section{The bound evidence}
+\section{Source artifacts and their checksums}
 \label{app:evidence}
 
 Table~\ref{tab:evidence} lists all \NEvidence{} artifacts behind this
 manuscript, totalling \EvidenceBytes{} bytes, in the order the analysis consumes
 them. Every number the text prints is computed from these bytes by the figure
-code, and the code recomputes each digest before reading, so a stale artifact
+code, and the code recomputes each checksum before reading, so a stale artifact
 stops the build rather than reaching the page.
 
 The table also makes visible a check that would otherwise be invisible. Two
-rows carry the same digest: the per-crop record for the bicubic arm and the
+rows carry the same checksum: the per-crop record for the bicubic arm and the
 independently written audit of that arm are byte-identical, which is the
 strongest available statement that the two agree crop for crop. They are listed
-as two rows because they are two records, and the shared digest is the result of
+as two rows because they are two records, and the shared checksum is the result of
 comparing them, not an accident of bookkeeping.
 
 The discipline earns its place in a paper of this kind. The manuscript reports a
@@ -642,7 +642,7 @@ skipped. A study whose findings are largely negative has no positive number
 anchoring it, so the guarantee that the account was not rewritten after the fact
 has to come from somewhere else. It comes from here.
 
-Two limits, so the table is not read as more than it is. A digest fixes bytes to
+Two limits, so the table is not read as more than it is. A checksum fixes bytes to
 a claim; it does not make the bytes true, and nothing here certifies an artifact
 was correct when written. And each artifact's internal identifier and path are
 omitted deliberately: they describe a private tree, they would tell a reader
@@ -651,12 +651,12 @@ nothing, and keeping them out of the PDF is a property the build verifies.
 \begin{table}[htbp]
 \centering
 \caption{Every artifact this manuscript rests on, with its size and the first 16
-hexadecimal characters of its SHA-256 digest. Full digests, and the paths they
+hexadecimal characters of its SHA-256 checksum. Full checksums, and the paths they
 apply to, are in the manifest accompanying the manuscript source; the prefix is
-shown here only because a 64-character digest does not set in a table column.
-Where two rows share a digest they are the same bytes recorded twice, which is
+shown here only because a 64-character checksum does not set in a table column.
+Where two rows share a checksum they are the same bytes recorded twice, which is
 how the bicubic arm and its independent audit are shown to agree. The figure and
-table code recomputes each digest from the bytes on disk before reading them and
+table code recomputes each checksum from the bytes on disk before reading them and
 stops the build on any mismatch.}
 \label{tab:evidence}
 \scriptsize
@@ -669,9 +669,9 @@ The toy training records, the record in which the project withdrew its own toy
 comparison, the unpromoted longer run, the per-crop fidelity tables for all three
 subset arms, the recorded summaries and stratum counts, the inference manifests
 for both attempts, the skip census and its size and source-group breakdowns, the
-recorded tier states, and the figure code that produces every number in this
+recorded status of the two unproduced comparisons, and the figure code that produces every number in this
 manuscript accompany the manuscript source. Each artifact is recorded with its
-SHA-256 digest in a manifest, and the figure code verifies those digests against
+SHA-256 checksum in a manifest, and the figure code verifies those checksums against
 the bytes on disk before reading them, so the build fails rather than silently
 reporting stale numbers. No images are redistributed: the low-resolution inputs
 and reference images are from a third-party benchmark held under its own licence,
@@ -716,8 +716,8 @@ and editing.
 \section*{Declaration of generative AI use}
 
 Generative AI tools assisted with code preparation and language editing. Every
-number printed above is emitted programmatically from artifacts bound by
-cryptographic digest rather than transcribed into prose. Structural claims ---
+number printed above is emitted programmatically from artifacts tied to the manuscript by cryptographic
+checksum rather than transcribed into prose. Structural claims ---
 including the per-crop means, paired differences, win counts, census, and
 reference-image exclusion --- are enforced by build-time checks that stop the
 build. Responsibility for the content rests with the authors.
