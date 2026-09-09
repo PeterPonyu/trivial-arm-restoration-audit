@@ -1,6 +1,6 @@
 # Print the trivial arm: three scales at which a do-nothing baseline decided what an image restoration comparison could conclude
 
-Toy training records, per-crop fidelity tables for a released restoration model and two interpolations, inference manifests, a memory-ceiling skip census, figure code and manuscript source for a study showing that at three scales of one restoration project the untouched input or the cheapest interpolation determined what the comparison could conclude.
+Toy training records, per-crop PSNR/SSIM tables for a released restoration model and two interpolations, camera-stratified metrics, inference manifests, a memory-ceiling skip census, figure code and manuscript source for an estimand and baseline audit across three scales. The crop128 result is a labelled subset; the official 206-image RealSR PSNR table is unavailable.
 
 Archived at [10.5281/zenodo.22647026](https://doi.org/10.5281/zenodo.22647026).
 

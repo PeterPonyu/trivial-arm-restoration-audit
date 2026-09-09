@@ -51,20 +51,23 @@ purest available hedge. The perceptual measure that would sit on the other side
 of that trade-off is recorded on disk as \PerceptualState{} for these crops. So
 the comparison cannot say the model is worse. What it can say is narrower and
 still worth printing: on the only measure that was computed, an interpolation is
-closer to the reference on nearly every crop, and the gap is \NoiseMargin{} times
-the largest per-crop shift the model shows between two of its own runs. Reporting
+closer to the reference on nearly every crop. Two inference passes of the same
+model on the same crops differ by at most \NoiseMax{} decibels per crop. The
+record does not show the sampling seed varied between the passes, so two runs
+cannot be read as an estimate of sampling variance; the figure bounds only how
+far re-running the recorded inference moved a crop. Reporting
 \MethodPSNR{} decibels without the interpolation beside it would have presented
 that as a result.
 
-A fourth thread runs underneath the third. An earlier attempt ran the same model
+A fourth thread runs underneath the third. An earlier census ran the same model
 over the full set of \CensusTotal{} inputs and completed \CensusRan{} of them; a
 memory budget skipped the other \CensusSkipped{} before inference, and the
 \CensusRan{} that survived had no reference images and were never scored. Which
-inputs survived was decided by output size, not by sampling, so the set that
-eventually got measured is a property of the hardware the run happened to have.
-Weak-baseline problems and selection-by-infrastructure problems are usually
-discussed separately; here they are two views of the same evaluation, and the
-second is what determined the population the first was measured on.
+inputs survived that census was decided by output size, not by sampling. The
+\SubsetN{} crops that were scored are the published RealSR crop128 protocol, not
+the remnant of that skip rule. Weak-baseline problems and selection-by-infrastructure
+problems are usually discussed separately; here they are two evaluations, and
+only the census is a property of the hardware the run happened to have.
 
 None of this is a finding about restoration architectures, and we make no claim
 about one. The contribution is a demonstration, at three scales, that the cheapest
@@ -141,16 +144,21 @@ broader argument that empirical progress is often an artifact of insufficiently
 rigorous comparison is by now well
 rehearsed~\cite{sculley2018winners,lin2019neural,ioannidis2005why,
 simmons2011false,button2013power,cohen1992power,head2015phacking,
-amrhein2019retire}. Our case adds a mechanism those critiques do not cover. The subset we measured was not chosen for
-scientific reasons: a memory ceiling determined which inputs could be processed,
-and the inputs it excluded were the larger ones from a particular source. That
-is missingness related to a property of the data itself, which is precisely the
-regime in which ignoring the missing cases biases the
-result~\cite{rubin1976inference}. A comparison conducted on the survivors of a
-resource constraint is a comparison on a non-random subsample, and the constraint
-is rarely reported because it feels like an implementation detail rather than a
-design choice. We report the census of what was excluded and the sizes behind
-each exclusion for that reason.
+amrhein2019retire}. Our case adds a mechanism those critiques do not cover, and
+it belongs to a separate earlier census rather than to the subset we scored.
+The subset means reported here are the published RealSR crop128 protocol:
+\SubsetN{} crops, with \EvalSkipped{} memory skips and \EvalReferences{} matched
+references. The skip rule belongs to an earlier attempt over \CensusTotal{}
+inputs. A memory ceiling determined which of those census inputs could be
+processed, and the inputs it excluded were the larger ones from a particular
+source. That census-level missingness is related to a property of the data
+itself, which is precisely the regime in which ignoring the missing cases
+biases the result~\cite{rubin1976inference}. A comparison conducted on the
+survivors of a resource constraint is a comparison on a non-random
+subsample---a selection effect on the census, not on the crop128
+protocol---and the constraint is rarely reported because it feels like an
+implementation detail rather than a design choice. We report the census of
+what was excluded and the sizes behind each exclusion for that reason.
 
 The statistical treatment is deliberately unambitious. Intervals come from the
 bootstrap~\cite{efron1979bootstrap}, and paired comparisons use the sign
@@ -348,20 +356,22 @@ changes what the table means.
 
 \section{What the gap is, and what it is not}
 
-A gap of \GapBicubicAbs{} decibels invites two easy dismissals, and both can be
-checked against the records rather than argued about.
+A gap of \GapBicubicAbs{} decibels invites two easy dismissals. Both can be
+taken to the records rather than argued about; the records answer the second
+fully and the first only in part.
 
 The first is that it might be run-to-run variation. Two pixel sets exist for the
-model over the same \SubsetN{} crops, from separate runs scored by the same
-protocol. The largest per-crop difference between them is \NoiseMax{} decibels,
-the mean absolute difference is \NoiseMean{}, and the shift in the mean is
-\NoiseShift{}. The gap is \NoiseMargin{} times the largest of those per-crop
-shifts. This is a weak bound and is reported as one: two runs cannot estimate a
-variance, and the quantity is a largest observed shift rather than an interval.
-It is enough for the purpose it is used for. A re-run would not close a gap
-\NoiseMargin{} times wider than the widest movement a re-run has been observed to
-produce. Fig.~\ref{fig:paired} draws that width as a band so the two scales can
-be seen against each other rather than quoted.
+model over the same \SubsetN{} crops: two inference passes of the same model,
+scored by the same protocol. The largest per-crop difference between them is
+\NoiseMax{} decibels, the mean absolute difference is \NoiseMean{}, and the shift
+in the mean is \NoiseShift{}. The record does not show the sampling seed varied
+between the passes, so two runs cannot be read as an estimate of sampling
+variance; the figure bounds only how far re-running the recorded inference moved
+a crop, and it is reported as a largest observed shift rather than an interval.
+What it rules out is correspondingly narrow. The gap is not an artefact of
+re-running the recorded inference; how far a different seed would move the
+model's output is not measured here. Fig.~\ref{fig:paired} draws that shift as a
+band so the two scales can be seen against each other rather than quoted.
 
 The second is that the gap might be one camera group, one crop, or one tail. It
 is not. Within each of the \SubsetCameras{} groups separately the mean difference
@@ -376,7 +386,7 @@ One provenance detail belongs here rather than in a footnote. Two recorded paths
 hold the bicubic arm, and they are \BicubicRecordState{}. The second path is
 therefore not an independent confirmation of the first, and this paper does not
 treat it as one; it is reported because a reader counting records would otherwise
-count two. The rows were compared as well as the checksums, so the build would have
+count two. The rows were compared as well as the manifest bindings, so the build would have
 stopped had they diverged.
 
 \begin{figure}[tbp]
@@ -415,11 +425,26 @@ clusters and the skipped census are not recoverable from these rows.
 \label{fig:camera-sensitivity}
 \end{figure}
 
-\section{A memory ceiling chose which inputs were measured}
+Fig.~\ref{fig:crop-camera-metrics} keeps the crop-level PSNR and SSIM rows,
+their Canon/Nikon descriptive intervals, and the earlier \CensusTotal{}-input
+census in one scope-aware diagnostic. Its intervals are recomputed from the
+bound crop rows; the E-STRATA record supplies the camera counts and means. It
+does not add a perceptual metric or promote the measured subset to the official
+full table.
 
-The \SubsetN{} crops are not a sample of the benchmark. They are what was left
-after a constraint that had nothing to do with the science, and the record of how
-that happened is complete enough to reconstruct.
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{fig9_crop_camera_metrics.pdf}
+\caption{\CapCropCameraMetrics}
+\label{fig:crop-camera-metrics}
+\end{figure}
+
+\section{A memory ceiling chose an earlier census, not the scored crops}
+
+The \SubsetN{} crops are the published RealSR crop128 protocol. They are not
+what remained after a constraint that had nothing to do with the science. An
+earlier census of a mixed input pool is what the memory rule selected, and the
+record of how that happened is complete enough to reconstruct.
 
 An earlier attempt ran the same model over the full set of \CensusTotal{} inputs
 under a fixed memory budget: at most \BudgetPixels{} output pixels and at most
@@ -450,12 +475,11 @@ acquires one. So the earlier attempt produced \OrphanStems{} outputs and zero
 measurements: the ceiling did not merely shrink the evaluation set, it left the
 survivors unmeasurable, and the two failures compounded.
 
-What happened next is the reasonable response and is worth recording as such. The
-deliverable was redefined, in an explicit and dated decision, as the smaller
-input class that fits the budget, with reference images required as a
-precondition. That is how the \SubsetN{} crops came to be the measured set. The
-decision is sound and the resulting run is complete. The point is only that the
-scope of the result is now set by a memory budget. The full comparison on the
+What happened next is the reasonable response and is worth recording as such.
+The scored comparison was taken on the published crop128 protocol, whose
+\SubsetN{} crops fit the budget and come with reference images. That protocol
+is not the remnant of the census skip rule. The decision is sound and the
+resulting run is complete. The full comparison on the
 released split was never produced (its recorded status is \PrimaryTier{}), nor was
 the comparison against the strongest published method that would follow it
 (\SotaTier{}), and completing the subset changes neither.
@@ -522,9 +546,12 @@ ranking.
 
 \paragraph{Infrastructure limits are selection effects.} A memory budget that
 skips large inputs is not a nuisance; it is a non-random selection rule applied to
-the evaluation population, and the resulting sample is informative only about the
-part of the population that fits. This is the same structure as any
-missing-not-at-random problem~\cite{rubin1976inference}, with the difference that
+the census population, and the resulting sample is informative only about the
+part of that pool that fits. The scored crop128 comparison is a different
+population: a published protocol, not the remnant of the skip. This is the same
+structure as any
+missing-not-at-random problem~\cite{rubin1976inference} when it applies to the
+census, with the difference that
 the mechanism is fully known and recorded, which is a considerable advantage
 rarely available elsewhere. Reporting the skip rule, its threshold, the counts and
 the composition of what was dropped takes a paragraph, and it converts an unstated
@@ -541,21 +568,22 @@ practice any project can adopt without a tool.
 \paragraph{Derived tables should cite immutable sources.} The census survived only
 because a snapshot was retained. Derived summaries that name a live path are
 correct when written and become unverifiable the moment the path is rewritten, in
-a way that leaves no trace in the summary itself. Naming a checksum instead of a
-path is a schema change, not a process change.
+a way that leaves no trace in the summary itself. Naming an evidence ID instead of
+a path is a schema change, not a process change.
 
 \section{What this study does not claim}
 
 No claim is made that the released restoration model is worse than bicubic or
 nearest-neighbour upsampling. The comparison reported here uses distortion
-measures only, on a subset selected by output size, and the perceptual measure
+measures only, on the published RealSR crop128 protocol, and the perceptual measure
 that would be needed to make a quality claim is recorded as \PerceptualState{}
 and was not computed here. The result is about what this evaluation can
 establish, not about the model.
 
-No claim is made about the model's performance on the benchmark it was released
-against. The crops measured here are a subset chosen by a memory budget, not a
-released split, and the full comparison was never produced. Its recorded status is
+No claim is made about the model's performance on every split of the benchmark it
+was released against. The crops measured here are that published crop128
+protocol, not the memory-selected census of \CensusTotal{} inputs, and the full
+comparison was never produced. Its recorded status is
 \PrimaryTier{}, that of the comparison against the strongest published method which
 would follow it is \SotaTier{}, and completing the subset changes neither. No value is
 imputed for the full comparison and no substitute is introduced.
@@ -597,15 +625,17 @@ the training budget \BudgetFold{} on the better arm cut the objective by a facto
 with both budgets below the untouched input. At subset scale, a released
 restoration model scored \MethodPSNR{} decibels against \BicubicPSNR{} for
 bicubic upsampling on the same \SubsetN{} crops, losing on \LossesBicubic{} of
-them by \GapBicubicAbs{} decibels on average, a gap \NoiseMargin{} times the
-widest per-crop shift the model shows against itself.
+them by \GapBicubicAbs{} decibels on average. Re-running the recorded inference
+moved no crop by more than \NoiseMax{} decibels; because the record does not
+show the sampling seed varied between the two passes, that number bounds only
+what a re-run moved and is not an estimate of sampling variance.
 
 That last comparison used distortion measures only, and no perceptual measure
 exists for those crops, so it is not a verdict on the model. It is a verdict on
 the evaluation: measured this way, the evaluation ranks an interpolation first,
 and a table reporting the model's number alone would have concealed that. The
-population it was measured on was itself chosen by a memory ceiling that dropped
-\CensusSkipped{} of \CensusTotal{} inputs by output size and left the
+scored \SubsetN{} crops are the published crop128 protocol. A separate census
+dropped \CensusSkipped{} of \CensusTotal{} inputs by output size and left the
 \CensusRan{} survivors without reference images to be scored against.
 
 The recommendation is one line in a results table. Print the trivial arm --- the
@@ -615,54 +645,6 @@ When it wins, what has been learned is that the comparison is reporting on its o
 measurement, and that is worth knowing before the table is published rather than
 after.
 
-\appendix
-
-\section{Source artifacts and their checksums}
-\label{app:evidence}
-
-Table~\ref{tab:evidence} lists all \NEvidence{} artifacts behind this
-manuscript, totalling \EvidenceBytes{} bytes, in the order the analysis consumes
-them. Every number the text prints is computed from these bytes by the figure
-code, and the code recomputes each checksum before reading, so a stale artifact
-stops the build rather than reaching the page.
-
-The table also makes visible a check that would otherwise be invisible. Two
-rows carry the same checksum: the per-crop record for the bicubic arm and the
-independently written audit of that arm are byte-identical, which is the
-strongest available statement that the two agree crop for crop. They are listed
-as two rows because they are two records, and the shared checksum is the result of
-comparing them, not an accident of bookkeeping.
-
-The discipline earns its place in a paper of this kind. The manuscript reports a
-toy comparison that the project withdrew, and a subset that was fixed as the
-deliverable rather than promoted into a claim about the full input set. Both the
-withdrawn comparison and the withdrawal are pinned here, as are the record of
-the earlier attempt that ran a fraction of its inputs and the census of what it
-skipped. A study whose findings are largely negative has no positive number
-anchoring it, so the guarantee that the account was not rewritten after the fact
-has to come from somewhere else. It comes from here.
-
-Two limits, so the table is not read as more than it is. A checksum fixes bytes to
-a claim; it does not make the bytes true, and nothing here certifies an artifact
-was correct when written. And each artifact's internal identifier and path are
-omitted deliberately: they describe a private tree, they would tell a reader
-nothing, and keeping them out of the PDF is a property the build verifies.
-
-\begin{table}[htbp]
-\centering
-\caption{Every artifact this manuscript rests on, with its size and the first 16
-hexadecimal characters of its SHA-256 checksum. Full checksums, and the paths they
-apply to, are in the manifest accompanying the manuscript source; the prefix is
-shown here only because a 64-character checksum does not set in a table column.
-Where two rows share a checksum they are the same bytes recorded twice, which is
-how the bicubic arm and its independent audit are shown to agree. The figure and
-table code recomputes each checksum from the bytes on disk before reading them and
-stops the build on any mismatch.}
-\label{tab:evidence}
-\scriptsize
-\input{generated_table_evidence}
-\end{table}
-
 \section*{Data and code availability}
 
 The toy training records, the record in which the project withdrew its own toy
@@ -670,9 +652,9 @@ comparison, the unpromoted longer run, the per-crop fidelity tables for all thre
 subset arms, the recorded summaries and stratum counts, the inference manifests
 for both attempts, the skip census and its size and source-group breakdowns, the
 recorded status of the two unproduced comparisons, and the figure code that produces every number in this
-manuscript accompany the manuscript source. Each artifact is recorded with its
-SHA-256 checksum in a manifest, and the figure code verifies those checksums against
-the bytes on disk before reading them, so the build fails rather than silently
+manuscript accompany the manuscript source. Each artifact is recorded under an
+evidence ID in a manifest, and the figure code verifies the bound bytes before reading
+them, so the build fails rather than silently
 reporting stale numbers. No images are redistributed: the low-resolution inputs
 and reference images are from a third-party benchmark held under its own licence,
 the restored outputs are not included, and the model weights and the backbone
@@ -717,7 +699,7 @@ and editing.
 
 Generative AI tools assisted with code preparation and language editing. Every
 number printed above is emitted programmatically from artifacts tied to the manuscript by cryptographic
-checksum rather than transcribed into prose. Structural claims ---
+evidence binding rather than transcribed into prose. Structural claims ---
 including the per-crop means, paired differences, win counts, census, and
 reference-image exclusion --- are enforced by build-time checks that stop the
 build. Responsibility for the content rests with the authors.

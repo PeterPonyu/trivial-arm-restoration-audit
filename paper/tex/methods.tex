@@ -2,8 +2,8 @@
 
 Nothing in this study was generated for it. Every quantity comes from records
 written by runs that finished before this analysis began, and each record is
-tied to the manuscript by its SHA-256 checksum; the figure code re-hashes each
-file before reading it and stops the build on any mismatch. No model was
+tied to the manuscript by an evidence-manifest binding; the figure code verifies
+each bound file before reading it and stops the build on any mismatch. No model was
 trained, no image was restored, and no evaluation was launched.
 
 Three comparisons are read. The first is a toy-scale training run in which a
@@ -51,20 +51,31 @@ crops, and it is not computed here. A comparison with a distortion measure and
 no perceptual measure can establish which output is closer to the reference. It
 cannot establish which output is better.
 
-The measured population is conditional, and we use that word literally. Let
-\(\mathcal{U}\) be the candidate input set and let
+The scored means and the memory census are two populations, not one union. Let
+\(\mathcal{U}\) be the candidate input pool. The displayed estimator is the
+published RealSR crop128 protocol with a matched reference:
 \[
   \mathcal{M}
-  = \{i\in\mathcal{U}: i\text{ passes the declared crop and memory filters and
-      has a matched reference}\}.
+  = \{i\in\mathcal{U}: i\text{ is in the published crop128 protocol and
+      has a matched reference}\},
 \]
-All subset means, paired differences, intervals, and win counts are functions
-of \(\mathcal{M}\), with denominator \(N_{\mathcal{M}}=|\mathcal{M}|\). An input
-that is skipped for memory or runs without a matched reference is outside
-\(\mathcal{M}\); it contributes a census count, not a zero-valued metric.
-Thus the reported comparison is conditional on the retained, scorable subset
-and cannot be read as an estimate for \(\mathcal{U}\) or for the released model
-on a full benchmark.
+with \(N_{\mathcal{M}}=|\mathcal{M}|=\SubsetN{}\). That protocol run recorded
+\(\EvalSkipped{}\) memory skips and \(\EvalReferences{}\) matched references. A
+separate earlier census applied a memory filter over \(\CensusTotal{}\) inputs;
+write
+\[
+  \mathcal{C}
+  = \{i\in\mathcal{U}: i\text{ was presented to that memory-filtered
+      census}\}.
+\]
+The displayed estimator does not take \(\mathcal{M}\cup\mathcal{C}\) or
+intersect \(\mathcal{M}\) with the memory filter. All subset means, paired
+differences, intervals, and win counts are functions of \(\mathcal{M}\) only.
+An input skipped for memory in the census is counted in \(\mathcal{C}\) and is
+outside \(\mathcal{M}\); it contributes a census count, not a zero-valued
+metric. Thus the reported comparison is the crop128 protocol and cannot be
+read as an estimate for \(\mathcal{C}\) or for the released model on a full
+benchmark.
 
 \subsection{Checks the build enforces}
 
@@ -83,7 +94,7 @@ within each source group, must all reproduce from the per-crop rows. The per-cro
 rows themselves are joined across arms on the crop name rather than on position,
 so a reordering cannot silently pair the wrong crops.
 
-Two recorded paths hold the record for the bicubic arm. Comparing their checksums
+Two recorded paths hold the record for the bicubic arm. Comparing their manifest bindings
 establishes whether that is a second measurement or a second copy, and the
 manuscript reports which; comparing their rows establishes that they still agree
 either way.
@@ -91,12 +102,13 @@ either way.
 \subsection{Bounding the model against itself}
 
 Two pixel sets exist for the released model over the same \SubsetN{} crops,
-produced by separate runs and scored by the same protocol. The per-crop
-differences between them are not used as a result. They are used once, as an
-upper bound on how much of any gap could be the model's own run-to-run
-variability, and the largest of them is drawn on the figure that reports the
-gap. This is a weak bound --- two runs cannot estimate a variance --- and it is
-reported as a largest observed shift rather than as an interval.
+produced by two inference passes and scored by the same protocol. The per-crop
+differences between them are not used as a result. They are used once, to bound
+how far re-running the recorded inference moved a crop. The record does not show
+the sampling seed varied between the passes, so two runs cannot be read as an
+estimate of sampling variance. The largest of the differences is drawn on the
+figure that reports the gap, and it is reported as a largest observed shift
+rather than as an interval.
 
 \subsection{Tests}
 
@@ -158,4 +170,6 @@ line of work would eventually be measured against was never produced; its record
 status is \PrimaryTier{}, and that of the comparison against the strongest published
 method which would follow it is \SotaTier{}. Completing the subset changes
 neither, and this paper does not present the
-subset as an approximation of the full comparison.
+subset as an approximation of the full comparison. The scored \SubsetN{} crops
+are the published crop128 protocol; the memory skip belongs to the earlier
+census, not to that protocol.

@@ -70,9 +70,11 @@ diffusion restoration model minus that of bicubic upsampling of the same
 low-resolution input, over a \SubsetN{}-crop subset, ordered by that difference.
 Negative values are crops on which the interpolation is closer to the reference.
 The solid rule is zero and the dashed rule is the mean difference. The shaded
-band is the largest per-crop shift the same model shows between two of its own
-runs over the same crops, so it is an upper bound on how much of the gap could be
-run-to-run variation; the gap is \NoiseMargin{} times that width. Panel B
+band is the largest per-crop shift between two inference passes of the same
+model on the same crops, \NoiseMax{} decibels. The record does not show the
+sampling seed varied between the passes, so two runs cannot be read as an
+estimate of sampling variance; the band bounds only how far re-running the
+recorded inference moved a crop. Panel B
 gives the mean difference overall and within each camera group, with 95\%
 percentile bootstrap intervals over the crops. Camera group is a recorded
 property of each crop and was fixed before these differences were computed. The
@@ -82,18 +84,24 @@ than uncertainty for the full census.%
 }
 
 \newcommand{\CapCeiling}{%
-What a memory ceiling selected, and what it removed. An earlier attempt ran a
-released diffusion restoration model over the full set of \CensusTotal{} inputs
+What a memory ceiling selected in an earlier census, and what it removed. That
+census ran a released diffusion restoration model over the full set of
+\CensusTotal{} inputs
 under a fixed budget of \BudgetPixels{} output pixels and a maximum output side
 of \BudgetLong{} pixels; inputs whose upsampled output would exceed it were
-skipped before inference. Panel A gives, for that attempt and for the
-later \SubsetN{}-crop run, what became of every input the run was given: dropped
+skipped before inference. Panel A gives, for that census and for the
+later \SubsetN{}-crop published crop128 run, what became of every input the run
+was given: dropped
 before inference, run but left with no reference image to score against, or run
-and scored. Neither the drop nor the absence of references was a sampling
-decision. Panel B breaks the dropped inputs down by the recorded source group
-and shades the two groups that appear in the later subset. Every dropped input
+and scored. The census drop and the absence of references were not sampling
+decisions; the later scored set is the published protocol, not the remnant of
+the skip. Panel B breaks the dropped census inputs down by the recorded source
+group
+and shades the two groups that appear in the later crop128 set. Every dropped
+input
 was of a single larger size class, so what survived
-the ceiling was fixed by output dimensions rather than chosen. Segment labels
+the ceiling in the census was fixed by output dimensions rather than chosen.
+Segment labels
 are n/N and percentages: in Panel A, N is the number of inputs given to that
 attempt, and in Panel B it is the total number dropped for memory. An
 input that ran without a matched reference is counted as unscored rather than
@@ -120,9 +128,24 @@ Each point is the mean DiT--bicubic difference within one recorded camera
 stratum; the horizontal interval is the corresponding descriptive percentile
 bootstrap over paired crops, and the label gives the number of DiT wins out of
 the stratum's crops. The vertical rule is equality. Both strata are part of the
-same 100-crop, memory-selected subset, so this panel does not provide
+same 100-crop published crop128 protocol, so this panel does not provide
 scene-level or full-census uncertainty and does not measure perceptual quality.%
 }
+
+\newcommand{\CapCropCameraMetrics}{%
+Crop-level fidelity and scope diagnostics for the published crop128 subset.
+Panel A shows the DiT--bicubic difference for every one of the \SubsetN{} paired
+crops on RGB PSNR and RGB SSIM, with Canon and Nikon symbols retained. Panel B
+gives descriptive 95\% bootstrap intervals for the same two metrics within
+each camera stratum; these are intervals over the measured crops, not a
+scene-level or full-census uncertainty. Panel C keeps the earlier full-input
+census visible: the early \CensusTotal{}-input attempt yielded \CensusRan{} runs
+and \CensusSkipped{} skips, whereas the separate crop128 protocol scored
+\SubsetN{} crops with references. PSNR and SSIM measure fidelity to a
+reference; no perceptual-quality endpoint is claimed or added. The metric rows
+are recomputed from the bound E-DIT and E-BICUBIC crop rows; E-STRATA is used
+for the recorded camera counts and means, and the census is bound by
+E-EVAL-EARLIER and E-SKIP.}
 
 \newcommand{\CapToyTable}{%
 The toy-scale arms as their own training records describe them. Parameter

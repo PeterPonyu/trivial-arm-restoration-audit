@@ -6,15 +6,14 @@ the better arm a \BudgetFold{} budget lowers its training loss by
 \ToyLossDrop{} times but moves fidelity \ToyLongRegression{} dB in the wrong
 direction, so the toy run cannot rank a restoration method above its input.
 
-At subset scale, a released diffusion model completes on \SubsetN{} crops and
-loses to bicubic on \LossesBicubic{}; the mean fidelity gap is
-\GapBicubicAbs{} dB, \NoiseMargin{} times the largest shift the same model
-shows between two runs on the same crops. No perceptual measure was computed,
-so this is a fidelity-only ranking rather than a verdict on overall image
-quality. The earlier full-set census contains \CensusTotal{} inputs:
-\CensusSkipped{} are skipped by the memory rule and only \CensusRan{} survive;
-the survivors lack reference images and are not scored, making the measured
-set a property of hardware-dependent selection.
+At subset scale, a released diffusion model completes on \SubsetN{} crops from
+the published RealSR crop128 protocol and loses to bicubic on
+\LossesBicubic{}; the mean fidelity gap is \GapBicubicAbs{} dB. No perceptual
+measure was computed, so this is a fidelity-only ranking rather than a verdict
+on overall image quality. A separate census of \CensusTotal{} inputs skips
+\CensusSkipped{} under a memory rule; the \CensusRan{} survivors lack reference
+images and are not scored. That census is hardware-selected; the crop128
+comparison is not.
 
 The practical recommendation is narrow: print the trivial arm beside the
 method and describe any win by that arm as a statement about the measured

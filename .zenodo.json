@@ -1,6 +1,6 @@
 {
   "title": "Print the trivial arm: three scales at which a do-nothing baseline decided what an image restoration comparison could conclude",
-  "description": "Toy training records, per-crop fidelity tables for a released restoration model and two interpolations, inference manifests, a memory-ceiling skip census, figure code and manuscript source for a study showing that at three scales of one restoration project the untouched input or the cheapest interpolation determined what the comparison could conclude. Code is MIT; manuscript text, figures and recorded result data are CC-BY-4.0. Third-party simulators and datasets are not redistributed.",
+  "description": "Toy training records, per-crop PSNR/SSIM tables for a released restoration model and two interpolations, camera-stratified metrics, inference manifests, a memory-ceiling skip census, figure code and manuscript source for an estimand and baseline audit across three scales. The crop128 result is a labelled subset; the official 206-image RealSR PSNR table is unavailable. Code is MIT; manuscript text, figures and recorded result data are CC-BY-4.0. Third-party simulators and datasets are not redistributed.",
   "upload_type": "dataset",
   "access_right": "open",
   "license": "MIT",

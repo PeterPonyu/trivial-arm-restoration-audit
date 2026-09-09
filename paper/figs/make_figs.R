@@ -259,7 +259,8 @@ if (nrow(metric_effects) != 4L || any(metric_effects$n != SUBSET_N)) {
 
 for (unit in c("fig0_three_scales.R", "fig1_toy.R", "fig2_budget.R",
                "fig3_subset.R", "fig4_paired.R", "fig5_ceiling.R",
-               "fig6_metric_consistency.R", "fig7_camera_sensitivity.R")) {
+               "fig6_metric_consistency.R", "fig7_camera_sensitivity.R",
+               "fig9_crop_camera_metrics.R")) {
   source(file.path("figs", "panels", unit))
 }
 
@@ -335,7 +336,6 @@ write_generated(c(
   macro("NoiseMax", fmt(noise$max_abs, 3)),
   macro("NoiseMean", fmt(noise$mean_abs, 3)),
   macro("NoiseShift", signed(noise$mean_shift, 4)),
-  macro("NoiseMargin", fmt(NOISE_MARGIN, 0)),
   macro("BicubicRecordState", if (BICUBIC_IS_COPY) "the same bytes at two paths" else "two distinct records"),
 
   macro("CensusTotal", census$n_total),
@@ -423,6 +423,6 @@ write_generated(c(
 
 ## The manifest itself, so the evidence discipline can be checked rather than believed.
 
-write_generated(evidence_table(manifest), "generated_table_evidence.tex")
 
-message("wrote 8 figures to figs/out and 5 generated tex files to tex/")
+message("wrote 9 figures to figs/out and 5 generated tex files to tex/")
+unlink(file.path("tex", "generated_table_evidence.tex"), force = TRUE)
