@@ -1,0 +1,92 @@
+{
+  "bicubic_x4": {
+    "pillow": "12.1.1",
+    "procedure": "PIL Image.convert('RGB').resize((512,512), Image.Resampling.BICUBIC).save(PNG) per LR crop, identical to baseline_eval.prepare_bicubic / E-BICUBIC",
+    "regenerated_here": true,
+    "reproduces_E-BICUBIC_per_stem_rows_max_abs_diff": 7.105427357601002e-15,
+    "tolerance": 1e-09
+  },
+  "bound_records_read_only": {
+    "E-BICUBIC": {
+      "path": "data/e-bicubic/sota_dit4sr_metrics_today_bicubic.json",
+      "sha256": "ed3054bcd5107a2ae0095725eb421991e7bdc35bd8de4c86aa008e0255481a37"
+    },
+    "E-BICUBIC-AUDIT": {
+      "path": "source-tree/005-dit-blind-restoration/results/sota_copy/baseline_bicubic/run_receipt.json",
+      "sha256": "f9d44c91f61a61cca3b8c662c668eb9d5d5ad1cfc191adcd779cacb37f4e56d1"
+    },
+    "E-DIT": {
+      "path": "data/e-dit/sota_dit4sr_metrics_today_dit.json",
+      "sha256": "06249f3c7ad2335ea656243c1fedb213b0fe8c138b0e7ad5c1766e0c98331e1d"
+    },
+    "E-EVAL": {
+      "path": "data/e-eval/sota_dit4sr_eval.json",
+      "sha256": "749af50fc0e86631b94177e0b122599c567d3d8146f95583da1bbc0d8736af3a"
+    }
+  },
+  "desktop_checkout": {
+    "head": "6625b7970b5d34b627b4313927c779f5edf46c69",
+    "path": "."
+  },
+  "dit4sr_seed20260909": {
+    "format": "512x512 RGB PNG",
+    "inference": {
+      "align_method": "adain",
+      "end_utc": "2026-09-09T06:25:48Z",
+      "entry": "vendor/DiT4SR/test/test_wollava.py (vendor PIN fbd464067b5ab01a3fd5cde9e1439ef052d054e9)",
+      "exit": "exit=0",
+      "gpu_total_used_min_mib": 2406,
+      "gpu_total_used_peak_mib": 20465,
+      "guidance_scale": 8.0,
+      "log_inference_time_lines": 100,
+      "mixed_precision": "fp16",
+      "num_inference_steps": 40,
+      "parameters_source": "receipt block of the sibling's unrun script perceptual_endpoint_20260909.py (sha256 78744965e95dbe23c1bbe2b8be5ef83c3244ab4e3e0232c7cacb964fe5be93e9); the verbatim command line is not in logs/full.log",
+      "per_image_seconds_mean": 12.0964,
+      "process_size": 512,
+      "sample_times": 1,
+      "seed": 20260909,
+      "start_point": "noise",
+      "start_utc": "2026-09-09T06:04:24Z",
+      "upscale": 4,
+      "vram_csv_samples": 257,
+      "weights": {
+        "dit4sr_revision": "d8603cec2fee0e8d5a502840b09439f7b168c31c",
+        "provenance": "results/local_5090/download_receipt.json (LFS sha256-verified); same revisions as the bound 2026-08-23 remote run",
+        "sd35_revision": "b940f670f0eda2d07fbb75229e779da1ad11eb80"
+      }
+    },
+    "n": 100,
+    "relation_to_bound_E-DIT": "different pixel set: E-DIT came from the 2026-08-23 remote run with vendor default seed None; these pixels are a new sample (seed 20260909) on the local 5090. Same 100 LR crops, same HR references.",
+    "source_dir": "/tmp/sci-20260909/source-tree/005-dit-blind-restoration/data/perceptual_20260909/dit4sr_out/sample00"
+  },
+  "downloads_performed": [],
+  "manifest": {
+    "entries": 400,
+    "path": "inputs/MANIFEST.sha256",
+    "sha256": "1c3dc4bdd3a0944a26099abdb74dbe74fe809317f5eb4673265fd2404e20ba8b"
+  },
+  "schema": "005.perceptual.inputs.provenance.v1",
+  "sibling_worktree": {
+    "branch": "sci/2026-09-09-left-issues",
+    "head": "a5b830dabdc8dd55efc6522b880250e73f7bd268",
+    "path": "/tmp/sci-20260909",
+    "treated_as": "read-only source; nothing there was modified"
+  },
+  "staged_by": "WRITE-IN-3 compute worker (Cursor subagent), repo HEAD 6625b7970b5d34b627b4313927c779f5edf46c69",
+  "staged_utc": "2026-09-09T07:29:37Z",
+  "test_HR": {
+    "format": "512x512 RGB PNG",
+    "n": 100,
+    "origin": "same zip -> RealSRVal_crop128/test_HR",
+    "source_dir": "/tmp/sci-20260909/source-tree/005-dit-blind-restoration/data/perceptual_20260909/StableSR_testsets/RealSRVal_crop128/test_HR",
+    "verified_against": "baseline_bicubic/run_receipt.json gt/*.png sha256: 100/100 match"
+  },
+  "test_LR": {
+    "format": "128x128 RGB PNG",
+    "n": 100,
+    "origin": "StableSR_testsets.zip (sha256 32a6344e2a0d394ffcaa7a9245df14105c590dab3ef0d3540e940add1ef9b803, LFS-verified) -> StableSR_testsets/RealSRVal_crop128/test_LR",
+    "source_dir": "/tmp/sci-20260909/source-tree/005-dit-blind-restoration/data/perceptual_20260909/StableSR_testsets/RealSRVal_crop128/test_LR",
+    "verified_against": "results/sota_copy/baseline_bicubic/run_receipt.json lq/*.png sha256 (E-BICUBIC-AUDIT): 100/100 match"
+  }
+}

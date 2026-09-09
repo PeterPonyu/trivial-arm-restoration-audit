@@ -1,0 +1,119 @@
+{
+  "arms": {
+    "bicubic": "PIL BICUBIC x4 of test_LR to 512x512, regenerated into inputs/bicubic_x4; per-stem fidelity rows already shown equal to E-BICUBIC to 1e-9 at stage time",
+    "dit4sr_local": "SD3.5-medium@b940f670 + dit4sr_q@d8603cec, vendor test_wollava.py, seed 20260909, 40 steps, cfg 8.0, fp16, adain, 512 process size; pixels = inputs/dit4sr_seed20260909 (sha256 per stem in inputs/MANIFEST.sha256); sibling run 2026-09-09T06:04:24Z-06:25:48Z UTC, exit=0"
+  },
+  "compute_script": {
+    "path": "source-tree/005-dit-blind-restoration/results/perceptual_20260909/perceptual_lpips.py",
+    "sha256": "5a55593527df0a7e73e07eb4aae132b7f21adcb7a0c476c2a43ccee3a6cd696d"
+  },
+  "declared_utc": "2026-09-09T07:29:47Z",
+  "environment": {
+    "device": "cpu",
+    "lpips": "0.1.4",
+    "numpy": "2.2.6",
+    "pillow": "12.1.1",
+    "python": "3.13.5",
+    "scikit-image": "0.26.0",
+    "scipy": "1.16.3",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130",
+    "venv": "/tmp/venv-dit4sr"
+  },
+  "fidelity_anchor_rule": {
+    "condition_1": "|mean RGB-PSNR(local) - 21.878992 (E-DIT bootstrap mean)| <= 0.5 dB",
+    "condition_2": ">= 90 of 100 crops with RGB-PSNR(local DiT4SR) < RGB-PSNR(bicubic); bound E-DIT has 97/100",
+    "on_failure": "STOP: report 'anchor failed'; LPIPS numbers, if any, are reported as 'pixel set not comparable' and no thesis rewrite occurs",
+    "procedure": "recompute RGB-PSNR on inputs/dit4sr_seed20260909 with the bound protocol (dit4sr_artifacts.compute_metrics, 'RGB-full + BT.601-Y shave-4')",
+    "why": "E-DIT (the printed PSNR) came from a different DiT4SR sample (remote, 2026-08-23, seed None). LPIPS is computed on a new sample. The anchor checks that the new sample is the same phenomenon before any thesis rewrite."
+  },
+  "forbidden_readings": [
+    "'the model is worse/better' as a verdict",
+    "LPIPS-VGG promoted to primary after seeing results",
+    "any ratio of the PSNR gap to the 0.098 dB re-run shift",
+    "comparison of these LPIPS values to the published DiT4SR LPIPS column (protocol unknown)"
+  ],
+  "inputs": {
+    "manifest": "inputs/MANIFEST.sha256",
+    "manifest_sha256": "1c3dc4bdd3a0944a26099abdb74dbe74fe809317f5eb4673265fd2404e20ba8b",
+    "provenance": "inputs/PROVENANCE.json",
+    "provenance_sha256": "1dbd791c447807fc5c0a546e2c010950e86495491a6e0b2783f3da9d436cf8a4"
+  },
+  "n": 100,
+  "not_computed": [
+    "DISTS (would require downloading pyiqa DISTS weights; omitted, not imputed)"
+  ],
+  "ordering_rule": "review-checklist.md:119-120: this file is written and frozen before any LPIPS value is computed; compute refuses to run if this script's sha256 differs from compute_script.sha256 below",
+  "outcomes_and_thesis": {
+    "AGREEMENT": "bicubic wins LPIPS-Alex on a majority with p < 0.05 -> thesis becomes 'the trivial arm wins on both axes measured; the released model does not beat do-nothing on this protocol on either endpoint'",
+    "NULL": "p >= 0.05 or split ~50/50 -> thesis becomes 'the perceptual endpoint does not separate the arms at n=100; the distortion ranking stands as the only decisive measure and remains a statement about the endpoint'",
+    "REVERSAL": "DiT4SR wins LPIPS-Alex on a majority of crops with sign-test p < 0.05 -> thesis becomes 'perception-distortion reversal on the measured crops: the trivial arm wins on distortion, the model wins on the perceptual endpoint; a fidelity-only table would have inverted the ranking'",
+    "rule": "in every outcome the 'not computed' thesis is rewritten, not appended (review-checklist.md:117-118); this worker does not edit papers/**"
+  },
+  "outputs_to_be_written": [
+    "per_crop.jsonl",
+    "perceptual_summary.json",
+    "RECEIPT.json"
+  ],
+  "pairing": "per stem, same 100 crops and same HR references in both arms; delta = LPIPS(bicubic) - LPIPS(dit4sr_local); positive favours DiT4SR",
+  "perceptual_weights_sha256": {
+    "lpips_linear_alex": {
+      "bytes": 6009,
+      "path": "/tmp/venv-dit4sr/lib/python3.13/site-packages/lpips/weights/v0.1/alex.pth",
+      "sha256": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0"
+    },
+    "lpips_linear_vgg": {
+      "bytes": 7289,
+      "path": "/tmp/venv-dit4sr/lib/python3.13/site-packages/lpips/weights/v0.1/vgg.pth",
+      "sha256": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+    },
+    "torchvision_alexnet": {
+      "bytes": 244408911,
+      "path": "~/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth",
+      "sha256": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02"
+    },
+    "torchvision_vgg16": {
+      "bytes": 155730036,
+      "path": "~/.cache/torch/hub/checkpoints/vgg16-397923af.pth",
+      "sha256": "8bdcf25ede9624f91b1de255a3a1b4401dc9255f02e45a7f806fc88500e3e58b"
+    }
+  },
+  "primary_metric": {
+    "direction": "lower is better",
+    "implementation": "lpips==0.1.4 lpips.LPIPS(net='alex'), linear head weights/v0.1/alex.pth, torchvision alexnet-owt-7be5be79.pth",
+    "input": "full 512x512 RGB, no shave, pixels scaled to [-1,1]",
+    "name": "LPIPS v0.1, AlexNet backbone"
+  },
+  "primary_test": {
+    "alpha": 0.05,
+    "implementation": "scipy.stats.binomtest(k=#positive, n=#nonzero, p=0.5, alternative='two-sided')",
+    "name": "exact two-sided sign test on the 100 paired LPIPS-Alex deltas",
+    "ties": "excluded from n, counted and reported"
+  },
+  "reference": "inputs/test_HR (sha256 per stem verified equal to baseline_bicubic/run_receipt.json gt/*)",
+  "repo_branch": "writein/2026-09-08",
+  "repo_head": "6625b7970b5d34b627b4313927c779f5edf46c69",
+  "schema": "005.perceptual.predeclaration.v1",
+  "secondary_analyses": [
+    "same sign test on LPIPS-VGG deltas",
+    "percentile bootstrap CI of mean delta (n=100, 1000 resamples, seed 20260822, same as the bound fidelity CIs)",
+    "camera strata Canon/Nikon, descriptive only",
+    "quadrant count: crops where DiT4SR loses on RGB-PSNR (local pixel set) and wins on LPIPS-Alex"
+  ],
+  "secondary_metric": {
+    "direction": "lower is better",
+    "implementation": "lpips.LPIPS(net='vgg'), weights/v0.1/vgg.pth, torchvision vgg16-397923af.pth",
+    "input": "as primary",
+    "name": "LPIPS v0.1, VGG16 backbone",
+    "role": "robustness check only; never promoted to primary after seeing results"
+  },
+  "stems": "dit4sr_artifacts.CANONICAL_100_STEMS == sota_dit4sr_eval.json stems_ran (50 Canon + 50 Nikon LR4)",
+  "subset_id": "RealSRVal_crop128",
+  "unpark_authority": "owner approval 2026-09-09 (WRITE-IN-3 brief; compute and downloads approved); supersedes the R5 PARK in docs/reports/2026-09-08-owner-authorization.md:48 for 005 LPIPS only",
+  "what_this_does_not_change": [
+    "paper_primary / sota_copy tiers stay 'blocked' (BINDINGS E-PRIMARY, E-SOTA)",
+    "census 206/193/13 is untouched and unscored",
+    "no number is computed for the 13 orphan outputs",
+    "the bound E-DIT / E-BICUBIC files are never edited"
+  ]
+}

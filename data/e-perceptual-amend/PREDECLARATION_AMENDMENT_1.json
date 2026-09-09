@@ -1,0 +1,38 @@
+{
+  "schema": "005.perceptual.predeclaration_amendment.v1",
+  "amends": {
+    "path": "data/e-perceptual-predecl/PREDECLARATION.json",
+    "sha256": "8a2cafcf89c4969fdf8ccf81ba6a81ec086bf83e4950b96e645f323418aa5996",
+    "declared_utc": "2026-09-09T07:29:47Z",
+    "frozen_file_edited": false
+  },
+  "amended_utc": "2026-09-09T08:05:00Z",
+  "authority": "owner ruling R14 (WRITE-IN-3), recorded verbatim below; applied by the Cursor compute subagent",
+  "ruling": "Predeclaration amended after first run attempt, before any formal endpoint file was written: (a) `perceptual_lpips.py` serialization crash (`numpy.bool` / `numpy.float64` in `sign_test` → `dump_json`) fixed by casting to Python types — no change to endpoints, pairing, test, α, or anchor rule; (b) secondary LPIPS-VGG dropped as NOT COMPUTED because the cached `vgg16-397923af.pth` is truncated (155.7/553.4 MB) and the permitted download route (proxy 7890) is down tonight; the primary LPIPS-AlexNet endpoint is unaffected. Disclosure: the primary result was first observed on a provisional side run (`provisional/`) before this amendment; the formal run must reproduce it exactly.",
+  "reason_a": "perceptual_lpips.py compute crashes at dump_json(SUMMARY, ...) with TypeError: Object of type bool is not JSON serializable, because scipy 1.16.3 binomtest().pvalue is numpy.float64 and `p < ALPHA` in sign_test yields numpy.bool (RUN_NOTES.md §5). Fix in perceptual_lpips_v2.py: cast p to float and `significant` to bool in sign_test, and give dump_json a default that converts np.generic via .item(). Values unchanged; only Python types.",
+  "reason_b": "The cached torchvision checkpoint ~/.cache/torch/hub/checkpoints/vgg16-397923af.pth is truncated (155,730,036 of 553,433,881 bytes; sha256 8bdcf25e… does not begin with 397923af), so lpips.LPIPS(net='vgg') raises RuntimeError: unexpected EOF (RUN_NOTES.md §2). The permitted download route (ClashParty 7890/7891/7892) refused connections at 2026-09-09 ~07:36 UTC and again at ~08:02 UTC; TAG 7897/7898/7899 and direct fetch are forbidden by standing rule. perceptual_lpips_v2.py gains `--skip-vgg`, which records secondary_status = \"NOT_COMPUTED — truncated cached weights; permitted proxy down\" in perceptual_summary.json instead of loading VGG16. The predeclared role of LPIPS-VGG (robustness check only, never promoted) means its absence does not affect the primary endpoint or the outcome map.",
+  "old_script_sha256": "5a55593527df0a7e73e07eb4aae132b7f21adcb7a0c476c2a43ccee3a6cd696d",
+  "old_script_path": "source-tree/005-dit-blind-restoration/results/perceptual_20260909/perceptual_lpips.py",
+  "new_script_sha256": "0381731c0b7666a7fe5970bdcd9489e2912b9309e5f138f2b982b933aba05f70",
+  "new_script_path": "source-tree/005-dit-blind-restoration/results/perceptual_20260909/perceptual_lpips_v2.py",
+  "diff_recorded_in": "RUN_NOTES.md §8 (diff -u perceptual_lpips.py perceptual_lpips_v2.py)",
+  "provisional_result_seen_before_amendment": true,
+  "provisional_result_location": "provisional/anchor_and_lpips_alex.json (sha256 in provisional/RECEIPT.json)",
+  "endpoints_unchanged": true,
+  "unchanged_items": [
+    "primary_metric (LPIPS v0.1 AlexNet, full 512x512 RGB in [-1,1], lower is better)",
+    "pairing (per stem; delta = LPIPS(bicubic) - LPIPS(dit4sr_local))",
+    "primary_test (exact two-sided sign test, ties excluded) and alpha 0.05",
+    "fidelity_anchor_rule (|delta mean| <= 0.5 dB vs 21.878992; >= 90/100 losses)",
+    "outcomes_and_thesis map (REVERSAL / AGREEMENT / NULL) and forbidden_readings",
+    "inputs (MANIFEST.sha256 1c3dc4bd…, PROVENANCE.json 1dbd791c…), weights for AlexNet and the linear heads",
+    "bootstrap seed 20260822 / 1000 resamples"
+  ],
+  "formal_run_requirements": [
+    "perceptual_lpips_v2.py compute --device cpu --skip-vgg with TORCH_HOME redirected into this directory (torch_home/hub/checkpoints/alexnet-owt-7be5be79.pth symlinked to the verified cache file); ~/.cache/torch untouched",
+    "formal LPIPS-Alex means, wins/losses/ties, p and the anchor delta / loss count must equal provisional/anchor_and_lpips_alex.json (integers exact; floats within 1e-6 abs, p within 1e-6 rel, i.e. the measured float32 CPU run-to-run noise); perceptual_lpips_v2.py performs this read-only comparison and records formal_equals_provisional in perceptual_summary.json before RECEIPT.json hashes it",
+    "no downloads; no edit to PREDECLARATION.json; no paper edits; no bind_evidence.py; no commit"
+  ],
+  "repo_head_at_amendment": "bca9ca695ef29a1d4be1cad7bb326eaf7085991a",
+  "repo_branch": "writein/2026-09-08"
+}

@@ -1,0 +1,139 @@
+{
+  "schema": "005.init-ablation.receipt.v1",
+  "run_id": "init-ablation-20260909",
+  "receipt_utc": "2026-09-09T08:23:54Z",
+  "run_start_utc": "2026-09-09T08:17:17Z",
+  "run_start_note": "run.log start stamp; includes the ~15 s contract-test re-run that precedes init_ablation.py",
+  "run_end_utc": "2026-09-09T08:21:42Z",
+  "wall_clock_sec_init_ablation_py_only": 246.224863447,
+  "train_elapsed_sec_sum_over_cells": 219.0837779045105,
+  "command": "~/miniconda3/envs/dl/bin/python scripts/init_ablation.py --all-cells --run-training --steps 50 --batch-size 8 --eval-steps 30 --device cuda --num-workers 0 --out-dir results/init_ablation_20260909/run --run-id init-ablation-20260909",
+  "cwd": "source-tree/005-dit-blind-restoration",
+  "exit_code": 0,
+  "status": "COMPLETE",
+  "cells_ok": 9,
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5090 Laptop GPU, 595.84, 24463 MiB",
+  "gpu_peak_memory_allocated_bytes_max_over_cells": 776247808,
+  "gpu_cap_bytes": 6442450944,
+  "gpu_cap_respected": true,
+  "host": "zeyufu-ROG-Strix-SCAR-18-G835LX-G835LX",
+  "interpreter": "~/miniconda3/envs/dl/bin/python",
+  "versions": {
+    "python": "3.13.7",
+    "torch": "2.12.1+cu130",
+    "cuda": "13.0",
+    "diffusers": "0.37.0",
+    "numpy": "2.2.6",
+    "scipy": "1.16.2",
+    "scikit-image": "0.26.0"
+  },
+  "contract_tests": "13 passed (re-run immediately before the run; see run.log)",
+  "git": {
+    "branch": "writein/2026-09-08",
+    "head_at_predeclaration": "bca9ca695ef29a1d4be1cad7bb326eaf7085991a",
+    "head_at_run_start": "b9fa7618f128327363f29564255d06148fc61f82",
+    "head_at_receipt": "f8e1b886d189624d4a60dc978a547468dec191ca",
+    "source_commit_values_recorded_across_cells": [
+      "b9fa7618f128327363f29564255d06148fc61f82",
+      "bca9ca695ef29a1d4be1cad7bb326eaf7085991a",
+      "f8e1b886d189624d4a60dc978a547468dec191ca"
+    ],
+    "head_drift_note": "HEAD advanced during the run (a concurrent worker committed the audited main merge in papers/). init_ablation.py records `git rev-parse HEAD` per cell, so cell rows carry three different source_commit values; analyze_init_ablation.py flags this as 'cell field drift: source_commit'. The code contract did not change: code_manifest_sha256 is identical in all 9 cells and the manifest, and every frozen source re-hashes to its predeclared sha256 below. No commit was made by this run.",
+    "code_manifest_sha256_all_cells": [
+      "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    ]
+  },
+  "frozen_sources_rehash": {
+    "source-tree/005-dit-blind-restoration/scripts/init_ablation.py": {
+      "predeclared": "8b9cbcec78e9de7a887d4d1ec135ec1355b3fb37206b31607b0fde04c7ad6850",
+      "after_run": "8b9cbcec78e9de7a887d4d1ec135ec1355b3fb37206b31607b0fde04c7ad6850",
+      "match": true
+    },
+    "source-tree/005-dit-blind-restoration/scripts/analyze_init_ablation.py": {
+      "predeclared": "709556a30abd0078afbdd96a7dcfb87fce151dc8e07d59d5d91cd185b05ac863",
+      "after_run": "709556a30abd0078afbdd96a7dcfb87fce151dc8e07d59d5d91cd185b05ac863",
+      "match": true
+    },
+    "source-tree/005-dit-blind-restoration/scripts/common.py": {
+      "predeclared": "069334f87ff104cb63b2430a030d8360755eb59cbc4fb78c127c00af9f39297a",
+      "after_run": "069334f87ff104cb63b2430a030d8360755eb59cbc4fb78c127c00af9f39297a",
+      "match": true
+    },
+    "source-tree/005-dit-blind-restoration/scripts/train_dit_restoration.py": {
+      "predeclared": "bb176fe17314e0f5c34ef8ddbd877ade47db3c87c1dfe1c7037527542e964be3",
+      "after_run": "bb176fe17314e0f5c34ef8ddbd877ade47db3c87c1dfe1c7037527542e964be3",
+      "match": true
+    },
+    "source-tree/005-dit-blind-restoration/scripts/paired_data.py": {
+      "predeclared": "530f675d0e987d55d17dca098ed0c1ddec6cb43c5638b91651541de2fee00705",
+      "after_run": "530f675d0e987d55d17dca098ed0c1ddec6cb43c5638b91651541de2fee00705",
+      "match": true
+    },
+    "source-tree/005-dit-blind-restoration/data/manifest.json": {
+      "predeclared": "e402faef1f31e299e12e65d71e618f1310709dde034b310bca25a52e7d46a653",
+      "after_run": "e402faef1f31e299e12e65d71e618f1310709dde034b310bca25a52e7d46a653",
+      "match": true
+    }
+  },
+  "frozen_sources_all_match": true,
+  "predeclaration_sha256": "6b28545954179bb81cd55d33cd5afbfcb473bf1e3ce009c06bc9bcfb53a38174",
+  "predeclaration_sha256_file_verified": true,
+  "predeclaration_mtime_before_all_outputs": true,
+  "outputs_sha256": {
+    "results/init_ablation_20260909/PREDECLARATION.json": {
+      "sha256": "2d09abb6bfe534fb2e186035c7531988682057a50df4a8b863ad44e5606e1d98",
+      "bytes": 13571,
+      "mtime_epoch": 1788941191.9726133
+    },
+    "results/init_ablation_20260909/PREDECLARATION.sha256": {
+      "sha256": "85b070e2c8530375153acca343fd7b2d4923d6093163e207dd13220a6d27c283",
+      "bytes": 86,
+      "mtime_epoch": 1788941204.665604
+    },
+    "results/init_ablation_20260909/analysis.json": {
+      "sha256": "d53ac8e580b1eca222d8138b45a7720569e33852cb334b59c06078c766f9bd3e",
+      "bytes": 4457,
+      "mtime_epoch": 1788942116.3491402
+    },
+    "results/init_ablation_20260909/init_summary.json": {
+      "sha256": "fb54927b93c48d7b15873c6c2eab9f94af7e639afdc01164c87d0b81b7982777",
+      "bytes": 17070,
+      "mtime_epoch": 1788942232.1275644
+    },
+    "results/init_ablation_20260909/run/cell_results.jsonl": {
+      "sha256": "5ddcc5209f897e401ea85cbac2e463eaaeba9e34ff193edad275204543c59f03",
+      "bytes": 19019,
+      "mtime_epoch": 1788942101.021292
+    },
+    "results/init_ablation_20260909/run/manifest.json": {
+      "sha256": "61e34e328abc30a3762ec8e8cb4c6226e1a591354b25fc98145d2df4731583a4",
+      "bytes": 1572,
+      "mtime_epoch": 1788942101.0267522
+    },
+    "results/init_ablation_20260909/run/stdout.log": {
+      "sha256": "4b32401cdf70cb34a3ea243b55ba2df1029f30f6030393abfcd15295a0378cb2",
+      "bytes": 2936,
+      "mtime_epoch": 1788942101.0267522
+    },
+    "results/init_ablation_20260909/run/summary.json": {
+      "sha256": "4063c8f163af6b218fb2f09827ff6573d050af2a2952e83469e5c8092e1a76c7",
+      "bytes": 23734,
+      "mtime_epoch": 1788942101.0266626
+    },
+    "results/init_ablation_20260909/run.log": {
+      "sha256": "8b383f5f17fb7b82d89f2d8318f8a2b09b4acdedfaaac68cd1c2789f5565a009",
+      "bytes": 3809,
+      "mtime_epoch": 1788942102.368764
+    }
+  },
+  "rule_fired": "R1_INIT_DEPENDENT",
+  "not_done": [
+    "does not edit papers/**, tex, claim-register.md, review-checklist.md, BINDINGS.tsv",
+    "does not run bind_evidence.py",
+    "does not commit",
+    "does not download anything",
+    "does not modify init_ablation.py or any file listed in frozen_sources_sha256",
+    "does not write outside source-tree/005-dit-blind-restoration/results/init_ablation_20260909/ and docs/reports/2026-09-09-writein3-005-init-result.md"
+  ]
+}

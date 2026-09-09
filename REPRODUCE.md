@@ -29,6 +29,16 @@ the build instead of producing a stale number.
 | `data/e-orphans/complement_dit4sr_13stem_identity.json` | derived_table | 5613 | `5d4bfb206a23f8dc…` |
 | `data/e-primary/paper_primary.json` | recorded_state | 503 | `97e416747aa78a65…` |
 | `data/e-sota/sota_copy.json` | recorded_state | 562 | `cdfb73588e424076…` |
+| `data/e-perceptual-predecl/PREDECLARATION.json` | recorded_state | 6919 | `8a2cafcf89c4969f…` |
+| `data/e-perceptual-amend/PREDECLARATION_AMENDMENT_1.json` | recorded_state | 4596 | `4a398c7a4604b789…` |
+| `data/e-perceptual/perceptual_summary.json` | derived_table | 7841 | `b7182e5c4a84cece…` |
+| `data/e-perceptual-raw/per_crop.jsonl` | derived_table | 63573 | `8fc8c0ea51110475…` |
+| `data/e-perceptual-receipt/RECEIPT.json` | recorded_state | 3261 | `eae7ea63a7e76711…` |
+| `data/e-perceptual-provenance/PROVENANCE.json` | recorded_state | 4355 | `d8af0402fde94773…` |
+| `data/e-init-predecl/PREDECLARATION.json` | recorded_state | 13508 | `2d09abb6bfe534fb…` |
+| `data/e-init/init_summary.json` | derived_table | 17059 | `fb54927b93c48d7b…` |
+| `data/e-init-analysis/analysis.json` | derived_table | 4457 | `d53ac8e580b1eca2…` |
+| `data/e-init-receipt/RECEIPT.json` | recorded_state | 6787 | `0ec809ed0df89017…` |
 
 Some of these files recorded the paths of the machine that produced them. Those path strings and source links were refreshed before deposit; `REDACTION.md` states the rules, lists every file touched with both digests, and describes the check that proves no number changed.
 

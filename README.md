@@ -1,6 +1,6 @@
-# Print the trivial arm: three scales at which a do-nothing baseline decided what an image restoration comparison could conclude
+# Print the trivial arm, then print the other metric: a fidelity-perception reversal and an initialisation-dependent stall in an image restoration comparison
 
-Toy training records, per-crop PSNR/SSIM tables for a released restoration model and two interpolations, camera-stratified metrics, inference manifests, a memory-ceiling skip census, figure code and manuscript source for an estimand and baseline audit across three scales. The crop128 result is a labelled subset; the official 206-image RealSR PSNR table is unavailable.
+Toy training records and a nine-cell initialisation ablation, per-crop PSNR/SSIM and LPIPS-AlexNet tables for a released restoration model and two interpolations on the published RealSR crop128 protocol, camera-stratified metrics, inference manifests, a memory-ceiling skip census, predeclarations and receipts, figure code and manuscript source for an estimand and baseline audit across three scales. The crop128 protocol is the published test split; the census (206/193/13) is hardware-selected and reported separately.
 
 Archived at [10.5281/zenodo.22647026](https://doi.org/10.5281/zenodo.22647026).
 
@@ -11,7 +11,7 @@ Repository: https://github.com/PeterPonyu/trivial-arm-restoration-audit
 - `paper/tex/` — manuscript source
 - `paper/figs/` — the R code that draws the figures and writes the printed numbers
 - `paper/evidence/` — a file list with SHA-256 hashes
-- `data/` — the 20 data files named in that list
+- `data/` — the 30 data files named in that list
 
 ## Not included
 

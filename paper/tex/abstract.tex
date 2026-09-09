@@ -1,20 +1,21 @@
 Image-restoration comparisons often omit the arm that does nothing. We report
-three evidence-bounded comparisons from one project in which that arm was
-retained. At toy scale, two matched-budget networks both finish below the
-degraded input: \ToyConv{} and \ToyTrans{} dB versus \ToyDegraded{} dB. Giving
-the better arm a \BudgetFold{} budget lowers its training loss by
-\ToyLossDrop{} times but moves fidelity \ToyLongRegression{} dB in the wrong
-direction, so the toy run cannot rank a restoration method above its input.
+three evidence-bounded comparisons from one project that retained that arm,
+plus two predeclared follow-ups. At toy scale, two matched-budget networks both
+finish below the degraded input: \ToyConv{} and \ToyTrans{} dB versus
+\ToyDegraded{} dB. Giving the better arm a \BudgetFold{} budget lowers its
+training loss \ToyLossDrop{} times but moves fidelity \ToyLongRegression{} dB
+the wrong way. The transformer's stall, attributed by the project to
+zero-initialised gates, reproduces in \InitDefaultStall{}/\InitSeeds{} seeds
+under the default initialisation and vanishes in \InitZeroEscape{}/\InitSeeds{}
+under the scheme that zeroes the gates exactly; the attribution is withdrawn.
 
-At subset scale, a released diffusion model completes on \SubsetN{} crops from
-the published RealSR crop128 protocol and loses to bicubic on
-\LossesBicubic{}; the mean fidelity gap is \GapBicubicAbs{} dB. No perceptual
-measure was computed, so this is a fidelity-only ranking rather than a verdict
-on overall image quality. A separate census of \CensusTotal{} inputs skips
-\CensusSkipped{} under a memory rule; the \CensusRan{} survivors lack reference
-images and are not scored. That census is hardware-selected; the crop128
-comparison is not.
+At subset scale, a released diffusion model completes on \SubsetN{} crops of
+the published RealSR crop128 protocol and loses to bicubic on PSNR on
+\LossesBicubic{}, by \GapBicubicAbs{} dB. On a learned perceptual distance
+scored on the same crops the order reverses: the model is closer on
+\LpipsWins{} of \SubsetN{}, sign test \LpipsSignP{}. A separate
+hardware-selected census (\CensusTotal{} inputs, \CensusSkipped{} skipped) is
+not the crop128 comparison.
 
-The practical recommendation is narrow: print the trivial arm beside the
-method and describe any win by that arm as a statement about the measured
-endpoint. The ranking is fidelity-only on the measured crops.
+The recommendation: print the trivial arm beside the method, and when it wins
+on one endpoint, print the other before publishing the ranking.

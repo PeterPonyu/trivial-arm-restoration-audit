@@ -1,7 +1,7 @@
 {
   "schema": "evidence-manifest/v1",
   "state": "BOUND",
-  "bound_utc": "2026-08-28T13:37:57Z",
+  "bound_utc": "2026-09-09T08:32:33Z",
   "allowed_roots": [
     "data",
     "paper/evidence"
@@ -167,6 +167,86 @@
       "note": "the full-replication tier, recorded as blocked for the same reason",
       "bytes": 562,
       "sha256": "cdfb73588e424076e4e202aa3f91063dd738d480f5689eb57e7389ea38526549"
+    },
+    {
+      "id": "E-PERCEPTUAL-PREDECL",
+      "path": "data/e-perceptual-predecl/PREDECLARATION.json",
+      "role": "recorded_state",
+      "note": "the frozen predeclaration for the perceptual pass: endpoints, pairing, sign test, fidelity anchor rule and the three outcome cases, written before any score was computed",
+      "bytes": 6919,
+      "sha256": "8a2cafcf89c4969fdf8ccf81ba6a81ec086bf83e4950b96e645f323418aa5996"
+    },
+    {
+      "id": "E-PERCEPTUAL-AMEND",
+      "path": "data/e-perceptual-amend/PREDECLARATION_AMENDMENT_1.json",
+      "role": "recorded_state",
+      "note": "the amendment made after a serialisation crash and before any formal endpoint file was written: script hash replaced, the secondary VGG endpoint recorded as not computed, and the disclosure that the primary result had been seen on a provisional run",
+      "bytes": 4596,
+      "sha256": "4a398c7a4604b789175f6eeee5b1a9bc958a241bc937dcce8a9be8224c08843c"
+    },
+    {
+      "id": "E-PERCEPTUAL",
+      "path": "data/e-perceptual/perceptual_summary.json",
+      "role": "derived_table",
+      "note": "the formal perceptual summary: fidelity anchor against the bound record, learned perceptual distance for both arms, wins and losses, sign test, quadrant counts and the cross-check against the provisional run",
+      "bytes": 7841,
+      "sha256": "b7182e5c4a84ceceb544cd4e5eb80e8ffb277d16c2ea3f5bae3fc3f9de211cd0"
+    },
+    {
+      "id": "E-PERCEPTUAL-RAW",
+      "path": "data/e-perceptual-raw/per_crop.jsonl",
+      "role": "derived_table",
+      "note": "one row per crop with the local and bound fidelity, the bicubic fidelity and the learned perceptual distance for both arms",
+      "bytes": 63573,
+      "sha256": "8fc8c0ea51110475eb6fea05c3dc07bcd99885901dae1754c766e248257b05ca"
+    },
+    {
+      "id": "E-PERCEPTUAL-RECEIPT",
+      "path": "data/e-perceptual-receipt/RECEIPT.json",
+      "role": "recorded_state",
+      "note": "the run receipt for the formal perceptual pass: host, environment, weights actually loaded, wall clock, output digests and the statement that nothing was downloaded",
+      "bytes": 3261,
+      "sha256": "eae7ea63a7e76711a40ae0344635cbc95e3e111bfd82e82010cf25897be8665d"
+    },
+    {
+      "id": "E-PERCEPTUAL-PROVENANCE",
+      "path": "data/e-perceptual-provenance/PROVENANCE.json",
+      "role": "recorded_state",
+      "note": "where the four hundred input images came from, including the sampling seed and settings of the fresh local sample of the released model",
+      "bytes": 4355,
+      "sha256": "d8af0402fde947737e68a5bd7533585b190a21889f93dd3955f778bdb36b7b86"
+    },
+    {
+      "id": "E-INIT-PREDECL",
+      "path": "data/e-init-predecl/PREDECLARATION.json",
+      "role": "recorded_state",
+      "note": "the frozen predeclaration for the initialisation ablation: nine cells, the stall threshold, the mode-level majority and the four reading rules in evaluation order",
+      "bytes": 13508,
+      "sha256": "2d09abb6bfe534fb2e186035c7531988682057a50df4a8b863ad44e5606e1d98"
+    },
+    {
+      "id": "E-INIT",
+      "path": "data/e-init/init_summary.json",
+      "role": "derived_table",
+      "note": "the nine-cell result: per-cell early and late training loss, restored fidelity, initialisation probe, mode verdicts and the rule that fired",
+      "bytes": 17059,
+      "sha256": "fb54927b93c48d7b15873c6c2eab9f94af7e639afdc01164c87d0b81b7982777"
+    },
+    {
+      "id": "E-INIT-ANALYSIS",
+      "path": "data/e-init-analysis/analysis.json",
+      "role": "derived_table",
+      "note": "the independent analyser's reading of the same run: completeness gates, ordering by restored fidelity and its own decision, which never promotes a toy result",
+      "bytes": 4457,
+      "sha256": "d53ac8e580b1eca222d8138b45a7720569e33852cb334b59c06078c766f9bd3e"
+    },
+    {
+      "id": "E-INIT-RECEIPT",
+      "path": "data/e-init-receipt/RECEIPT.json",
+      "role": "recorded_state",
+      "note": "the run receipt for the ablation: frozen source digests re-hashed after the run, the commit drift during the run, environment and wall clock",
+      "bytes": 6787,
+      "sha256": "0ec809ed0df89017edbabbbb8fe70a7fd78c8aa7475164d355bb8d4ad28712c7"
     }
   ]
 }

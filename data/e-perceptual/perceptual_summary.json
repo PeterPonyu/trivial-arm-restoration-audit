@@ -1,0 +1,245 @@
+{
+  "anchor_check": {
+    "bicubic_reproduces_E-BICUBIC_max_abs_diff": 7.105427357601002e-15,
+    "bound_losses_vs_bicubic_rgb_psnr": 97,
+    "bound_mean_delta_vs_bicubic_rgb_psnr": -3.598599714745268,
+    "bound_record": "E-DIT sota_dit4sr_metrics_today_dit.json (remote 2026-08-23, seed None)",
+    "bound_rgb_psnr_mean": 21.87899226775902,
+    "condition_1_abs_delta_le_0p5_db": true,
+    "condition_2_losses_ge_90": true,
+    "delta_mean_local_minus_bound_db": 0.07360640926705386,
+    "local_fidelity_bootstrap": {
+      "rgb_psnr": {
+        "high": 22.428972469168272,
+        "low": 21.504431755692828,
+        "mean": 21.952598677026074,
+        "n": 100,
+        "samples": 1000,
+        "seed": 20260822
+      },
+      "rgb_ssim": {
+        "high": 0.644509810071288,
+        "low": 0.5900375968862498,
+        "mean": 0.6160297298304497,
+        "n": 100,
+        "samples": 1000,
+        "seed": 20260822
+      },
+      "y_psnr_shave4": {
+        "high": 24.01939221979776,
+        "low": 23.045757196609927,
+        "mean": 23.517334422892876,
+        "n": 100,
+        "samples": 1000,
+        "seed": 20260822
+      },
+      "y_ssim_shave4": {
+        "high": 0.6882875482683204,
+        "low": 0.6344856245239193,
+        "mean": 0.6601681088532224,
+        "n": 100,
+        "samples": 1000,
+        "seed": 20260822
+      }
+    },
+    "local_losses_vs_bicubic_rgb_psnr": 96,
+    "local_mean_delta_vs_bicubic_rgb_psnr": -3.5249933054782177,
+    "local_rgb_psnr_mean": 21.952598677026074,
+    "local_wins_vs_bicubic_rgb_psnr": 4,
+    "passed": true,
+    "per_crop_local_minus_bound_rgb_psnr": {
+      "max_abs": 3.0318340527282537,
+      "mean_abs": 0.30259456167271104,
+      "mean_shift": 0.07360640926705003
+    }
+  },
+  "anchor_result": "PASS",
+  "computed_utc": "2026-09-09T08:11:23Z",
+  "cross_check_vs_provisional": {
+    "float_tolerance_abs": 1e-06,
+    "floats": {
+      "anchor_delta_mean_local_minus_bound_db": {
+        "abs_diff": 0.0,
+        "bitwise_equal": true,
+        "formal": 0.07360640926705386,
+        "provisional": 0.07360640926705386
+      },
+      "bicubic_mean": {
+        "abs_diff": 1.6391277779526092e-09,
+        "bitwise_equal": false,
+        "formal": 0.4563796231150627,
+        "provisional": 0.45637962475419047
+      },
+      "dit_mean": {
+        "abs_diff": 6.705522803684971e-10,
+        "bitwise_equal": false,
+        "formal": 0.3172248724475503,
+        "provisional": 0.31722487177699804
+      },
+      "mean_delta": {
+        "abs_diff": 2.3096799750543795e-09,
+        "bitwise_equal": false,
+        "formal": 0.13915475066751243,
+        "provisional": 0.1391547529771924
+      }
+    },
+    "formal_equals_provisional": true,
+    "integers_exact": {
+      "anchor_local_losses": {
+        "equal": true,
+        "formal": 96,
+        "provisional": 96
+      },
+      "bicubic_wins": {
+        "equal": true,
+        "formal": 7,
+        "provisional": 7
+      },
+      "dit_wins": {
+        "equal": true,
+        "formal": 93,
+        "provisional": 93
+      },
+      "thesis_case": {
+        "equal": true,
+        "formal": "REVERSAL",
+        "provisional": "REVERSAL"
+      },
+      "ties": {
+        "equal": true,
+        "formal": 0,
+        "provisional": 0
+      }
+    },
+    "p_tolerance_rel": 1e-06,
+    "p_two_sided": {
+      "bitwise_equal": true,
+      "formal": 2.726143732806038e-20,
+      "provisional": 2.726143732806038e-20,
+      "rel_diff": 0.0
+    },
+    "provisional_file": "provisional/anchor_and_lpips_alex.json",
+    "provisional_sha256": "4b0d4d64535045eafc5d0a5e36ae3d4f76de31076e219cf77ee7cbc4452ebc6a"
+  },
+  "device": "cpu",
+  "formal_equals_provisional": true,
+  "gpu_peak_allocated_mib": null,
+  "n": 100,
+  "predeclaration": {
+    "declared_utc": "2026-09-09T07:29:47Z",
+    "path": "data/e-perceptual-predecl/PREDECLARATION.json",
+    "sha256": "8a2cafcf89c4969fdf8ccf81ba6a81ec086bf83e4950b96e645f323418aa5996"
+  },
+  "predeclaration_amendment": {
+    "amended_utc": "2026-09-09T08:05:00Z",
+    "compute_script": {
+      "path": "source-tree/005-dit-blind-restoration/results/perceptual_20260909/perceptual_lpips_v2.py",
+      "sha256": "0381731c0b7666a7fe5970bdcd9489e2912b9309e5f138f2b982b933aba05f70"
+    },
+    "path": "data/e-perceptual-amend/PREDECLARATION_AMENDMENT_1.json",
+    "sha256": "4a398c7a4604b789175f6eeee5b1a9bc958a241bc937dcce8a9be8224c08843c"
+  },
+  "primary_lpips_alex": {
+    "bicubic_mean": 0.4563796231150627,
+    "bicubic_median": 0.45093318819999695,
+    "bicubic_wins": 7,
+    "bootstrap_mean_delta": {
+      "high": 0.1619217197224498,
+      "low": 0.11729581110179424,
+      "mean": 0.13915475066751243,
+      "n": 100,
+      "samples": 1000,
+      "seed": 20260822
+    },
+    "camera_strata": {
+      "Canon": {
+        "bicubic_wins": 4,
+        "dit_wins": 46,
+        "mean_delta": 0.13390829429030418,
+        "n": 50
+      },
+      "Nikon": {
+        "bicubic_wins": 3,
+        "dit_wins": 47,
+        "mean_delta": 0.14440120704472065,
+        "n": 50
+      }
+    },
+    "dit_mean": 0.3172248724475503,
+    "dit_median": 0.31677567958831787,
+    "dit_wins": 93,
+    "mean_delta": 0.13915475066751243,
+    "median_delta": 0.13998904824256897,
+    "orientation": "bicubic_minus_dit; positive favours DiT4SR",
+    "sign_test": {
+      "alpha": 0.05,
+      "n": 100,
+      "n_tested": 100,
+      "negative_bicubic_wins": 7,
+      "p_two_sided": 2.726143732806038e-20,
+      "positive_dit_wins": 93,
+      "significant": true,
+      "ties": 0
+    },
+    "ties": 0
+  },
+  "protocol": "LPIPS v0.1 (lpips==0.1.4) AlexNet primary / VGG16 secondary on full 512x512 RGB scaled to [-1,1], each arm vs HR; lower is better. Paired per stem; delta = bicubic - dit (positive favours DiT4SR); exact two-sided sign test, ties excluded; percentile bootstrap n=100, 1000 resamples, seed 20260822. Fidelity anchor: RGB-full + BT.601-Y shave-4 (dit4sr_artifacts.compute_metrics).",
+  "psnr_vs_perceptual_quadrants": {
+    "lpips_alex": {
+      "psnr_loss_perceptual_loss": 7,
+      "psnr_loss_perceptual_win": 89,
+      "psnr_win_perceptual_loss": 0,
+      "psnr_win_perceptual_win": 4
+    }
+  },
+  "rgb_psnr_local_paired": {
+    "bicubic_mean": 25.47759198250429,
+    "bicubic_median": 25.45366798887733,
+    "bicubic_wins": 96,
+    "bootstrap_mean_delta": {
+      "high": -3.0353600940941625,
+      "low": -3.9592036445761467,
+      "mean": -3.5249933054782177,
+      "n": 100,
+      "samples": 1000,
+      "seed": 20260822
+    },
+    "camera_strata": {
+      "Canon": {
+        "bicubic_wins": 48,
+        "dit_wins": 2,
+        "mean_delta": -3.9117167531592427,
+        "n": 50
+      },
+      "Nikon": {
+        "bicubic_wins": 48,
+        "dit_wins": 2,
+        "mean_delta": -3.1382698577971926,
+        "n": 50
+      }
+    },
+    "dit_mean": 21.952598677026074,
+    "dit_median": 21.993608973841887,
+    "dit_wins": 4,
+    "mean_delta": -3.5249933054782177,
+    "median_delta": -3.5715462792461175,
+    "orientation": "dit_minus_bicubic; positive favours DiT4SR",
+    "sign_test": {
+      "alpha": 0.05,
+      "n": 100,
+      "n_tested": 100,
+      "negative_bicubic_wins": 96,
+      "p_two_sided": 6.449688895763542e-24,
+      "positive_dit_wins": 4,
+      "significant": true,
+      "ties": 0
+    },
+    "ties": 0
+  },
+  "schema": "005.perceptual.summary.v1",
+  "secondary_lpips_vgg": "NOT_COMPUTED — truncated cached weights; permitted proxy down",
+  "secondary_status": "NOT_COMPUTED — truncated cached weights; permitted proxy down",
+  "subset_id": "RealSRVal_crop128",
+  "thesis_case": "REVERSAL",
+  "thesis_case_text": "DiT4SR wins LPIPS-Alex on a majority of crops with sign-test p < 0.05 -> thesis becomes 'perception-distortion reversal on the measured crops: the trivial arm wins on distortion, the model wins on the perceptual endpoint; a fidelity-only table would have inverted the ranking'"
+}

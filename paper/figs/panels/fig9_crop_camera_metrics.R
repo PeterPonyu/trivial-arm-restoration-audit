@@ -48,8 +48,8 @@ intervals <- ggplot(camera_metrics, aes(x = mean_delta, y = camera)) +
                       axis.text.y = element_text(size = 7.2), strip.text = element_text(size = 8))
 
 census_rows <- data.frame(
-  attempt = factor(c("Earlier full census", "Earlier full census", "Scored crop128 subset"),
-                   levels = c("Earlier full census", "Scored crop128 subset")),
+  attempt = factor(c("Earlier full\ncensus", "Earlier full\ncensus", "Scored crop128\nsubset"),
+                   levels = c("Earlier full\ncensus", "Scored crop128\nsubset")),
   outcome = factor(c("Ran", "Skipped (OOM)", "Scored with GT"),
                    levels = c("Ran", "Skipped (OOM)", "Scored with GT")),
   n = c(as.integer(census$n_run), as.integer(census$n_skipped_oom), nrow(crops))
@@ -58,7 +58,8 @@ census_plot <- ggplot(census_rows, aes(x = attempt, y = n, fill = outcome)) +
   geom_col(width = 0.65) +
   geom_text(aes(label = n), position = position_stack(vjust = 0.5), size = 2.5,
             colour = "white", family = FIGURE_FONT_FAMILY) +
-  scale_fill_manual(values = c("Ran" = "#7A9E7E", "Skipped (OOM)" = "#B2182B", "Ran with GT" = "#4D7EA8"), name = NULL) +
+  scale_fill_manual(values = c("Ran" = "#7A9E7E", "Skipped (OOM)" = "#B2182B", "Scored with GT" = "#4D7EA8"), name = NULL) +
+  guides(fill = guide_legend(nrow = 2)) +
   labs(x = NULL, y = "Inputs", subtitle = sprintf("Scope census: %d → %d ran / %d skipped; scored subset n = %d",
                                                      census$n_total, census$n_run, census$n_skipped_oom, nrow(crops))) +
   rtx_theme() + theme(legend.position = "bottom", legend.text = element_text(size = 6.7),

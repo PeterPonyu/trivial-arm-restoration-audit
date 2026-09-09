@@ -1,0 +1,136 @@
+{
+  "schema": "005.init-ablation.predeclaration.v1",
+  "declared_utc": "2026-09-09T08:04:39Z",
+  "frozen": true,
+  "freeze_rule": "This file is not edited after the first result file lands. Verify: stat mtime of PREDECLARATION.json < mtime of every file under run/. PREDECLARATION.sha256 is written immediately after this file and before the run starts.",
+  "authority": {
+    "unpark": "WRITE-IN-3 item 005 init ablation; owner approved compute 2026-09-09. Spec docs/specs/2026-09-09-writein3-spec.md section 3.4: the LPIPS three-state outcome forces a 005 thesis rewrite, so the init ablation is RUN (not PARK).",
+    "supersedes": "review-checklist.md INIT_ABLATION_NOT_RUN_REVIEW 2026-09-08 sign-off line '三初始化消融不因本记录排期' (source-tree/005-adaln-stall-and-crop128-subset/review-checklist.md:144). That gate must be reopened and re-signed by a human after this run; this file does not re-sign it.",
+    "scout": "docs/reports/2026-09-09-scout-005-lpips-init.md section 4"
+  },
+  "repo": {
+    "path": ".",
+    "branch": "writein/2026-09-08",
+    "head": "bca9ca695ef29a1d4be1cad7bb326eaf7085991a",
+    "worktree_dirty": true,
+    "worktree_note": "Staged write-in changes exist under docs/, .superpowers/, source-tree/004; none touch source-tree/005-dit-blind-restoration/scripts or data."
+  },
+  "frozen_sources_sha256": {
+    "source-tree/005-dit-blind-restoration/scripts/init_ablation.py": "8b9cbcec78e9de7a887d4d1ec135ec1355b3fb37206b31607b0fde04c7ad6850",
+    "source-tree/005-dit-blind-restoration/scripts/analyze_init_ablation.py": "709556a30abd0078afbdd96a7dcfb87fce151dc8e07d59d5d91cd185b05ac863",
+    "source-tree/005-dit-blind-restoration/scripts/common.py": "069334f87ff104cb63b2430a030d8360755eb59cbc4fb78c127c00af9f39297a",
+    "source-tree/005-dit-blind-restoration/scripts/train_dit_restoration.py": "bb176fe17314e0f5c34ef8ddbd877ade47db3c87c1dfe1c7037527542e964be3",
+    "source-tree/005-dit-blind-restoration/scripts/paired_data.py": "530f675d0e987d55d17dca098ed0c1ddec6cb43c5638b91651541de2fee00705",
+    "source-tree/005-dit-blind-restoration/data/manifest.json": "e402faef1f31e299e12e65d71e618f1310709dde034b310bca25a52e7d46a653",
+    "rule": "None of these files is edited. RECEIPT.json re-hashes them after the run; any mismatch voids the run."
+  },
+  "environment": {
+    "interpreter": "~/miniconda3/envs/dl/bin/python",
+    "python": "3.13.7",
+    "torch": "2.12.1+cu130",
+    "diffusers": "0.37.0",
+    "scikit-image": "0.26.0",
+    "scipy": "1.16.2",
+    "numpy": "2.2.6",
+    "cuda": "13.0",
+    "driver": "595.84",
+    "gpu": "NVIDIA GeForce RTX 5090 Laptop GPU (24463 MiB; 3370 MiB in use by a thesis job at declaration; this run is capped at 6 GB and expected < 2 GB)",
+    "device_choice": "cuda; CPU load average was 29 at declaration, so the GPU is the quieter resource"
+  },
+  "contract_tests_before_run": {
+    "command": "python -m pytest -q -p no:cacheprovider scripts/test_init_ablation.py scripts/test_init_ablation_analysis.py",
+    "result": "13 passed (2026-09-09, before this file was written)"
+  },
+  "design": {
+    "model": "toy DiTTransformer2DModel from train_dit_restoration.build_model: 6 layers, 6 heads x 64 = 384 dim, patch 8 on 128x128 (256 tokens), 6 in-channels (3 noisy + 3 degraded conditioning), norm_type=ada_norm_zero, ~17,961,024 params",
+    "data": "source-tree/005-dit-blind-restoration/data: 460 clean/degraded 128x128 pairs from DIV2K valid HR; frozen split with 10 test pairs (data/manifest.json). No download.",
+    "modes": {
+      "library_default": "exact current build_model() construction, Diffusers default init, no post-init edits. This is the arm behind the bound toy record (ToyTrans 6.57 dB, ToyTransLoss 0.9912, ToyTransLastTen 0.9880, seed 0).",
+      "dit_standard": "same graph re-initialised with the public DiT Xavier/normal recipe, WITHOUT the zeroing step",
+      "dit_zero": "dit_standard plus DiT-style exact zeroing of transformer_blocks.*.norm1.linear.{weight,bias}, proj_out_1.{weight,bias}, proj_out_2.{weight,bias} (the AdaLN-Zero recipe proper)"
+    },
+    "seeds": [0, 1, 2],
+    "seed_source": "init_ablation.py --all-cells hard-codes seeds (0,1,2) (init_ablation.py:655); the seed drives model construction/re-init (fork_rng), the training batch order and noise, and the sampling generator",
+    "cells": 9,
+    "cell_list": [
+      "library_default/0", "library_default/1", "library_default/2",
+      "dit_standard/0", "dit_standard/1", "dit_standard/2",
+      "dit_zero/0", "dit_zero/1", "dit_zero/2"
+    ],
+    "training": {"steps": 50, "batch_size": 8, "learning_rate": 0.0002, "optimizer": "AdamW", "objective": "MSE epsilon-prediction, DDPM 1000 steps squaredcos_cap_v2", "eval_steps": 30, "num_workers": 0},
+    "command": "~/miniconda3/envs/dl/bin/python scripts/init_ablation.py --all-cells --run-training --steps 50 --batch-size 8 --eval-steps 30 --device cuda --num-workers 0 --out-dir results/init_ablation_20260909/run --run-id init-ablation-20260909",
+    "output_layout": {
+      "note": "init_ablation.py refuses a non-empty --out-dir (init_ablation.py:445-447), so the script writes into the run/ subdirectory; this predeclaration and the receipts sit one level up.",
+      "script_outputs": "results/init_ablation_20260909/run/{manifest.json,cell_results.jsonl,summary.json,stdout.log}",
+      "wrapper_outputs": "results/init_ablation_20260909/{run.log,analysis.json,init_summary.json,RECEIPT.json}",
+      "spec_path_deviation": "Spec section 3.4 names results/sota_copy/init_ablation_20260909/; the WRITE-IN-3 task assignment names results/init_ablation_20260909/ as the only writable path. The assignment is followed. Both are under source-tree/005-dit-blind-restoration/results so bind_evidence allowed_roots need no change."
+    },
+    "budget_rule": "No cell beyond these 9 is added in this run. If all modes stall at 50 steps, the conclusion is 'initialisation alone is not isolated at this budget'; a longer-budget arm needs its own predeclared cell in a later round (spec 3.4)."
+  },
+  "what_the_paper_currently_claims": {
+    "body.tex_209-229 (scout cited 207-224; file has shifted by 2 lines)": "The transformer's toy number (6.57 dB) is 'not a measurement of the transformer': its objective sat flat at ~1.0 (0.9912 final, 0.9880 last-ten mean), 'the project's record attributes that to the zero-initialised residual gates the transformer's normalisation layers use at initialisation'. The paper reports that reading 'as the project's, not as ours, because the experiment that would establish it was never run', and states the three-way comparison 'does not exist on disk. What exists is one run, at one seed, whose objective did not move.'",
+    "body.tex_596-601 (scout cited 577-582)": "'No claim is made that the initialisation scheme caused that stall. The reading is the project's own ... but the ablation that would isolate it ... is specified in the project's design and has not been executed. This paper reports the specification's absence rather than substituting for it.'",
+    "review-checklist.md_133-151": "gate INIT_ABLATION_NOT_RUN_REVIEW signed on the proposition 'the paper truthfully states the ablation was not run'.",
+    "testable_content": "The attribution is to zero-initialised AdaLN gates. init_ablation.py's docstring records that the Diffusers 'ada_norm_zero' default (library_default) does NOT zero those weights; dit_zero does. So the attribution predicts: library_default stalls only if something other than exact zeroing is responsible; dit_zero is the arm that actually carries zero gates. Whatever pattern appears, the paragraphs above become false the moment run/ exists and must be rewritten (not by this run)."
+  },
+  "endpoints": {
+    "per_cell_primary": {
+      "mean_last10_loss": "train.mean_last10_loss from common.summarize_losses (mean of the last 10 of 50 step losses)",
+      "loss_slope_first10_to_last10": "train.loss_slope_first10_to_last10 = mean_last10 - mean_first10 (negative = learning)",
+      "final_loss": "train.final_loss (step-50 loss)",
+      "restored_psnr_mean": "eval.restored_psnr_mean on the frozen 10 test pairs, RGB-full, 30 DDPM steps (common.sample_and_eval:v1)",
+      "degraded_input_psnr_mean": "eval.degraded_input_psnr_mean (identity/do-nothing reference on the same pairs; bound value 20.75 dB)"
+    },
+    "per_cell_secondary": ["eval.restored_ssim_mean", "train.elapsed_sec", "max_memory_allocated_bytes", "initialization.block_gate_abs_max", "initialization.final_modulation_abs_max", "initialization.initial_output_abs_max", "initialization.zero_target_all_exact_zero", "n_params"],
+    "stall_indicator": {
+      "definition": "A cell STALLS iff train.mean_last10_loss >= 0.90. Rationale: the epsilon-prediction MSE against unit-variance noise is ~1.0 when the network contributes nothing (body.tex:212-214); the bound stalled run has last-ten mean 0.9880; the bound 50-step U-Net reached 0.081. A 10 per cent departure from unity in the last ten steps is the minimum that can be called 'left its initialisation'.",
+      "tie_breaker": "none; the threshold is a hard inequality on the recorded float",
+      "mode_level": "A MODE STALLS iff >= 2 of its 3 seeds stall. A MODE ESCAPES iff <= 1 of its 3 seeds stall.",
+      "descriptive_only": "restored_psnr_mean vs degraded_input_psnr_mean (identity crossing) and vs the bound 6.57 dB are reported per cell but do not enter the rule; analyze_init_ablation.py kill_rules.decision is recorded verbatim as a second, independent reading."
+    },
+    "reproduction_check_descriptive": "library_default seed 0 is the same construction, seed, steps, batch and learning rate as the bound toy record. Report |mean_last10_loss - 0.9880| and |restored_psnr_mean - 6.57|. This is descriptive: GPU nondeterminism and DataLoader worker count can move it; it does not gate any rule."
+  },
+  "reading_rules": {
+    "evaluation_order": "Rules are evaluated in the order R3, R2, R1, R4; the first that matches fires. R3 and R2 are mutually exclusive with each other and with R1.",
+    "R1_INIT_DEPENDENT": {
+      "condition": "library_default MODE STALLS (>= 2/3 seeds) AND at least one of {dit_standard, dit_zero} MODE ESCAPES (<= 1/3 seeds stall)",
+      "sentence": "The stall reproduces under the library default initialisation and disappears under <named mode(s)>, so on this toy the stall is initialisation-dependent. Which named mode escapes is reported; if dit_zero escapes while library_default stalls, the specific 'zero-initialised gates' attribution is contradicted even though initialisation-dependence holds, and the rewrite must say so.",
+      "tex_consequence": "body.tex:220-229 rewritten to report the 9-cell result; body.tex:596-601 rewritten to drop 'has not been executed'."
+    },
+    "R2_NOT_ISOLATED_AT_BUDGET": {
+      "condition": "all 9 cells stall",
+      "sentence": "All three initialisations stall at 50 steps; initialisation alone is not isolated at this budget. No longer-budget cell is added in this round.",
+      "tex_consequence": "same two paragraphs rewritten; the attribution to initialisation is reported as not supported at this budget, not as refuted."
+    },
+    "R3_STALL_NOT_REPRODUCED": {
+      "condition": "0 of 9 cells stall (including all three library_default seeds)",
+      "sentence": "The bound single-seed stall does not reproduce in three seeds of the same construction; the toy reproduction sentences (body.tex:209-218, and every use of ToyTransLoss/ToyTransLastTen as evidence of a stall) must be re-scoped to 'one recorded run at one seed that did not reproduce'.",
+      "tex_consequence": "larger rewrite than R1/R2; the crop128 thesis is untouched."
+    },
+    "R4_MIXED": {
+      "condition": "anything else (e.g. library_default escapes while an alternative stalls; library_default splits 1/3 or 2/3 with all alternatives also splitting; stall present in some but not all seeds without a mode-level pattern)",
+      "sentence": "The stall is seed- and initialisation-sensitive in a pattern that does not support a one-sentence attribution; the paragraphs report the per-cell table and state that the ablation was run and did not isolate a single cause.",
+      "tex_consequence": "both paragraphs rewritten; no attribution sentence in either direction."
+    },
+    "forbidden_readings": [
+      "any statement about diffusion transformers as an architecture (body.tex:591-594 stays)",
+      "any statement about DiT4SR or the crop128 comparison",
+      "promoting restored_psnr_mean to the stall criterion after seeing results",
+      "changing the 0.90 threshold or the 2/3 majority after seeing results",
+      "adding a 500-step or any other cell in this run"
+    ]
+  },
+  "what_this_run_does_not_do": [
+    "does not edit papers/**, tex, claim-register.md, review-checklist.md, BINDINGS.tsv",
+    "does not run bind_evidence.py",
+    "does not commit",
+    "does not download anything",
+    "does not modify init_ablation.py or any file listed in frozen_sources_sha256",
+    "does not write outside source-tree/005-dit-blind-restoration/results/init_ablation_20260909/ and docs/reports/2026-09-09-writein3-005-init-result.md"
+  ],
+  "binding_ids_proposed_not_created": {
+    "E-PERCEPTUAL-INIT-PREDECL": "results/init_ablation_20260909/PREDECLARATION.json",
+    "E-PERCEPTUAL-INIT": "results/init_ablation_20260909/init_summary.json (or run/summary.json; the binder decides)",
+    "E-PERCEPTUAL-INIT-RECEIPT": "results/init_ablation_20260909/RECEIPT.json"
+  }
+}

@@ -1,0 +1,414 @@
+{
+  "schema": "005.init-ablation.init_summary.v1",
+  "run_id": "init-ablation-20260909",
+  "generated_utc": "2026-09-09T08:23:52Z",
+  "predeclaration": {
+    "path": "data/e-init-predecl/PREDECLARATION.json",
+    "sha256": "2d09abb6bfe534fb2e186035c7531988682057a50df4a8b863ad44e5606e1d98",
+    "declared_utc": "2026-09-09T08:04:39Z",
+    "mtime_before_all_outputs": true
+  },
+  "stall_indicator": {
+    "definition": "A cell STALLS iff train.mean_last10_loss >= 0.90. Rationale: the epsilon-prediction MSE against unit-variance noise is ~1.0 when the network contributes nothing (body.tex:212-214); the bound stalled run has last-ten mean 0.9880; the bound 50-step U-Net reached 0.081. A 10 per cent departure from unity in the last ten steps is the minimum that can be called 'left its initialisation'.",
+    "tie_breaker": "none; the threshold is a hard inequality on the recorded float",
+    "mode_level": "A MODE STALLS iff >= 2 of its 3 seeds stall. A MODE ESCAPES iff <= 1 of its 3 seeds stall.",
+    "descriptive_only": "restored_psnr_mean vs degraded_input_psnr_mean (identity crossing) and vs the bound 6.57 dB are reported per cell but do not enter the rule; analyze_init_ablation.py kill_rules.decision is recorded verbatim as a second, independent reading."
+  },
+  "threshold_mean_last10_loss": 0.9,
+  "cells": [
+    {
+      "cell": "library_default/0",
+      "mode": "library_default",
+      "seed": 0,
+      "mean_first10_loss": 1.1122586846351623,
+      "mean_last10_loss": 0.9877313435077667,
+      "loss_slope_first10_to_last10": -0.12452734112739561,
+      "final_loss": 0.9907741546630859,
+      "restored_psnr_mean": 6.558659160876397,
+      "restored_ssim_mean": 0.004759316085946698,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": true,
+      "train_elapsed_sec": 28.848653554916382,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 1.2856570482254028,
+      "final_modulation_abs_max": 1.0835105180740356,
+      "initial_output_abs_max": 1.6130962371826172,
+      "zero_target_all_exact_zero": false,
+      "state_fingerprint": "4ea71650caf0fae22a421f755e253f15bcec9233edcfb62f0c5e449f9494928d",
+      "source_commit_at_cell": "bca9ca695ef29a1d4be1cad7bb326eaf7085991a",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "library_default/1",
+      "mode": "library_default",
+      "seed": 1,
+      "mean_first10_loss": 1.1051784992218017,
+      "mean_last10_loss": 0.9832328855991364,
+      "loss_slope_first10_to_last10": -0.12194561362266532,
+      "final_loss": 0.982576847076416,
+      "restored_psnr_mean": 6.592401289568289,
+      "restored_ssim_mean": 0.004870834298866536,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": true,
+      "train_elapsed_sec": 21.377368688583374,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 1.354088544845581,
+      "final_modulation_abs_max": 1.2206376791000366,
+      "initial_output_abs_max": 1.3838486671447754,
+      "zero_target_all_exact_zero": false,
+      "state_fingerprint": "c03f5cbcab89d8b399d9884190c23a49395f794889e94ada9570cd635a112268",
+      "source_commit_at_cell": "b9fa7618f128327363f29564255d06148fc61f82",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "library_default/2",
+      "mode": "library_default",
+      "seed": 2,
+      "mean_first10_loss": 1.1141317725181579,
+      "mean_last10_loss": 0.9887785196304322,
+      "loss_slope_first10_to_last10": -0.1253532528877257,
+      "final_loss": 0.9954785108566284,
+      "restored_psnr_mean": 6.557839468291301,
+      "restored_ssim_mean": 0.0046339167116139345,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": true,
+      "train_elapsed_sec": 31.88933515548706,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 1.151658296585083,
+      "final_modulation_abs_max": 1.1764801740646362,
+      "initial_output_abs_max": 1.2584788799285889,
+      "zero_target_all_exact_zero": false,
+      "state_fingerprint": "9d9f3c802d59c11557b97f68919e2cde360e21d091c700a08e31c2fa0fea0f6e",
+      "source_commit_at_cell": "b9fa7618f128327363f29564255d06148fc61f82",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "dit_standard/0",
+      "mode": "dit_standard",
+      "seed": 0,
+      "mean_first10_loss": 1.8997935771942138,
+      "mean_last10_loss": 0.9929693520069123,
+      "loss_slope_first10_to_last10": -0.9068242251873015,
+      "final_loss": 0.9943422675132751,
+      "restored_psnr_mean": 6.558933467862063,
+      "restored_ssim_mean": 0.004964411090138175,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": true,
+      "train_elapsed_sec": 30.85909605026245,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 0.04966610670089722,
+      "final_modulation_abs_max": 0.06809486448764801,
+      "initial_output_abs_max": 2.588651180267334,
+      "zero_target_all_exact_zero": false,
+      "state_fingerprint": "b9bc58e49253e3031bc0710b88ab488308ea446e95c39bcdc2a8fd0f467fdd35",
+      "source_commit_at_cell": "b9fa7618f128327363f29564255d06148fc61f82",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "dit_standard/1",
+      "mode": "dit_standard",
+      "seed": 1,
+      "mean_first10_loss": 1.879982590675354,
+      "mean_last10_loss": 0.9904178500175476,
+      "loss_slope_first10_to_last10": -0.8895647406578064,
+      "final_loss": 0.9891047477722168,
+      "restored_psnr_mean": 6.569055252585715,
+      "restored_ssim_mean": 0.004948254457744949,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": true,
+      "train_elapsed_sec": 21.14024519920349,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 0.06403139233589172,
+      "final_modulation_abs_max": 0.059560924768447876,
+      "initial_output_abs_max": 2.39681339263916,
+      "zero_target_all_exact_zero": false,
+      "state_fingerprint": "9bf0af905124a4f2ec84397f313c90225625cf73192956ee0b0487411f7fc345",
+      "source_commit_at_cell": "f8e1b886d189624d4a60dc978a547468dec191ca",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "dit_standard/2",
+      "mode": "dit_standard",
+      "seed": 2,
+      "mean_first10_loss": 1.7884044170379638,
+      "mean_last10_loss": 0.9929315447807312,
+      "loss_slope_first10_to_last10": -0.7954728722572326,
+      "final_loss": 0.9988533854484558,
+      "restored_psnr_mean": 6.549666672312908,
+      "restored_ssim_mean": 0.00463046892740831,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": true,
+      "train_elapsed_sec": 21.77410054206848,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 0.052939802408218384,
+      "final_modulation_abs_max": 0.06631964445114136,
+      "initial_output_abs_max": 2.436246633529663,
+      "zero_target_all_exact_zero": false,
+      "state_fingerprint": "85f80bd11aadfba0da938330bdbf55221347ddfb8ea60025a8bc8edc937351cc",
+      "source_commit_at_cell": "f8e1b886d189624d4a60dc978a547468dec191ca",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "dit_zero/0",
+      "mode": "dit_zero",
+      "seed": 0,
+      "mean_first10_loss": 0.9804797112941742,
+      "mean_last10_loss": 0.42366111278533936,
+      "loss_slope_first10_to_last10": -0.5568185985088349,
+      "final_loss": 0.5067440271377563,
+      "restored_psnr_mean": 9.56389741184972,
+      "restored_ssim_mean": 0.018525336538820342,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": false,
+      "train_elapsed_sec": 21.21728014945984,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 0.0,
+      "final_modulation_abs_max": 0.0,
+      "initial_output_abs_max": 0.0,
+      "zero_target_all_exact_zero": true,
+      "state_fingerprint": "c0b3cfedfbbcab85f4cb448aea0dcf4b03d601ff9ead083aa71e1000ad3d80fe",
+      "source_commit_at_cell": "f8e1b886d189624d4a60dc978a547468dec191ca",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "dit_zero/1",
+      "mode": "dit_zero",
+      "seed": 1,
+      "mean_first10_loss": 0.9777483344078064,
+      "mean_last10_loss": 0.41736571192741395,
+      "loss_slope_first10_to_last10": -0.5603826224803925,
+      "final_loss": 0.43577322363853455,
+      "restored_psnr_mean": 9.873997572763662,
+      "restored_ssim_mean": 0.019674560306213965,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": false,
+      "train_elapsed_sec": 20.772899627685547,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 0.0,
+      "final_modulation_abs_max": 0.0,
+      "initial_output_abs_max": 0.0,
+      "zero_target_all_exact_zero": true,
+      "state_fingerprint": "f30ad6dcd732693121e482b137d7cc0209aaa4a75672c2457b96c89b9e486ed4",
+      "source_commit_at_cell": "f8e1b886d189624d4a60dc978a547468dec191ca",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    },
+    {
+      "cell": "dit_zero/2",
+      "mode": "dit_zero",
+      "seed": 2,
+      "mean_first10_loss": 0.9796558976173401,
+      "mean_last10_loss": 0.4081265926361084,
+      "loss_slope_first10_to_last10": -0.5715293049812317,
+      "final_loss": 0.48835334181785583,
+      "restored_psnr_mean": 9.761944235080223,
+      "restored_ssim_mean": 0.01962048991754112,
+      "degraded_input_psnr_mean": 20.752884960569773,
+      "restored_below_identity": true,
+      "stalls": false,
+      "train_elapsed_sec": 21.204798936843872,
+      "max_memory_allocated_bytes": 776247808,
+      "n_params": 17961024,
+      "block_gate_abs_max": 0.0,
+      "final_modulation_abs_max": 0.0,
+      "initial_output_abs_max": 0.0,
+      "zero_target_all_exact_zero": true,
+      "state_fingerprint": "9e0fa02279ca21c23892d681dfd98d06f0a962218f4c0f1844dd53acef974a8c",
+      "source_commit_at_cell": "f8e1b886d189624d4a60dc978a547468dec191ca",
+      "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6"
+    }
+  ],
+  "modes": {
+    "library_default": {
+      "seeds_stalling": 3,
+      "seeds_total": 3,
+      "mode_verdict": "STALLS",
+      "mean_last10_loss_by_seed": {
+        "0": 0.9877313435077667,
+        "1": 0.9832328855991364,
+        "2": 0.9887785196304322
+      },
+      "restored_psnr_mean_by_seed": {
+        "0": 6.558659160876397,
+        "1": 6.592401289568289,
+        "2": 6.557839468291301
+      },
+      "mean_last10_loss_mean": 0.9865809162457784,
+      "restored_psnr_mean_mean": 6.569633306245329
+    },
+    "dit_standard": {
+      "seeds_stalling": 3,
+      "seeds_total": 3,
+      "mode_verdict": "STALLS",
+      "mean_last10_loss_by_seed": {
+        "0": 0.9929693520069123,
+        "1": 0.9904178500175476,
+        "2": 0.9929315447807312
+      },
+      "restored_psnr_mean_by_seed": {
+        "0": 6.558933467862063,
+        "1": 6.569055252585715,
+        "2": 6.549666672312908
+      },
+      "mean_last10_loss_mean": 0.9921062489350637,
+      "restored_psnr_mean_mean": 6.559218464253561
+    },
+    "dit_zero": {
+      "seeds_stalling": 0,
+      "seeds_total": 3,
+      "mode_verdict": "ESCAPES",
+      "mean_last10_loss_by_seed": {
+        "0": 0.42366111278533936,
+        "1": 0.41736571192741395,
+        "2": 0.4081265926361084
+      },
+      "restored_psnr_mean_by_seed": {
+        "0": 9.56389741184972,
+        "1": 9.873997572763662,
+        "2": 9.761944235080223
+      },
+      "mean_last10_loss_mean": 0.41638447244962057,
+      "restored_psnr_mean_mean": 9.733279739897869
+    }
+  },
+  "cells_stalling_total": 6,
+  "rule_evaluation_order": [
+    "R3_STALL_NOT_REPRODUCED",
+    "R2_NOT_ISOLATED_AT_BUDGET",
+    "R1_INIT_DEPENDENT",
+    "R4_MIXED"
+  ],
+  "rule_fired": "R1_INIT_DEPENDENT",
+  "modes_stalling": [
+    "library_default",
+    "dit_standard"
+  ],
+  "modes_escaping": [
+    "dit_zero"
+  ],
+  "sentence": "The stall reproduces under the library default initialisation (3/3 seeds, mean last-ten loss 0.9866) and disappears under dit_zero (0/3 seeds stall, mean last-ten loss 0.4164), so on this toy the stall is initialisation-dependent. dit_zero is the arm that actually carries exactly-zero AdaLN gates and final projections, and it is the arm that escapes; library_default (Diffusers ada_norm_zero default, gates NOT zero) and dit_standard (Xavier, gates not zero) both stall. The specific 'zero-initialised residual gates caused the stall' attribution is therefore contradicted even though initialisation-dependence holds; the rewrite must say so.",
+  "tex_consequence": "body.tex:220-229 rewritten to report the 9-cell result; body.tex:596-601 rewritten to drop 'has not been executed'.",
+  "descriptive": {
+    "identity_reference_psnr_db": 20.752884960569773,
+    "all_cells_below_identity": true,
+    "reproduction_check_library_default_seed0": {
+      "bound_ToyTransLastTen": 0.988,
+      "bound_ToyTransLoss": 0.9912,
+      "bound_ToyTrans_psnr_db": 6.57,
+      "observed_mean_last10_loss": 0.9877313435077667,
+      "observed_final_loss": 0.9907741546630859,
+      "observed_restored_psnr_mean": 6.558659160876397,
+      "abs_diff_mean_last10_loss": 0.0002686564922332879,
+      "abs_diff_final_loss": 0.0004258453369140325,
+      "abs_diff_restored_psnr": 0.011340839123603175,
+      "note": "descriptive only (PREDECLARATION.endpoints.reproduction_check_descriptive); does not gate any rule"
+    },
+    "analyzer_kill_rules_decision_verbatim": {
+      "crosses_identity": null,
+      "decision": "OPEN",
+      "seed_ordering_changes": null,
+      "stays_below_identity": null,
+      "training_interpretation_available": false
+    },
+    "analyzer_ordering_by_restored_psnr": {
+      "distinct_orders": [
+        [
+          "dit_zero",
+          "dit_standard",
+          "library_default"
+        ],
+        [
+          "dit_zero",
+          "library_default",
+          "dit_standard"
+        ],
+        [
+          "dit_zero",
+          "library_default",
+          "dit_standard"
+        ]
+      ],
+      "metric": "restored_psnr_mean",
+      "n_distinct_orders": 2,
+      "per_seed": {
+        "0": {
+          "descending_order": [
+            "dit_zero",
+            "dit_standard",
+            "library_default"
+          ],
+          "values": {
+            "dit_standard": 6.558933467862063,
+            "dit_zero": 9.56389741184972,
+            "library_default": 6.558659160876397
+          }
+        },
+        "1": {
+          "descending_order": [
+            "dit_zero",
+            "library_default",
+            "dit_standard"
+          ],
+          "values": {
+            "dit_standard": 6.569055252585715,
+            "dit_zero": 9.873997572763662,
+            "library_default": 6.592401289568289
+          }
+        },
+        "2": {
+          "descending_order": [
+            "dit_zero",
+            "library_default",
+            "dit_standard"
+          ],
+          "values": {
+            "dit_standard": 6.549666672312908,
+            "dit_zero": 9.761944235080223,
+            "library_default": 6.557839468291301
+          }
+        }
+      }
+    },
+    "analyzer_gates": {
+      "cell_completeness": true,
+      "common_parameter_count": true,
+      "initialization_separation": true,
+      "receipt_files": {
+        "cell_results.jsonl": true,
+        "manifest.json": true,
+        "stdout.log": true,
+        "summary.json": true
+      },
+      "source_data_metric_stable": false
+    },
+    "analyzer_issues": [
+      "cell field drift: source_commit has 3 values",
+      "cell field disagrees with manifest: source_commit"
+    ]
+  },
+  "forbidden_readings_respected": [
+    "any statement about diffusion transformers as an architecture (body.tex:591-594 stays)",
+    "any statement about DiT4SR or the crop128 comparison",
+    "promoting restored_psnr_mean to the stall criterion after seeing results",
+    "changing the 0.90 threshold or the 2/3 majority after seeing results",
+    "adding a 500-step or any other cell in this run"
+  ],
+  "official_r": false,
+  "paper_promotion": false,
+  "interpretation_boundary": "toy DiT, 50 steps, 10 test pairs; nothing about diffusion transformers as an architecture, DiT4SR, or crop128 follows."
+}

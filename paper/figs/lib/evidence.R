@@ -25,8 +25,8 @@ load_manifest <- function() {
 
 # Built once by the driver and closed over by the readers below, so a panel
 # cannot reach past the manifest by constructing a path of its own.
-evidence_reader <- function(manifest, repo_root) {
-  bound_path <- function(id) {
+bound_path_checker <- function(manifest, repo_root) {
+  function(id) {
     row <- manifest$entries[manifest$entries$id == id, ]
     if (nrow(row) != 1L) stop("no unique evidence entry bound under id ", id)
     path <- file.path(repo_root, row$path[[1]])
@@ -35,7 +35,22 @@ evidence_reader <- function(manifest, repo_root) {
     if (!identical(actual, row$sha256[[1]])) stop("bound evidence drifted on disk: ", id)
     path
   }
+}
+
+evidence_reader <- function(manifest, repo_root) {
+  bound_path <- bound_path_checker(manifest, repo_root)
   function(id) jsonlite::fromJSON(bound_path(id), simplifyVector = TRUE)
+}
+
+# The same digest check for a record written one JSON object per line. Returns
+# a data frame with one row per line; a null field becomes NA.
+evidence_lines_reader <- function(manifest, repo_root) {
+  bound_path <- bound_path_checker(manifest, repo_root)
+  function(id) {
+    lines <- readLines(bound_path(id), warn = FALSE)
+    lines <- lines[nzchar(trimws(lines))]
+    jsonlite::fromJSON(paste0("[", paste(lines, collapse = ","), "]"), simplifyVector = TRUE)
+  }
 }
 
 # The digest the manifest recorded for one entry. Two entries that carry the same

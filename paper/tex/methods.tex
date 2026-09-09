@@ -1,10 +1,15 @@
-\subsection{What was already on disk}
+\subsection{What was already on disk, and what was added under predeclaration}
 
-Nothing in this study was generated for it. Every quantity comes from records
-written by runs that finished before this analysis began, and each record is
-tied to the manuscript by an evidence-manifest binding; the figure code verifies
-each bound file before reading it and stops the build on any mismatch. No model was
-trained, no image was restored, and no evaluation was launched.
+The study has two layers. The first is a re-reading of records written by runs
+that finished before this analysis began: three comparisons, none of which was
+generated for this paper. The second is two computations made for this paper
+under written predeclarations, each frozen and hashed before its first result
+existed: a perceptual scoring pass over the subset crops, and a
+three-initialisation ablation of the toy transformer. Every quantity in both
+layers is tied to the manuscript by an evidence-manifest binding; the figure
+code verifies each bound file before reading it, re-derives the summaries from
+the per-crop or per-cell rows, holds each result to its own predeclaration, and
+stops the build on any mismatch.
 
 Three comparisons are read. The first is a toy-scale training run in which a
 small convolutional restoration network and a small transformer of comparable
@@ -12,10 +17,10 @@ size were trained under a matched step budget on the same data, evaluated on the
 same \ToyN{} held-out pairs at the same number of sampling steps, and scored
 against the same degraded inputs. The second is the same convolutional arm
 retrained at \BudgetMultiple{} times the budget, written outside the results tree
-and never promoted. The third is a released diffusion restoration model run over a
-\SubsetN{}-crop subset drawn from a real-world super-resolution validation set,
-scored against reference images, alongside bicubic and nearest-neighbour
-upsampling of the same inputs.
+and never promoted. The third is a released diffusion restoration model run over
+the \SubsetN{} crops of the published RealSR crop128 protocol, scored against
+reference images, alongside bicubic and nearest-neighbour upsampling of the same
+inputs.
 
 \subsection{The trivial arms, and why they are arms}
 
@@ -45,11 +50,92 @@ plausible detail are known to score worse on distortion measures than methods
 that produce a blurrier output closer to the conditional
 mean~\cite{blau2018perception,ledig2017srgan}, and the trade-off is a property
 of the estimator rather than a defect of any particular
-model~\cite{blau2018perception}. The perceptual measure that would sit on the
-other side of that trade-off is recorded on disk as \PerceptualState{} for these
-crops, and it is not computed here. A comparison with a distortion measure and
-no perceptual measure can establish which output is closer to the reference. It
-cannot establish which output is better.
+model~\cite{blau2018perception}. A comparison with a distortion measure alone
+can establish which output is closer to the reference; it cannot establish
+which output is better, and a comparison with a perceptual measure alone cannot
+either. This paper reports both, and treats their disagreement as the result.
+
+\subsection{The perceptual endpoint}
+
+The perceptual endpoint is the learned perceptual image patch similarity
+(LPIPS), version 0.1, with the AlexNet backbone and its released linear
+calibration head~\cite{zhang2018lpips}: lower is closer. Each restored output
+and its reference are the full \(512\times512\) colour crop, scaled to
+\([-1,1]\), with no border removed. The primary contrast for crop
+\(i\in\mathcal{M}\) is \(\Delta^{\mathrm{LPIPS}}_i =
+\mathrm{LPIPS}_{\mathrm{bicubic},i}-\mathrm{LPIPS}_{\mathrm{model},i}\), so a
+positive value is a crop on which the model is perceptually closer. The
+primary test is the exact two-sided sign test on the \SubsetN{} paired
+contrasts at \(\alpha=0.05\), ties counted and excluded; a percentile bootstrap
+of the mean contrast over 1,000 resamples and the per-camera win counts are
+descriptive. The protocol, including these choices and the three possible
+readings of the outcome, was written and hashed before any perceptual value was
+computed, and the figure code re-derives the wins, the test and the mean from
+the per-crop rows.
+
+Two disclosures attach to this endpoint. First, provenance: the bound fidelity
+table was produced by an earlier inference run on another machine, and its
+restored pixels were not the ones scored here. The perceptual pass drew a fresh
+sample of the released model on the same \SubsetN{} low-resolution inputs, at
+sampling seed \LpipsSeed{} with \LpipsSteps{} sampling steps and the released
+weights, and scored that sample. A predeclared anchor rule governs whether the
+fresh sample may be read beside the bound ranking: its mean RGB PSNR must lie
+within half a decibel of the bound record's, and it must lose to bicubic on at
+least ninety of the \SubsetN{} crops; had either failed, the perceptual numbers
+were to be reported as not comparable and no rewriting of the thesis was to
+occur. The anchor passed with a shift of \AnchorDeltaDb{} decibels and
+\AnchorLosses{} losses, and the bicubic arm recomputed for the pass reproduces
+the bound bicubic rows to floating-point precision. The perceptual comparison
+is therefore between the fresh sample and bicubic; the PSNR comparison in the
+same figure uses the fresh sample as well, and the bound PSNR table is unchanged.
+
+Second, the predeclaration was amended once. The predeclared scoring script
+crashed while serialising its summary, after the per-crop values had been
+computed and before any formal endpoint file was written. The amendment
+replaced the script with a version that casts the offending values to plain
+types --- the endpoints, pairing, test, threshold and anchor rule were not
+changed --- and recorded the secondary backbone as not computed (below). The
+primary result had by then been observed on a provisional side run that
+imported the predeclared script's own functions; the amendment says so, and the
+formal run under the amended protocol reproduced the provisional run exactly:
+the same \LpipsWins{} wins, the same sign-test probability to the last digit,
+the same anchor shift. Both the original predeclaration and the amendment are
+bound and hashed with the result.
+
+The protocol named LPIPS with the VGG16 backbone as a secondary robustness
+check, never to be promoted. It was not computed: the cached VGG16 checkpoint
+on the scoring machine was truncated, and the download route the workspace
+permits was unavailable at the time of the run. Its status is recorded as such
+in the bound summary, the per-crop rows carry null values for it, and nothing
+is imputed for it. A distinct learned quality score that would have required a
+further download was likewise omitted rather than substituted.
+
+\subsection{The initialisation ablation}
+
+The toy transformer was retrained under three initialisations with everything
+else fixed: the library's default construction, which is the arm behind the
+bound toy record; a standard transformer scheme applied to the same graph
+without any zeroing step; and that scheme plus exact zeroing of the adaptive
+normalisation gates and the final projection, which is the published
+recipe~\cite{peebles2023dit}. Each was trained at \InitSeeds{} seeds for
+\InitSteps{} steps on the same data, batch and learning rate as the bound run,
+and evaluated on the same \ToyN{} held-out pairs, giving \InitCells{} cells. An
+initialisation probe recorded, before training, whether each cell's gates were
+exactly zero.
+
+The predeclaration fixed the stall criterion before any cell ran: a cell
+stalls if its mean objective over the last ten steps is at least
+\InitThreshold{}, and a mode stalls if at least two of its three seeds do. Four
+reading rules were written in evaluation order, the first match to fire: no
+cell stalls; every cell stalls; the default stalls and at least one alternative
+escapes; anything else. Restored fidelity against the degraded input is
+reported per cell but does not enter the rule, and no cell beyond the nine was
+to be added whatever the outcome. The frozen sources were re-hashed after the
+run and match; the repository head advanced during the run because of
+unrelated commits, which the receipt records, and the code hash stamped in
+every cell is identical. The default cell at seed zero is the bound
+construction at the bound seed, and the figure code stops if it fails to
+reproduce the bound objective and fidelity within the printed precision.
 
 The scored means and the memory census are two populations, not one union. Let
 \(\mathcal{U}\) be the candidate input pool. The displayed estimator is the
@@ -160,16 +246,17 @@ rather than against the live path. The check is what makes the census usable;
 without the retained snapshot the counts would be unverifiable, and the paper
 reports the near miss rather than passing over it.
 
-\subsection{What is deliberately not computed}
+\subsection{The boundary of what is computed}
 
-No perceptual measure is computed. No value is imputed for the \CensusRan{}
-outputs of the earlier attempt, which have no reference images on disk; the
+The perceptual computation is the single endpoint described above, and the
+secondary backbone the protocol named is reported as not computed rather than
+estimated. The \CensusRan{} outputs of the earlier attempt enter only as a
+count: they have no reference images on disk, so they carry no value, and the
 build stops if any of them ever acquires one, because their absence is the
-reason those outputs cannot be scored. The full-length reference comparison this
-line of work would eventually be measured against was never produced; its recorded
-status is \PrimaryTier{}, and that of the comparison against the strongest published
-method which would follow it is \SotaTier{}. Completing the subset changes
-neither, and this paper does not present the
-subset as an approximation of the full comparison. The scored \SubsetN{} crops
-are the published crop128 protocol; the memory skip belongs to the earlier
-census, not to that protocol.
+reason those outputs cannot be scored. The two larger comparisons this line of
+work planned stay at their recorded status --- \PrimaryTier{} for the
+full-length reference comparison and \SotaTier{} for the comparison against the
+strongest published method that would follow it --- and the subset is reported
+as the subset, with completing it leaving both where they were. The scored
+\SubsetN{} crops are the published crop128 protocol; the memory skip belongs to
+the earlier census.

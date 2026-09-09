@@ -25,6 +25,7 @@ dir.create(file.path("figs", "out"), showWarnings = FALSE, recursive = TRUE)
 
 manifest <- load_manifest()
 read_bound <- evidence_reader(manifest, find_repo_root())
+read_bound_lines <- evidence_lines_reader(manifest, find_repo_root())
 
 toy <- read_bound("E-TOY")
 longer <- read_bound("E-LONGER")
@@ -49,6 +50,23 @@ orphans <- read_bound("E-ORPHANS")
 
 tier_primary <- read_bound("E-PRIMARY")
 tier_sota <- read_bound("E-SOTA")
+
+# The two predeclared 2026-09-09 results. The perceptual pass scores a fresh
+# local sample of the released model on the same crops; the ablation retrains
+# the toy transformer under three initialisations. Both are read with their
+# predeclarations so the checks below can hold the result to the rule that was
+# frozen before it existed.
+perc_predecl <- read_bound("E-PERCEPTUAL-PREDECL")
+perc_amend <- read_bound("E-PERCEPTUAL-AMEND")
+perc <- read_bound("E-PERCEPTUAL")
+perc_rows <- read_bound_lines("E-PERCEPTUAL-RAW")
+perc_receipt <- read_bound("E-PERCEPTUAL-RECEIPT")
+perc_prov <- read_bound("E-PERCEPTUAL-PROVENANCE")
+
+init_predecl <- read_bound("E-INIT-PREDECL")
+init_sum <- read_bound("E-INIT")
+init_analysis <- read_bound("E-INIT-ANALYSIS")
+init_receipt <- read_bound("E-INIT-RECEIPT")
 
 ## ---------------------------------------------------------------------------
 ## Checks that must hold before anything is drawn. Each one is a sentence the
@@ -254,13 +272,210 @@ if (nrow(metric_effects) != 4L || any(metric_effects$n != SUBSET_N)) {
 }
 
 ## ---------------------------------------------------------------------------
+## The perceptual pass. Every sentence the manuscript makes about it is held
+## here to the predeclaration, to the per-crop rows and to the bound fidelity
+## record, so the reversal cannot survive any of them changing.
+## ---------------------------------------------------------------------------
+
+anchor <- perc$anchor_check
+lp <- perc$primary_lpips_alex
+
+# The perceptual pass scored a fresh sample of the released model, not the
+# pixel set behind the bound fidelity table. The predeclared anchor rule says
+# when that sample may be read alongside the bound ranking: its mean fidelity
+# within half a decibel of the bound record, and losing to bicubic on at least
+# ninety crops. Both halves are re-evaluated here rather than trusted.
+if (!identical(perc$anchor_result, "PASS") || !isTRUE(anchor$passed)) {
+  stop("the perceptual pass records its fidelity anchor as failed; the reversal may not be read alongside the bound ranking")
+}
+if (!isTRUE(all.equal(anchor$bound_rgb_psnr_mean, mean(crops$dit_psnr)))) {
+  stop("the perceptual pass anchored to a fidelity mean that is not the bound record's")
+}
+ANCHOR_DELTA <- anchor$local_rgb_psnr_mean - anchor$bound_rgb_psnr_mean
+if (!isTRUE(all.equal(ANCHOR_DELTA, anchor$delta_mean_local_minus_bound_db))) {
+  stop("the recorded anchor shift is not the difference of the two means it names")
+}
+if (abs(ANCHOR_DELTA) > 0.5) stop("fidelity anchor: the fresh sample is more than half a decibel from the bound record")
+if (anchor$local_losses_vs_bicubic_rgb_psnr < 90) stop("fidelity anchor: the fresh sample loses to bicubic on fewer than ninety crops")
+
+# The per-crop rows are the record; the summary must restate them.
+if (nrow(perc_rows) != SUBSET_N || !identical(as.integer(lp$sign_test$n), SUBSET_N)) {
+  stop("the perceptual pass does not cover the same number of crops as the bound subset")
+}
+if (!setequal(perc_rows$crop, crops$stem)) {
+  stop("the perceptual pass scored different crops from the bound fidelity rows")
+}
+perc_rows <- perc_rows[match(crops$stem, perc_rows$crop), ]
+if (any(abs(perc_rows$`rgb_psnr_dit_bound_E-DIT` - crops$dit_psnr) > 1e-9) ||
+    any(abs(perc_rows$rgb_psnr_bicubic - crops$bicubic_psnr) > 1e-9)) {
+  stop("the perceptual pass carries bound fidelity values that do not match the bound rows")
+}
+perc_rows$d_lpips <- perc_rows$lpips_alex_bicubic - perc_rows$lpips_alex_dit
+if (any(abs(perc_rows$d_lpips - perc_rows$delta_lpips_alex_bicubic_minus_dit) > 1e-9)) {
+  stop("the recorded perceptual difference is not bicubic minus the released model")
+}
+perc_rows$d_psnr_local <- perc_rows$rgb_psnr_dit_local - perc_rows$rgb_psnr_bicubic
+if (any(abs(perc_rows$d_psnr_local - perc_rows$delta_rgb_psnr_dit_minus_bicubic) > 1e-9)) {
+  stop("the recorded local fidelity difference is not the released model minus bicubic")
+}
+assert_recorded_mean(perc_rows$lpips_alex_dit, lp$dit_mean, "perceptual, released model")
+assert_recorded_mean(perc_rows$lpips_alex_bicubic, lp$bicubic_mean, "perceptual, bicubic")
+assert_recorded_mean(perc_rows$d_lpips, lp$mean_delta, "perceptual, paired difference")
+assert_recorded_mean(perc_rows$rgb_psnr_dit_local, anchor$local_rgb_psnr_mean, "anchor, local fidelity")
+if (sum(perc_rows$d_psnr_local < 0) != anchor$local_losses_vs_bicubic_rgb_psnr) {
+  stop("the recorded anchor loss count does not come from the per-crop rows")
+}
+
+lpips_wins <- win_counts(perc_rows$lpips_alex_bicubic, perc_rows$lpips_alex_dit)
+# win_counts is oriented as "first argument larger"; a larger bicubic distance is
+# a win for the released model, which is the orientation the record uses.
+if (!identical(as.integer(lpips_wins$wins), as.integer(lp$dit_wins)) ||
+    !identical(as.integer(lpips_wins$losses), as.integer(lp$bicubic_wins)) ||
+    !identical(as.integer(lpips_wins$ties), as.integer(lp$ties))) {
+  stop("the recorded perceptual win and loss counts do not come from the per-crop rows")
+}
+lpips_sign <- sign_test(perc_rows$d_lpips)
+if (abs(lpips_sign$p - lp$sign_test$p_two_sided) > 1e-6 * lp$sign_test$p_two_sided) {
+  stop("the recorded sign test does not reproduce from the per-crop rows")
+}
+if (lp$dit_wins <= SUBSET_N / 2 || lpips_sign$p >= 1e-10) {
+  stop("the perceptual rows no longer show the reversal the manuscript reports")
+}
+if (!identical(perc$thesis_case, "REVERSAL")) {
+  stop("the perceptual pass records an outcome other than the reversal the manuscript is written for")
+}
+lpips_ci <- bootstrap_mean(perc_rows$d_lpips)
+if (!(lpips_ci[1] <= lp$mean_delta && lp$mean_delta <= lpips_ci[2])) {
+  stop("perceptual bootstrap interval does not contain its paired mean")
+}
+for (name in names(lp$camera_strata)) {
+  rows <- perc_rows[perc_rows$camera == name, ]
+  if (sum(rows$d_lpips > 0) != lp$camera_strata[[name]]$dit_wins) {
+    stop(name, ": the recorded perceptual stratum count does not come from the per-crop rows")
+  }
+}
+
+# The quadrants pair each crop's fidelity side with its perceptual side. They
+# are recounted from the rows and must add up to the whole subset.
+quad <- list(
+  loss_win = sum(perc_rows$d_psnr_local < 0 & perc_rows$d_lpips > 0),
+  loss_loss = sum(perc_rows$d_psnr_local < 0 & perc_rows$d_lpips < 0),
+  win_win = sum(perc_rows$d_psnr_local > 0 & perc_rows$d_lpips > 0),
+  win_loss = sum(perc_rows$d_psnr_local > 0 & perc_rows$d_lpips < 0)
+)
+recorded_quad <- perc$psnr_vs_perceptual_quadrants$lpips_alex
+if (quad$loss_win != recorded_quad$psnr_loss_perceptual_win ||
+    quad$loss_loss != recorded_quad$psnr_loss_perceptual_loss ||
+    quad$win_win != recorded_quad$psnr_win_perceptual_win ||
+    quad$win_loss != recorded_quad$psnr_win_perceptual_loss ||
+    sum(unlist(quad)) != SUBSET_N) {
+  stop("the recorded quadrant counts do not come from the per-crop rows")
+}
+
+# Provenance the manuscript discloses. The amendment was made after a
+# provisional run had been seen; the formal run must reproduce it, and the
+# secondary backbone must be recorded as not computed rather than quietly
+# missing.
+if (!isTRUE(perc$formal_equals_provisional) ||
+    !isTRUE(perc$cross_check_vs_provisional$formal_equals_provisional)) {
+  stop("the formal perceptual run does not reproduce the provisional run it was amended after")
+}
+if (!isTRUE(perc_amend$provisional_result_seen_before_amendment) ||
+    !isTRUE(perc_amend$endpoints_unchanged) ||
+    !isTRUE(perc_amend$amends$sha256 == perc$predeclaration$sha256) ||
+    !identical(perc_receipt$compute_script$sha256, perc_amend$new_script_sha256)) {
+  stop("the amendment record, the summary and the receipt do not describe one run")
+}
+if (!startsWith(perc$secondary_status, "NOT_COMPUTED")) {
+  stop("the secondary perceptual backbone is recorded as something other than not computed; the methods text is stale")
+}
+if (any(!is.na(perc_rows$lpips_vgg_dit)) || any(!is.na(perc_rows$lpips_vgg_bicubic))) {
+  stop("per-crop rows carry a secondary perceptual value the summary says was not computed")
+}
+LPIPS_SEED <- perc_prov$dit4sr_seed20260909$inference$seed
+if (!is.numeric(LPIPS_SEED) || length(LPIPS_SEED) != 1L) stop("the sampling seed of the fresh sample is not recorded")
+if (perc_prov$dit4sr_seed20260909$n != SUBSET_N || length(perc_receipt$downloads_performed) != 0L) {
+  stop("the fresh sample does not cover the subset, or the run downloaded something the receipt should list")
+}
+if (!isTRUE(perc$predeclaration$declared_utc < perc$computed_utc) ||
+    !isTRUE(perc_amend$amended_utc < perc$computed_utc)) {
+  stop("the perceptual predeclaration or its amendment postdates the computation")
+}
+
+## ---------------------------------------------------------------------------
+## The initialisation ablation. Nine cells; the reading rule that fired is
+## re-derived from the cells under the predeclared threshold.
+## ---------------------------------------------------------------------------
+
+init_cells <- init_sum$cells
+INIT_THRESHOLD <- init_sum$threshold_mean_last10_loss
+INIT_MODES <- c("library_default", "dit_standard", "dit_zero")
+if (nrow(init_cells) != init_predecl$design$cells || nrow(init_cells) != 9L ||
+    !setequal(unique(init_cells$mode), INIT_MODES) ||
+    !identical(as.integer(init_predecl$design$training$steps), 50L)) {
+  stop("the initialisation ablation does not hold the nine predeclared cells")
+}
+if (!identical(init_receipt$rule_fired, init_sum$rule_fired) ||
+    !identical(init_receipt$predeclaration_sha256, init_sum$predeclaration$sha256) ||
+    !isTRUE(init_receipt$frozen_sources_all_match) ||
+    !isTRUE(init_receipt$predeclaration_mtime_before_all_outputs) ||
+    !identical(as.integer(init_receipt$cells_ok), 9L)) {
+  stop("the ablation receipt, summary and predeclaration do not describe one run")
+}
+if (any((init_cells$mean_last10_loss >= INIT_THRESHOLD) != init_cells$stalls)) {
+  stop("a cell's recorded stall flag disagrees with the predeclared threshold")
+}
+stalls_by_mode <- tapply(init_cells$stalls, init_cells$mode, sum)
+seeds_by_mode <- tapply(init_cells$stalls, init_cells$mode, length)
+if (any(seeds_by_mode != 3L)) stop("a mode does not hold three seeds")
+for (m in INIT_MODES) {
+  if (stalls_by_mode[[m]] != init_sum$modes[[m]]$seeds_stalling) {
+    stop(m, ": the recorded number of stalling seeds does not come from the cells")
+  }
+}
+if (stalls_by_mode[["library_default"]] != 3L || stalls_by_mode[["dit_standard"]] != 3L ||
+    stalls_by_mode[["dit_zero"]] != 0L) {
+  stop("the ablation cells no longer show the pattern the manuscript reports: default and standard stall, zero-gated escapes")
+}
+if (!identical(init_sum$rule_fired, "R1_INIT_DEPENDENT")) {
+  stop("the ablation fired a reading rule other than the one the manuscript is written for")
+}
+# The predeclared attribution being tested names zero-initialised gates. The arm
+# that carries exactly-zero gates must be the one recorded as such.
+zero_probe <- tapply(init_cells$zero_target_all_exact_zero, init_cells$mode, all)
+if (!isTRUE(zero_probe[["dit_zero"]]) || isTRUE(zero_probe[["library_default"]]) ||
+    isTRUE(zero_probe[["dit_standard"]])) {
+  stop("the initialisation probe does not place exact-zero gates on the arm the manuscript says carries them")
+}
+if (any(!init_cells$restored_below_identity)) {
+  stop("an ablation cell reached the degraded input; the trivial-arm sentence about the toy is stale")
+}
+IDENTITY_PSNR <- unique(init_cells$degraded_input_psnr_mean)
+if (length(IDENTITY_PSNR) != 1L || !isTRUE(all.equal(IDENTITY_PSNR, TOY_REFERENCE))) {
+  stop("the ablation scored against a degraded input that is not the bound toy reference")
+}
+# library_default seed 0 is the bound toy construction; the record must
+# reproduce it within the printed precision, or the toy sentences are stale.
+repro <- init_cells[init_cells$mode == "library_default" & init_cells$seed == 0, ]
+if (abs(repro$mean_last10_loss - toy_rows$last10_loss[4]) > 5e-4 ||
+    abs(repro$final_loss - toy_rows$final_loss[4]) > 5e-4 ||
+    abs(repro$restored_psnr_mean - toy_rows$psnr[4]) > 0.05) {
+  stop("the ablation's default cell does not reproduce the bound toy record")
+}
+init_mode_loss <- tapply(init_cells$mean_last10_loss, init_cells$mode, mean)
+init_mode_psnr <- tapply(init_cells$restored_psnr_mean, init_cells$mode, mean)
+stalled_cells <- init_cells[init_cells$stalls, ]
+escaped_cells <- init_cells[!init_cells$stalls, ]
+
+## ---------------------------------------------------------------------------
 ## Figures. Each panel reads the objects above and writes one file.
 ## ---------------------------------------------------------------------------
 
 for (unit in c("fig0_three_scales.R", "fig1_toy.R", "fig2_budget.R",
                "fig3_subset.R", "fig4_paired.R", "fig5_ceiling.R",
                "fig6_metric_consistency.R", "fig7_camera_sensitivity.R",
-               "fig9_crop_camera_metrics.R")) {
+               "fig9_crop_camera_metrics.R", "fig10_perceptual_reversal.R",
+               "fig11_init_ablation.R")) {
   source(file.path("figs", "panels", unit))
 }
 
@@ -360,7 +575,50 @@ write_generated(c(
   macro("EvalReferences", eval_now$gt$n_gt_matched),
   macro("PrimaryTier", tier_primary$status),
   macro("SotaTier", tier_sota$status),
-  macro("PerceptualState", if (isTRUE(dit$lpips$computed)) "computed" else "not computed"),
+
+  # The perceptual pass on the same crops, and the fidelity anchor that lets it
+  # be read alongside the bound ranking.
+  macro("LpipsWins", lp$dit_wins),
+  macro("LpipsLosses", lp$bicubic_wins),
+  macro("LpipsTies", lp$ties),
+  macro("LpipsSignP", sci(lp$sign_test$p_two_sided)),
+  macro("LpipsDit", fmt(lp$dit_mean, 3)),
+  macro("LpipsBicubic", fmt(lp$bicubic_mean, 3)),
+  macro("LpipsDelta", fmt(lp$mean_delta, 3)),
+  macro("LpipsDeltaLo", fmt(lpips_ci[1], 3)),
+  macro("LpipsDeltaHi", fmt(lpips_ci[2], 3)),
+  macro("LpipsCanonWins", lp$camera_strata$Canon$dit_wins),
+  macro("LpipsNikonWins", lp$camera_strata$Nikon$dit_wins),
+  macro("QuadLossWin", quad$loss_win),
+  macro("QuadLossLoss", quad$loss_loss),
+  macro("QuadWinWin", quad$win_win),
+  macro("QuadWinLoss", quad$win_loss),
+  macro("AnchorDeltaDb", fmt(abs(ANCHOR_DELTA), 2)),
+  macro("AnchorLocalPsnr", fmt(anchor$local_rgb_psnr_mean)),
+  macro("AnchorLosses", anchor$local_losses_vs_bicubic_rgb_psnr),
+  macro("PsnrLossesLocal", anchor$local_losses_vs_bicubic_rgb_psnr),
+  macro("PsnrWinsLocal", anchor$local_wins_vs_bicubic_rgb_psnr),
+  macro("GapBicubicLocal", signed(anchor$local_mean_delta_vs_bicubic_rgb_psnr)),
+  macro("LpipsSeed", format(LPIPS_SEED, scientific = FALSE)),
+  macro("LpipsSteps", perc_prov$dit4sr_seed20260909$inference$num_inference_steps),
+
+  # The initialisation ablation on the toy transformer.
+  macro("InitCells", nrow(init_cells)),
+  macro("InitSeeds", length(unique(init_cells$seed))),
+  macro("InitSteps", init_predecl$design$training$steps),
+  macro("InitThreshold", fmt(INIT_THRESHOLD, 2)),
+  macro("InitDefaultStall", stalls_by_mode[["library_default"]]),
+  macro("InitStandardStall", stalls_by_mode[["dit_standard"]]),
+  macro("InitZeroEscape", seeds_by_mode[["dit_zero"]] - stalls_by_mode[["dit_zero"]]),
+  macro("InitZeroLoss", fmt(init_mode_loss[["dit_zero"]], 2)),
+  macro("InitDefaultLoss", fmt(init_mode_loss[["library_default"]], 2)),
+  macro("InitStandardLoss", fmt(init_mode_loss[["dit_standard"]], 2)),
+  macro("InitStallLoss", fmt(mean(stalled_cells$mean_last10_loss), 2)),
+  macro("InitZeroPsnr", fmt(init_mode_psnr[["dit_zero"]], 1)),
+  macro("InitStallPsnr", fmt(mean(stalled_cells$restored_psnr_mean), 1)),
+  macro("InitZeroGain", fmt(init_mode_psnr[["dit_zero"]] - mean(stalled_cells$restored_psnr_mean), 1)),
+  macro("IdentityPsnr", fmt(IDENTITY_PSNR)),
+
   macro("NEvidence", nrow(manifest$entries)),
   macro("EvidenceBytes", format(sum(manifest$entries$bytes), big.mark = ","))
 ), "generated_numbers.tex")
@@ -424,5 +682,5 @@ write_generated(c(
 ## The manifest itself, so the evidence discipline can be checked rather than believed.
 
 
-message("wrote 9 figures to figs/out and 5 generated tex files to tex/")
+message("wrote 11 figures to figs/out and 5 generated tex files to tex/")
 unlink(file.path("tex", "generated_table_evidence.tex"), force = TRUE)

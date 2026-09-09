@@ -53,3 +53,11 @@ checks.
 | `data/e-sizes/complement_dit4sr_lq_size_histogram.json` | 2 | 0 | `564db0f199545884…` | `30695b5cd548443a…` |
 | `data/e-orphans/complement_dit4sr_13stem_identity.json` | 16 | 0 | `9ae6a47f8f0e5a74…` | `5d4bfb206a23f8dc…` |
 | `data/e-primary/paper_primary.json` | 1 | 0 | `4e43b7e0a78cf196…` | `97e416747aa78a65…` |
+| `data/e-perceptual-predecl/PREDECLARATION.json` | 5 | 0 | `cbf7789c3701c634…` | `8a2cafcf89c4969f…` |
+| `data/e-perceptual-amend/PREDECLARATION_AMENDMENT_1.json` | 2 | 2 | `ebbd6f60d7b88166…` | `4a398c7a4604b789…` |
+| `data/e-perceptual/perceptual_summary.json` | 1 | 4 | `22202fd033acc2e9…` | `b7182e5c4a84cece…` |
+| `data/e-perceptual-receipt/RECEIPT.json` | 7 | 0 | `b099f394e5ced1ea…` | `eae7ea63a7e76711…` |
+| `data/e-perceptual-provenance/PROVENANCE.json` | 8 | 1 | `1dbd791c447807fc…` | `d8af0402fde94773…` |
+| `data/e-init-predecl/PREDECLARATION.json` | 20 | 0 | `6b28545954179bb8…` | `2d09abb6bfe534fb…` |
+| `data/e-init/init_summary.json` | 0 | 2 | `e70d43f9e34a2690…` | `fb54927b93c48d7b…` |
+| `data/e-init-receipt/RECEIPT.json` | 13 | 2 | `34f24b6859f72a79…` | `0ec809ed0df89017…` |

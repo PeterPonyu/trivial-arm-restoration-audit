@@ -1,0 +1,172 @@
+{
+  "aggregates": {},
+  "cell_count": 9,
+  "code_manifest_sha256": "eb25f545c308c4b24c882dc5f2167c828dcfc7e66a5ebaf7a9fcb97c91eee3d6",
+  "data_manifest_sha256": "e402faef1f31e299e12e65d71e618f1310709dde034b310bca25a52e7d46a653",
+  "gates": {
+    "cell_completeness": true,
+    "common_parameter_count": true,
+    "initialization_separation": true,
+    "receipt_files": {
+      "cell_results.jsonl": true,
+      "manifest.json": true,
+      "stdout.log": true,
+      "summary.json": true
+    },
+    "source_data_metric_stable": false
+  },
+  "initialization": {
+    "all_canonical_modes_present": true,
+    "mode_checks": {
+      "dit_standard": {
+        "final_modulation_abs_max": {
+          "max": 0.06809486448764801,
+          "min": 0.059560924768447876
+        },
+        "gate_abs_max": {
+          "max": 0.06403139233589172,
+          "min": 0.04966610670089722
+        },
+        "initial_output_abs_max": {
+          "max": 2.588651180267334,
+          "min": 2.39681339263916
+        },
+        "n_cells": 3,
+        "state_fingerprints_unique": true,
+        "zero_target_all_exact_zero": false
+      },
+      "dit_zero": {
+        "final_modulation_abs_max": {
+          "max": 0.0,
+          "min": 0.0
+        },
+        "gate_abs_max": {
+          "max": 0.0,
+          "min": 0.0
+        },
+        "initial_output_abs_max": {
+          "max": 0.0,
+          "min": 0.0
+        },
+        "n_cells": 3,
+        "state_fingerprints_unique": true,
+        "zero_target_all_exact_zero": true
+      },
+      "library_default": {
+        "final_modulation_abs_max": {
+          "max": 1.2206376791000366,
+          "min": 1.0835105180740356
+        },
+        "gate_abs_max": {
+          "max": 1.354088544845581,
+          "min": 1.151658296585083
+        },
+        "initial_output_abs_max": {
+          "max": 1.6130962371826172,
+          "min": 1.2584788799285889
+        },
+        "n_cells": 3,
+        "state_fingerprints_unique": true,
+        "zero_target_all_exact_zero": false
+      }
+    },
+    "required_fields_present": true
+  },
+  "interpretation_boundary": "Even a complete toy run is conditional and cannot support a general architecture claim.",
+  "issues": [
+    "cell field drift: source_commit has 3 values",
+    "cell field disagrees with manifest: source_commit"
+  ],
+  "kill_rules": {
+    "crosses_identity": null,
+    "decision": "OPEN",
+    "seed_ordering_changes": null,
+    "stays_below_identity": null,
+    "training_interpretation_available": false
+  },
+  "manifest_sha256": "61e34e328abc30a3762ec8e8cb4c6226e1a591354b25fc98145d2df4731583a4",
+  "modes": [
+    "library_default",
+    "dit_standard",
+    "dit_zero"
+  ],
+  "n_params": [
+    17961024
+  ],
+  "official_r": false,
+  "ordering": {
+    "distinct_orders": [
+      [
+        "dit_zero",
+        "dit_standard",
+        "library_default"
+      ],
+      [
+        "dit_zero",
+        "library_default",
+        "dit_standard"
+      ],
+      [
+        "dit_zero",
+        "library_default",
+        "dit_standard"
+      ]
+    ],
+    "metric": "restored_psnr_mean",
+    "n_distinct_orders": 2,
+    "per_seed": {
+      "0": {
+        "descending_order": [
+          "dit_zero",
+          "dit_standard",
+          "library_default"
+        ],
+        "values": {
+          "dit_standard": 6.558933467862063,
+          "dit_zero": 9.56389741184972,
+          "library_default": 6.558659160876397
+        }
+      },
+      "1": {
+        "descending_order": [
+          "dit_zero",
+          "library_default",
+          "dit_standard"
+        ],
+        "values": {
+          "dit_standard": 6.569055252585715,
+          "dit_zero": 9.873997572763662,
+          "library_default": 6.592401289568289
+        }
+      },
+      "2": {
+        "descending_order": [
+          "dit_zero",
+          "library_default",
+          "dit_standard"
+        ],
+        "values": {
+          "dit_standard": 6.549666672312908,
+          "dit_zero": 9.761944235080223,
+          "library_default": 6.557839468291301
+        }
+      }
+    }
+  },
+  "paper_promotion": false,
+  "run_dir": "results/init_ablation_20260909/run",
+  "run_id": "init-ablation-20260909",
+  "schema": "005.init-ablation.analysis.v1",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "source_commit": "bca9ca695ef29a1d4be1cad7bb326eaf7085991a",
+  "status": "BLOCKED",
+  "status_counts": {
+    "ok": 9
+  },
+  "summary_sha256": "4063c8f163af6b218fb2f09827ff6573d050af2a2952e83469e5c8092e1a76c7",
+  "warnings": []
+}

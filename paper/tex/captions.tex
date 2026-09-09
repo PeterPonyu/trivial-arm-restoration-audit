@@ -1,3 +1,9 @@
+%% Draft-only owner placeholder (ruling R15, 2026-09-09). Prints ONLY when the
+%% build defines \DRAFTTODO (e.g. pdflatex "\def\DRAFTTODO{1}\input{main}");
+%% every packet build leaves it undefined, so no unconfirmed declaration text
+%% reaches a PDF. The owner replaces each use with the confirmed sentence.
+\providecommand{\ownertodo}[1]{\ifdefined\DRAFTTODO[TODO-OWNER: #1]\fi}
+
 %% Self-contained captions. No cross-references, no section numbers: each
 %% caption must be readable on its own if the figure is lifted out.
 
@@ -10,8 +16,10 @@ architectures are below doing nothing. The Longer-budget panel restates the
 longer budget: the objective falls and fidelity falls with it to \ToyLong{},
 still below the untouched input. The Crop-128 panel restates the measured
 subset: the released model is behind bicubic on \LossesBicubic{} of
-\SubsetN{} crops, by \GapBicubicAbs{} decibels on average. No panel adds a
-perceptual endpoint or an official ground-truth score.%
+\SubsetN{} crops, by \GapBicubicAbs{} decibels on average, on peak
+signal-to-noise ratio. All three panels are fidelity readouts; the perceptual
+endpoint on which the subset ranking reverses is drawn on its own figure, and
+no panel adds an official ground-truth score.%
 }
 
 \newcommand{\CapToy}{%
@@ -28,7 +36,12 @@ comparison between the two architectures: the shortfall of the best of them is
 \ToyTransLoss{} at the last step, against a mean of \ToyTransLastTen{} over the
 last ten steps and \ToyConvLoss{} for the convolutional arm at the same step
 count: it did not fall, and a denoising objective that stays at unity is what a
-network contributing nothing to its own residual stream produces.%
+network whose output does not depend on its input produces. The stall
+reproduces in \InitDefaultStall{} of \InitSeeds{} seeds of the same construction
+in a separate predeclared ablation, which also shows that the one
+initialisation that zeroes the network's residual gates exactly is the one that
+trains; the earlier attribution of the stall to zero-initialised gates is
+withdrawn.%
 }
 
 \newcommand{\CapBudget}{%
@@ -57,10 +70,12 @@ the same input, scored by the same metric pass over the same crops. The diagonal
 is equality. Points below it are crops on which the interpolation is closer to
 the reference. Symbols distinguish the two camera groups the subset is drawn
 from, in equal numbers. Peak signal-to-noise ratio measures distance from the
-reference and not perceptual quality; no perceptual measure was computed for
-these crops, so the panel reports which output is closer to the reference and
-not which is better. Filled and open symbols identify the two camera groups;
-the diagonal is the pre-specified equality reference, not a fitted trend.%
+reference and not perceptual quality, so the panel reports which output is
+closer to the reference on that measure and not which is better; on a learned
+perceptual distance scored on the same crops the order reverses, and that
+endpoint is drawn on its own figure. Filled and open symbols identify the two
+camera groups; the diagonal is the pre-specified equality reference, not a
+fitted trend.%
 }
 
 \newcommand{\CapPaired}{%
@@ -119,7 +134,8 @@ labelled SSIM keeps RGB and luma structural similarity on its native unitless
 scale. Negative
 values mean that the model is farther from the reference under the displayed
 fidelity measure. The facets deliberately use separate axes, so their
-magnitudes are not compared across units; no perceptual-quality claim is made.%
+magnitudes are not compared across units; all four are distortion measures,
+and the perceptual endpoint is drawn on its own figure.%
 }
 
 \newcommand{\CapCameraSensitivity}{%
@@ -142,10 +158,11 @@ scene-level or full-census uncertainty. Panel C keeps the earlier full-input
 census visible: the early \CensusTotal{}-input attempt yielded \CensusRan{} runs
 and \CensusSkipped{} skips, whereas the separate crop128 protocol scored
 \SubsetN{} crops with references. PSNR and SSIM measure fidelity to a
-reference; no perceptual-quality endpoint is claimed or added. The metric rows
-are recomputed from the bound E-DIT and E-BICUBIC crop rows; E-STRATA is used
-for the recorded camera counts and means, and the census is bound by
-E-EVAL-EARLIER and E-SKIP.}
+reference; this figure adds no perceptual endpoint, which is drawn on its own
+figure. The metric rows
+are recomputed from the bound DiT and bicubic per-crop score files; the bound
+camera-stratum record supplies the recorded camera counts and means, and the
+census is bound by the earlier evaluation and skip records.}
 
 \newcommand{\CapToyTable}{%
 The toy-scale arms as their own training records describe them. Parameter
@@ -169,8 +186,55 @@ colour image and again over the luma channel with a four-pixel border removed.
 The two final rows are paired differences, computed crop by crop and then
 averaged, so a negative value means the model was further from the reference than
 the interpolation on average. All four measures compare an output with its
-reference; none of them measures perceptual quality, and no perceptual measure
-was computed for these crops.%
+reference and none of them measures perceptual quality; the learned perceptual
+distance scored on the same crops, on which the order reverses, is reported in
+its own figure rather than in this table because it was scored on a fresh
+sample of the model rather than on the pixel set behind these rows.%
+}
+
+\newcommand{\CapPerceptualReversal}{%
+The same crops on both axes of the perception--distortion plane. Each point is
+one of the \SubsetN{} crops of the published RealSR crop128 protocol. The
+horizontal position is the peak signal-to-noise ratio of a fresh sample of the
+released diffusion restoration model, drawn at sampling seed \LpipsSeed{}, minus
+that of bicubic upsampling of the same low-resolution input, so negative values
+are crops on which the interpolation is closer to the reference; the model
+loses on \PsnrLossesLocal{} of \SubsetN{}, and the fresh sample's mean sits
+\AnchorDeltaDb{} decibels from the bound fidelity record under a predeclared
+anchor rule. The vertical position is the learned perceptual distance (LPIPS,
+AlexNet backbone, lower is closer) of bicubic minus that of the model on the
+same crop and reference, so positive values are crops on which the model is
+perceptually closer; the model wins on \LpipsWins{} of \SubsetN{}, with
+\LpipsTies{} ties and an exact sign test of \LpipsSignP{}. The two rules are
+equality on each axis and divide the crops into four quadrants, whose counts are
+printed: on \QuadLossWin{} crops the interpolation is closer on fidelity and
+the model is closer perceptually, and the two endpoints agree on only
+\QuadLossLoss{} plus \QuadWinWin{} crops. Filled and open symbols are the two
+camera groups. Neither axis is a verdict on the model; together they are the
+trade-off, observed.%
+}
+
+\newcommand{\CapInitAblation}{%
+The toy transformer's training objective under three initialisations at three
+seeds each. Every cell is the same network, data, batch, learning rate and
+\InitSteps{}-step budget as the bound toy run; only the initialisation and the
+seed change. The three facets are the library's default construction, whose
+gates are not zero and which is the arm behind the bound record; a standard
+transformer scheme without any zeroing step, whose gates are not zero; and that
+scheme plus exact zeroing of the adaptive-normalisation gates and final
+projection. Each line joins the three points the record holds for one seed: the
+mean objective over the first ten steps, the mean over the last ten, and the
+last step. The solid rule is unity, the value a denoising objective takes when
+the network's output does not depend on its input; the dashed rule is the
+predeclared stall threshold of \InitThreshold{} on the last-ten mean. The
+default stalls in \InitDefaultStall{} of \InitSeeds{} seeds and the standard
+scheme in \InitStandardStall{} of \InitSeeds{}; the zero-gated scheme escapes
+in \InitZeroEscape{} of \InitSeeds{}, to a last-ten mean of \InitZeroLoss{}
+against \InitStallLoss{} for the cells that stalled. All nine cells restore to
+below the degraded input at \IdentityPsnr{} decibels: \InitZeroPsnr{} for the
+arm that trained against \InitStallPsnr{} for the arms that did not. The panel
+supports a statement about this toy's initialisation and none about the
+architecture.%
 }
 
 \newcommand{\CapCensusTable}{%
