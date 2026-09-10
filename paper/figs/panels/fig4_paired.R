@@ -7,21 +7,36 @@
 ordered <- crops[order(crops$d_bicubic), ]
 ordered$rank <- seq_len(nrow(ordered))
 
+# The re-run band is a few hundredths of a decibel on an axis spanning more
+# than ten, so it is drawn in a saturated grey and named where it lies rather
+# than left to be found.
+band_label <- sprintf("re-run band \u00b1%.3f dB", noise$max_abs)
+mean_label <- typeset_minus(sprintf("mean %+.2f dB", mean(crops$d_bicubic)))
+
 spread <- ggplot(ordered, aes(x = rank, y = d_bicubic)) +
   annotate("rect", xmin = -Inf, xmax = Inf, ymin = -noise$max_abs, ymax = noise$max_abs,
-           fill = "grey65", alpha = 0.6) +
-  geom_hline(yintercept = 0, linewidth = 0.4, colour = "grey25") +
-  geom_hline(yintercept = mean(crops$d_bicubic), linewidth = 0.4, linetype = "22") +
-  geom_point(aes(shape = camera), size = 1.3, stroke = 0.4) +
-  scale_shape_manual(values = c(1, 3), name = "Source group") +
+           fill = "grey45", alpha = 0.9) +
+  geom_hline(yintercept = 0, linewidth = FIGURE_RULE_WIDTH, colour = FIGURE_RULE_COLOUR) +
+  geom_hline(yintercept = mean(crops$d_bicubic), linewidth = FIGURE_RULE_WIDTH,
+             linetype = FIGURE_THRESHOLD_LINETYPE, colour = FIGURE_RULE_COLOUR) +
+  annotate("text", x = 1, y = noise$max_abs, label = band_label, hjust = 0, vjust = -0.5,
+           size = FIGURE_ANNOTATION_SIZE, colour = "grey25", family = FIGURE_FONT_FAMILY) +
+  annotate("text", x = nrow(ordered), y = mean(crops$d_bicubic), label = mean_label,
+           hjust = 1, vjust = 1.5, size = FIGURE_ANNOTATION_SIZE, colour = "grey25",
+           family = FIGURE_FONT_FAMILY) +
+  geom_point(aes(shape = camera, colour = camera), size = 1.4, stroke = 0.5) +
+  scale_shape_manual(values = FIGURE_CAMERA_SHAPES, name = "Camera group") +
+  scale_colour_manual(values = FIGURE_CAMERA_COLOURS, name = "Camera group") +
+  scale_y_continuous(expand = expansion(mult = c(0.08, 0.14))) +
   labs(x = "Crops, ordered by paired difference",
-       y = "Published method minus bicubic (dB)",
-       subtitle = sprintf("n = %d crops; band = %.3f dB, method against itself",
-                          nrow(crops), noise$max_abs)) +
+       y = "Published method \u2212 bicubic (dB)",
+       subtitle = sprintf("n = %d crops; solid rule = equality, dashed rule = mean", nrow(crops))) +
   rtx_theme() +
-  theme(plot.subtitle = element_text(size = 7, colour = "grey25"),
-        legend.position = "bottom", legend.title = element_text(size = 7),
-        legend.text = element_text(size = 7), legend.key.size = unit(8, "pt"))
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.03, 0.97),
+        legend.justification = c(0, 1),
+        legend.background = element_blank(),
+        legend.direction = "horizontal")
 
 means <- rbind(
   data.frame(camera = "All crops", n = nrow(crops), mean_delta = mean(crops$d_bicubic),
@@ -31,20 +46,20 @@ means <- rbind(
 means$pos <- rev(seq_len(nrow(means)))
 
 forest <- ggplot(means, aes(x = mean_delta, y = pos)) +
-  geom_vline(xintercept = 0, linewidth = 0.4, colour = "grey25") +
+  geom_vline(xintercept = 0, linewidth = FIGURE_RULE_WIDTH, colour = FIGURE_RULE_COLOUR) +
   geom_errorbar(aes(xmin = lower, xmax = upper), orientation = "y",
-                width = 0.12, linewidth = 0.4) +
+                width = 0.12, linewidth = 0.45) +
   geom_point(size = 2.2) +
-  geom_text(aes(label = sprintf("%+.2f", mean_delta)), vjust = -1.1, size = 2.6) +
+  geom_text(aes(label = typeset_minus(sprintf("%+.2f", mean_delta))), vjust = -1.1,
+            size = FIGURE_VALUE_LABEL_SIZE) +
   scale_y_continuous(breaks = means$pos,
                      labels = sprintf("%s\n(n = %d)", means$camera, means$n),
                      limits = c(0.5, nrow(means) + 0.5), expand = c(0, 0)) +
   scale_x_continuous(limits = c(min(means$lower) - 0.6, 0.6)) +
   labs(x = "Mean paired difference (dB)", y = NULL,
-       subtitle = sprintf("95%% bootstrap interval; n = %d crops in each row", nrow(crops))) +
+       subtitle = "95% percentile bootstrap intervals over crops") +
   rtx_theme() +
-  theme(plot.subtitle = element_text(size = 7, colour = "grey25"),
-        axis.text.y = element_text(size = 7))
+  theme(axis.text.y = element_text(lineheight = 0.9))
 
 p <- patchwork::wrap_plots(panel_label(spread, "A"), panel_label(forest, "B"),
                            widths = c(1.35, 1))

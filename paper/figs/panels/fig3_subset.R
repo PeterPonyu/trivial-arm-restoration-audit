@@ -4,21 +4,28 @@
 
 lims <- range(c(crops$dit_psnr, crops$bicubic_psnr))
 pad <- 0.04 * diff(lims)
+axis_lim <- c(lims[1] - pad, lims[2] + pad)
 
-p <- ggplot(crops, aes(x = bicubic_psnr, y = dit_psnr, shape = camera)) +
-  geom_abline(slope = 1, intercept = 0, linewidth = 0.5, colour = "grey25") +
-  geom_point(size = 1.5, alpha = 0.85, stroke = 0.4) +
-  scale_shape_manual(values = c(16, 1)) +
-  coord_fixed(xlim = c(lims[1] - pad, lims[2] + pad),
-              ylim = c(lims[1] - pad, lims[2] + pad)) +
-  labs(x = "Bicubic upsampling (dB)", y = "Published method (dB)", shape = "Source group",
-       subtitle = sprintf("%d/%d paired crops below equality; PSNR only",
+p <- ggplot(crops, aes(x = bicubic_psnr, y = dit_psnr, shape = camera, colour = camera)) +
+  geom_abline(slope = 1, intercept = 0, linewidth = FIGURE_RULE_WIDTH, colour = FIGURE_RULE_COLOUR) +
+  annotate("text", x = axis_lim[2] - 0.3, y = axis_lim[2] - 0.3, label = "equality",
+           hjust = 1, vjust = -0.6, angle = 45, size = FIGURE_ANNOTATION_SIZE,
+           colour = FIGURE_RULE_COLOUR, family = FIGURE_FONT_FAMILY) +
+  annotate("text", x = axis_lim[2] - 0.3, y = axis_lim[1] + 0.3,
+           label = "below the diagonal:\nbicubic closer",
+           hjust = 1, vjust = 0, size = FIGURE_ANNOTATION_SIZE, lineheight = 0.92,
+           colour = "grey25", family = FIGURE_FONT_FAMILY) +
+  geom_point(size = 1.6, alpha = 0.9, stroke = 0.5) +
+  scale_shape_manual(values = FIGURE_CAMERA_SHAPES, name = "Camera group") +
+  scale_colour_manual(values = FIGURE_CAMERA_COLOURS, name = "Camera group") +
+  coord_fixed(xlim = axis_lim, ylim = axis_lim, expand = FALSE) +
+  labs(x = "Bicubic upsampling, RGB PSNR (dB)", y = "Published method, RGB PSNR (dB)",
+       subtitle = sprintf("%d of %d paired crops below equality; PSNR only",
                           wins_bicubic$losses, SUBSET_N)) +
   rtx_theme() +
-  theme(plot.subtitle = element_text(size = 7.5, colour = "grey25")) +
-  theme(legend.position = c(0.02, 0.98), legend.justification = c(0, 1),
-        legend.background = element_blank(), legend.title = element_text(size = 7),
-        legend.text = element_text(size = 7), legend.key.size = unit(9, "pt"),
-        plot.subtitle = element_text(size = 7.3, colour = "grey25"))
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.03, 0.97),
+        legend.justification = c(0, 1),
+        legend.background = element_rect(fill = "white", colour = NA))
 
-save_fig(p, "fig3_subset", width = 0.62 * FIGURE_TEXT_WIDTH_IN, height = 3.6)
+save_fig(p, "fig3_subset", width = 0.62 * FIGURE_TEXT_WIDTH_IN, height = 3.9)

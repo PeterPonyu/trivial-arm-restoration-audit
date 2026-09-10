@@ -218,23 +218,25 @@ trade-off, observed.%
 The toy transformer's training objective under three initialisations at three
 seeds each. Every cell is the same network, data, batch, learning rate and
 \InitSteps{}-step budget as the bound toy run; only the initialisation and the
-seed change. The three facets are the library's default construction, whose
-gates are not zero and which is the arm behind the bound record; a standard
-transformer scheme without any zeroing step, whose gates are not zero; and that
-scheme plus exact zeroing of the adaptive-normalisation gates and final
-projection. Each line joins the three points the record holds for one seed: the
-mean objective over the first ten steps, the mean over the last ten, and the
-last step. The solid rule is unity, the value a denoising objective takes when
-the network's output does not depend on its input; the dashed rule is the
-predeclared stall threshold of \InitThreshold{} on the last-ten mean. The
-default stalls in \InitDefaultStall{} of \InitSeeds{} seeds and the standard
-scheme in \InitStandardStall{} of \InitSeeds{}; the zero-gated scheme escapes
-in \InitZeroEscape{} of \InitSeeds{}, to a last-ten mean of \InitZeroLoss{}
-against \InitStallLoss{} for the cells that stalled. All nine cells restore to
-below the degraded input at \IdentityPsnr{} decibels: \InitZeroPsnr{} for the
-arm that trained against \InitStallPsnr{} for the arms that did not. The panel
-supports a statement about this toy's initialisation and none about the
-architecture.%
+seed change. Panel A is the training objective. Its three facets are the
+library's default construction, whose gates are not zero and which is the arm
+behind the bound record; a standard transformer scheme without any zeroing
+step, whose gates are not zero; and that scheme plus exact zeroing of the
+adaptive-normalisation gates and final projection. Each line joins the three
+points the record holds for one seed: the mean objective over the first ten
+steps, the mean over the last ten, and the last step. The solid rule is unity,
+the value a denoising objective takes when the network's output does not depend
+on its input; the dashed rule is the predeclared stall threshold of
+\InitThreshold{} on the last-ten mean. The default stalls in
+\InitDefaultStall{} of \InitSeeds{} seeds and the standard scheme in
+\InitStandardStall{} of \InitSeeds{}; the zero-gated scheme escapes in
+\InitZeroEscape{} of \InitSeeds{}, to a last-ten mean of \InitZeroLoss{}
+against \InitStallLoss{} for the cells that stalled. Panel B is the restored
+fidelity of the same nine cells against the degraded input left alone at
+\IdentityPsnr{} decibels: \InitZeroPsnr{} for the arm that trained against
+\InitStallPsnr{} for the arms that did not. Every cell sits below that input.
+The figure supports a statement about this toy's initialisation and none about
+the architecture.%
 }
 
 \newcommand{\CapCensusTable}{%

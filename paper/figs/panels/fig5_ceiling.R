@@ -41,43 +41,43 @@ attempts$share <- attempts$n / attempts$denom
 attempts$count_label <- sprintf("%d/%d\n(%.1f%%)", attempts$n, attempts$denom,
                                 100 * attempts$share)
 
-# A tiny first segment cannot hold a two-line label without touching the axis;
-# move only those labels just beyond their segment while retaining the same
-# stack coordinate.  Larger segments stay centred in their own area.
+# Segments are stacked in factor order from the axis outward
+# (position_stack(reverse = TRUE)), and the label positions below are computed
+# in that same order, so each label sits on the segment it counts.  A small
+# segment cannot hold a two-line label without touching its neighbours; those
+# labels are set just beyond the end of the bar instead, and a segment with no
+# inputs prints nothing but stays in the legend.
+attempts <- attempts[order(attempts$attempt, attempts$outcome), ]
 attempts$stack_start <- ave(attempts$n, attempts$attempt, FUN = function(x) cumsum(x) - x)
 attempts$stack_center <- attempts$stack_start + attempts$n / 2
-attempts$label_y <- ifelse(attempts$n > 0 & attempts$n < 10,
-                           attempts$stack_start + attempts$n + 1.3,
-                           attempts$stack_center)
-attempts$label_hjust <- ifelse(attempts$n > 0 & attempts$n < 10, 0, 0.5)
+small <- attempts$n > 0 & attempts$n < 30
+attempts$label_y <- ifelse(small, attempts$stack_start + attempts$n + 3, attempts$stack_center)
+attempts$label_hjust <- ifelse(small, 0, 0.5)
+attempts$label_colour <- ifelse(attempts$outcome == SCORED & !small, "white", "black")
 
-attempt_totals_frame <- data.frame(
-  attempt = factor(names(attempt_totals), levels = levels(attempts$attempt)),
-  n = as.numeric(attempt_totals),
-  label = sprintf("N = %d", as.numeric(attempt_totals)),
-  stringsAsFactors = FALSE
-)
+# Each attempt carries its denominator in its axis label, so no floating
+# "N =" text has to compete with the segment labels for the same space.
+attempt_axis_labels <- sprintf("%s\n(N = %d)", names(attempt_totals), as.integer(attempt_totals))
+names(attempt_axis_labels) <- names(attempt_totals)
 
 survival <- ggplot(attempts, aes(x = attempt, y = n, fill = outcome)) +
-  geom_col(width = 0.6, colour = "black", linewidth = 0.25) +
+  geom_col(width = 0.6, colour = "black", linewidth = 0.25,
+           position = position_stack(reverse = TRUE)) +
   geom_text(aes(y = label_y, label = ifelse(n > 0, count_label, ""),
-                hjust = label_hjust),
-            size = 2.20, colour = "black", lineheight = 0.90) +
-  geom_text(data = attempt_totals_frame, aes(x = attempt, y = n, label = label),
-            inherit.aes = FALSE, hjust = 0, vjust = 0.5, nudge_y = 14,
-            size = 2.35,
-            colour = "grey20") +
-  scale_fill_manual(values = setNames(c("white", "grey80", "grey45"),
+                hjust = label_hjust, colour = label_colour),
+            size = FIGURE_ANNOTATION_SIZE, lineheight = 0.90) +
+  scale_colour_identity() +
+  scale_fill_manual(values = setNames(unname(FIGURE_OUTCOME_FILLS[c("dropped", "unscored", "scored")]),
                                       c(DROPPED, UNSCORED, SCORED)),
                     name = NULL) +
-  scale_y_continuous(limits = c(0, census$n_total * 1.35), expand = c(0, 0)) +
+  scale_x_discrete(labels = attempt_axis_labels) +
+  scale_y_continuous(limits = c(0, census$n_total * 1.22), expand = c(0, 0)) +
   coord_flip() +
   guides(fill = guide_legend(ncol = 1)) +
   labs(x = NULL, y = "Inputs the run was given") +
   rtx_theme() +
-  theme(legend.position = "bottom", legend.text = element_text(size = 7),
-        legend.key.size = unit(8, "pt"), axis.text.y = element_text(size = 7),
-        plot.subtitle = element_text(size = 7.1, colour = "grey25"))
+  theme(legend.position = "bottom",
+        axis.text.y = element_text(lineheight = 0.9))
 
 dropped <- skipped_frame
 dropped$camera <- factor(dropped$camera, levels = rev(dropped$camera))
@@ -90,26 +90,26 @@ dropped$count_label <- sprintf("%d/%d (%.1f%%)", dropped$n, dropped_total,
 
 composition <- ggplot(dropped, aes(x = camera, y = n, fill = measured)) +
   geom_col(width = 0.68, colour = "black", linewidth = 0.25) +
-  geom_text(aes(label = count_label), hjust = -0.12, size = 2.20,
+  geom_text(aes(label = count_label), hjust = -0.12, size = FIGURE_ANNOTATION_SIZE,
             lineheight = 0.90) +
-  scale_fill_manual(values = c(no = "white", yes = "grey45"),
-                    labels = c(no = "absent from the later subset",
-                               yes = "present in the later subset"),
+  scale_fill_manual(values = c(no = unname(FIGURE_OUTCOME_FILLS["dropped"]),
+                               yes = unname(FIGURE_OUTCOME_FILLS["scored"])),
+                    labels = c(no = "absent from the later crop128 protocol",
+                               yes = "present in the later crop128 protocol"),
                     name = NULL) +
-  scale_y_continuous(limits = c(0, max(dropped$n) * 1.48), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, max(dropped$n) * 1.85), expand = c(0, 0),
+                     breaks = seq(0, 100, by = 20)) +
   coord_flip() +
   guides(fill = guide_legend(ncol = 1)) +
   labs(x = NULL, y = "Inputs dropped for memory") +
   rtx_theme() +
-  theme(legend.position = "bottom", legend.text = element_text(size = 7),
-        legend.key.size = unit(8, "pt"), axis.text.y = element_text(size = 7),
-        plot.subtitle = element_text(size = 7.1, colour = "grey25"))
+  theme(legend.position = "bottom")
 
 p <- patchwork::wrap_plots(
   panel_label(survival, "A",
-              subtitle = "n/N + %; N = inputs given"),
+              subtitle = "Labels are n/N (%), N = inputs given"),
   panel_label(composition, "B",
-              subtitle = sprintf("n/N + %%; N = %d dropped", dropped_total)),
+              subtitle = sprintf("Labels are n/N (%%), N = %d dropped", dropped_total)),
                            widths = c(1.15, 1))
 
 save_fig(p, "fig5_ceiling", width = FIGURE_TEXT_WIDTH_IN, height = 3.0)

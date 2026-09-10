@@ -11,22 +11,23 @@ camera_plot <- camera_plot[order(camera_plot$camera), , drop = FALSE]
 camera_plot$camera <- factor(camera_plot$camera, levels = unique(camera_plot$camera))
 camera_plot$y <- seq_len(nrow(camera_plot))
 
+# Two rows on a continuous axis need explicit room above and below them;
+# without it the rows sit on the panel border with the whole middle empty.
 p <- ggplot(camera_plot, aes(x = mean_delta, y = y)) +
-  geom_vline(xintercept = 0, colour = "grey35", linewidth = 0.35) +
-  geom_segment(aes(x = lower, xend = upper,
-                   y = y, yend = y),
-               colour = "#9C3D2E", linewidth = 0.8) +
-  geom_point(shape = 21, size = 2.6, stroke = 0.7,
-             colour = "#9C3D2E", fill = "white") +
-  geom_text(aes(x = upper, label = sprintf("%d/%d wins", wins, n)),
-            hjust = -0.08, size = 2.55, family = FIGURE_FONT_FAMILY) +
-  scale_x_continuous(name = "DiT minus bicubic RGB PSNR (dB)",
-                     expand = expansion(mult = c(0.08, 0.18))) +
-  scale_y_continuous(name = NULL, breaks = camera_plot$y, labels = levels(camera_plot$camera)) +
+  geom_vline(xintercept = 0, colour = FIGURE_RULE_COLOUR, linewidth = FIGURE_RULE_WIDTH) +
+  geom_errorbar(aes(xmin = lower, xmax = upper), orientation = "y",
+                width = 0.14, linewidth = 0.45) +
+  geom_point(size = 2.2) +
+  geom_text(aes(x = upper, label = sprintf("DiT wins %d of %d", wins, n)),
+            hjust = -0.12, size = FIGURE_VALUE_LABEL_SIZE, family = FIGURE_FONT_FAMILY) +
+  geom_text(aes(label = typeset_minus(sprintf("%+.2f", mean_delta))), vjust = -1.1,
+            size = FIGURE_VALUE_LABEL_SIZE, family = FIGURE_FONT_FAMILY) +
+  scale_x_continuous(name = "DiT \u2212 bicubic, RGB PSNR (dB)",
+                     expand = expansion(mult = c(0.08, 0.22))) +
+  scale_y_continuous(name = NULL, breaks = camera_plot$y, labels = levels(camera_plot$camera),
+                     limits = c(0.4, nrow(camera_plot) + 0.6), expand = c(0, 0)) +
   labs(y = NULL,
-       subtitle = "Recorded camera strata; intervals are descriptive within-stratum bootstrap") +
-  rtx_theme() +
-  theme(plot.subtitle = element_text(size = FIGURE_SUBTITLE_SIZE, colour = "grey25"),
-        axis.text.y = element_text(size = FIGURE_AXIS_TEXT_SIZE))
+       subtitle = "Recorded camera strata; whiskers are descriptive 95% percentile bootstrap intervals within each stratum") +
+  rtx_theme()
 
-save_fig(p, "fig7_camera_sensitivity", FIGURE_TEXT_WIDTH_IN, 2.55)
+save_fig(p, "fig7_camera_sensitivity", FIGURE_TEXT_WIDTH_IN, 1.9)
