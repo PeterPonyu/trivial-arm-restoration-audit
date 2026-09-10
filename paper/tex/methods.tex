@@ -94,7 +94,8 @@ crashed while serialising its summary, after the per-crop values had been
 computed and before any formal endpoint file was written. The amendment
 replaced the script with a version that casts the offending values to plain
 types --- the endpoints, pairing, test, threshold and anchor rule were not
-changed --- and recorded the secondary backbone as not computed (below). The
+changed --- and recorded the secondary backbone as not computed at that time
+(below). The
 primary result had by then been observed on a provisional side run that
 imported the predeclared script's own functions; the amendment says so, and the
 formal run under the amended protocol reproduced the provisional run exactly:
@@ -103,12 +104,17 @@ the same anchor shift. Both the original predeclaration and the amendment are
 bound and hashed with the result.
 
 The protocol named LPIPS with the VGG16 backbone as a secondary robustness
-check, never to be promoted. It was not computed: the cached VGG16 checkpoint
-on the scoring machine was truncated, and the download route the workspace
-permits was unavailable at the time of the run. Its status is recorded as such
-in the bound summary, the per-crop rows carry null values for it, and nothing
-is imputed for it. A distinct learned quality score that would have required a
-further download was likewise omitted rather than substituted.
+check, never to be promoted. A later dated run scored that check after a
+complete torchvision VGG16 checkpoint was obtained, in a directory that does
+not replace the formal AlexNet files. On that secondary endpoint the model's
+mean distance is \LpipsVggDit{} against \LpipsVggBicubic{} for bicubic; the
+model is closer on \LpipsVggWins{} of \SubsetN{} and bicubic on
+\LpipsVggLosses{}, with \LpipsVggTies{} ties, and the exact sign test returns
+\LpipsVggSignP{}, which does not meet the predeclared threshold. That check
+is a backbone-sensitivity secondary. It does not confirm the AlexNet ranking
+and it does not rewrite it; the thesis remains the AlexNet reversal. Nothing
+is imputed for a further learned quality score that would have required
+another download.
 
 \subsection{The initialisation ablation}
 
@@ -248,9 +254,9 @@ reports the near miss rather than passing over it.
 
 \subsection{The boundary of what is computed}
 
-The perceptual computation is the single endpoint described above, and the
-secondary backbone the protocol named is reported as not computed rather than
-estimated. The \CensusRan{} outputs of the earlier attempt enter only as a
+The perceptual computation that carries the thesis is the AlexNet endpoint
+described above. The secondary VGG16 backbone the protocol named was later
+scored as a backbone-sensitivity check and is not promoted. The \CensusRan{} outputs of the earlier attempt enter only as a
 count: they have no reference images on disk, so they carry no value, and the
 build stops if any of them ever acquires one, because their absence is the
 reason those outputs cannot be scored. The two larger comparisons this line of

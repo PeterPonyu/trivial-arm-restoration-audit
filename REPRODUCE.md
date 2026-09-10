@@ -35,6 +35,12 @@ the build instead of producing a stale number.
 | `data/e-perceptual-raw/per_crop.jsonl` | derived_table | 63573 | `8fc8c0ea51110475…` |
 | `data/e-perceptual-receipt/RECEIPT.json` | recorded_state | 3261 | `eae7ea63a7e76711…` |
 | `data/e-perceptual-provenance/PROVENANCE.json` | recorded_state | 4355 | `d8af0402fde94773…` |
+| `data/e-perceptual-vgg/perceptual_summary.json` | derived_table | 8966 | `8e7b75d2e52140d8…` |
+| `data/e-perceptual-vgg-raw/per_crop.jsonl` | derived_table | 68033 | `29970712d8fc0015…` |
+| `data/e-perceptual-vgg-receipt/RECEIPT.json` | recorded_state | 3215 | `b4d87f71c642d83f…` |
+| `data/e-perceptual-vgg-fetch/FETCH_RECEIPT.json` | recorded_state | 1121 | `b54d22d380212897…` |
+| `data/e-perceptual-vgg-weights/WEIGHTS_LOADED_VGG.json` | recorded_state | 1820 | `aa93fa741fd24fc7…` |
+| `data/e-perceptual-vgg-report/2026-09-09-writein3-005-lpips-vgg-result.md` | narrative_record | 9536 | `58eb20002ba07002…` |
 | `data/e-init-predecl/PREDECLARATION.json` | recorded_state | 13508 | `2d09abb6bfe534fb…` |
 | `data/e-init/init_summary.json` | derived_table | 17059 | `fb54927b93c48d7b…` |
 | `data/e-init-analysis/analysis.json` | derived_table | 4457 | `d53ac8e580b1eca2…` |

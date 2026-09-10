@@ -58,6 +58,11 @@ checks.
 | `data/e-perceptual/perceptual_summary.json` | 1 | 4 | `22202fd033acc2e9…` | `b7182e5c4a84cece…` |
 | `data/e-perceptual-receipt/RECEIPT.json` | 7 | 0 | `b099f394e5ced1ea…` | `eae7ea63a7e76711…` |
 | `data/e-perceptual-provenance/PROVENANCE.json` | 8 | 1 | `1dbd791c447807fc…` | `d8af0402fde94773…` |
+| `data/e-perceptual-vgg/perceptual_summary.json` | 1 | 4 | `8832bb06e6949cf9…` | `8e7b75d2e52140d8…` |
+| `data/e-perceptual-vgg-receipt/RECEIPT.json` | 7 | 0 | `0f4a42d8fe5c7a35…` | `b4d87f71c642d83f…` |
+| `data/e-perceptual-vgg-fetch/FETCH_RECEIPT.json` | 3 | 0 | `ceaf06dc3600675b…` | `b54d22d380212897…` |
+| `data/e-perceptual-vgg-weights/WEIGHTS_LOADED_VGG.json` | 5 | 0 | `6b1179f38bcf1316…` | `aa93fa741fd24fc7…` |
+| `data/e-perceptual-vgg-report/2026-09-09-writein3-005-lpips-vgg-result.md` | 4 | 0 | `5cfd70d5539ec361…` | `58eb20002ba07002…` |
 | `data/e-init-predecl/PREDECLARATION.json` | 20 | 0 | `6b28545954179bb8…` | `2d09abb6bfe534fb…` |
 | `data/e-init/init_summary.json` | 0 | 2 | `e70d43f9e34a2690…` | `fb54927b93c48d7b…` |
 | `data/e-init-receipt/RECEIPT.json` | 13 | 2 | `34f24b6859f72a79…` | `0ec809ed0df89017…` |

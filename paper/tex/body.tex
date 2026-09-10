@@ -403,8 +403,12 @@ disagree almost everywhere: on \QuadLossWin{} crops bicubic is closer on PSNR
 and the model is closer on the perceptual distance, on \QuadLossLoss{} bicubic
 is closer on both, on \QuadWinWin{} the model is closer on both, and on
 \QuadWinLoss{} the model is closer on PSNR while bicubic is closer perceptually.
-The secondary backbone the protocol named, VGG16, was not computed; the reason
-and its recorded status are in Methods, and nothing is imputed for it.
+The secondary backbone the protocol named, VGG16, was later scored on the
+same crops as a backbone-sensitivity check: the model is closer on
+\LpipsVggWins{} of \SubsetN{} and bicubic on \LpipsVggLosses{}, sign test
+\LpipsVggSignP{}, which does not meet the predeclared threshold. That check
+does not confirm the AlexNet ranking and does not rewrite it; it is not
+promoted, and the thesis remains the reversal on the AlexNet endpoint.
 
 What the subset therefore establishes is a statement about measurement, not a
 verdict: scored on fidelity, this evaluation ranks two interpolations above the
@@ -678,7 +682,8 @@ learned perceptual distance that was computed; the two endpoints order the arms
 oppositely, and this paper reports that disagreement as the finding. It holds
 for one learned perceptual distance with one backbone, scored on these
 \SubsetN{} crops with no reader study beside it; the secondary backbone the
-protocol named is recorded as not computed, and the result describes what this
+protocol named was later scored as a backbone-sensitivity check and is not
+promoted, and the result describes what this
 evaluation establishes under each endpoint rather than the model's quality.
 
 The crops measured are the published crop128 protocol, and the two larger
@@ -705,10 +710,11 @@ budget, the stall depends on the initialisation and zeroing the gates removes
 it. The mechanism behind the default construction's stall is left open, and the
 published initialisation scheme is characterised only on this toy.
 
-The perceptual computation is the one named in Methods, on the \SubsetN{}
-crops. The VGG16 backbone the protocol named is recorded as not computed, no
-distortion-free quality score stands in for it, and every perceptual value in
-this paper belongs to one of those crops.
+The perceptual computation that carries the thesis is the one named in
+Methods, on the \SubsetN{} crops. The VGG16 backbone the protocol named was
+later scored as a backbone-sensitivity secondary and is not promoted; no
+distortion-free quality score stands in for the AlexNet endpoint, and every
+perceptual value in this paper belongs to one of those crops.
 
 The \CensusRan{} outputs of the earlier attempt appear only as a count. They
 have no reference images on disk, so they carry no measurement, and the figure
@@ -801,7 +807,8 @@ three subset arms, the recorded summaries and stratum counts, the inference
 manifests for both attempts, the skip census and its size and source-group
 breakdowns, the recorded status of the two unproduced comparisons, the
 predeclaration, amendment, per-crop rows, summary, receipt and input provenance
-of the perceptual pass, and the predeclaration, nine-cell summary, independent
+of the perceptual pass, the later VGG secondary scoring pass in a separate
+dated directory, and the predeclaration, nine-cell summary, independent
 analysis and receipt of the initialisation ablation accompany the manuscript
 source. Each artifact is recorded under an evidence ID in a manifest, and the
 figure code verifies the bound bytes before reading them, so the build fails

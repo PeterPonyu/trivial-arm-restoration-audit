@@ -1,7 +1,7 @@
 {
   "schema": "evidence-manifest/v1",
   "state": "BOUND",
-  "bound_utc": "2026-09-09T08:32:33Z",
+  "bound_utc": "2026-09-10T02:49:04Z",
   "allowed_roots": [
     "data",
     "paper/evidence"
@@ -215,6 +215,54 @@
       "note": "where the four hundred input images came from, including the sampling seed and settings of the fresh local sample of the released model",
       "bytes": 4355,
       "sha256": "d8af0402fde947737e68a5bd7533585b190a21889f93dd3955f778bdb36b7b86"
+    },
+    {
+      "id": "E-PERCEPTUAL-VGG",
+      "path": "data/e-perceptual-vgg/perceptual_summary.json",
+      "role": "derived_table",
+      "note": "the later VGG secondary summary: Alex primary reproduced, VGG16 scored as a backbone-sensitivity check, never used to rewrite the thesis",
+      "bytes": 8966,
+      "sha256": "8e7b75d2e52140d8db6dd0b851051d5d3f11ff88f7d763cf1e1b5ebba18e2d2f"
+    },
+    {
+      "id": "E-PERCEPTUAL-VGG-RAW",
+      "path": "data/e-perceptual-vgg-raw/per_crop.jsonl",
+      "role": "derived_table",
+      "note": "one row per crop from the later dated VGG run, with non-null VGG distances; does not replace the formal Alex per-crop file",
+      "bytes": 68033,
+      "sha256": "29970712d8fc0015339d883acb30a22d02c36cf21357184313cdb1e6dc8f42f9"
+    },
+    {
+      "id": "E-PERCEPTUAL-VGG-RECEIPT",
+      "path": "data/e-perceptual-vgg-receipt/RECEIPT.json",
+      "role": "recorded_state",
+      "note": "the run receipt for the later VGG scoring pass: host, environment, wall clock, output digests and secondary status COMPUTED",
+      "bytes": 3215,
+      "sha256": "b4d87f71c642d83ff05347225854dd8f64e267acba4fe96d75f23981b660d2f1"
+    },
+    {
+      "id": "E-PERCEPTUAL-VGG-FETCH",
+      "path": "data/e-perceptual-vgg-fetch/FETCH_RECEIPT.json",
+      "role": "recorded_state",
+      "note": "the fetch record for the complete torchvision VGG16 checkpoint used by the later dated run",
+      "bytes": 1121,
+      "sha256": "b54d22d3802128972098fece9fdd1897a8971177e92bb9cb745b443ad49b26e5"
+    },
+    {
+      "id": "E-PERCEPTUAL-VGG-WEIGHTS",
+      "path": "data/e-perceptual-vgg-weights/WEIGHTS_LOADED_VGG.json",
+      "role": "recorded_state",
+      "note": "the weights actually loaded for the later VGG pass, correcting the receipt copy of the truncated predeclaration hash",
+      "bytes": 1820,
+      "sha256": "aa93fa741fd24fc791922918afa9f66bd1d17cad5e5c622283f7afaa13d311a0"
+    },
+    {
+      "id": "E-PERCEPTUAL-VGG-REPORT",
+      "path": "data/e-perceptual-vgg-report/2026-09-09-writein3-005-lpips-vgg-result.md",
+      "role": "narrative_record",
+      "note": "the write-in report for the VGG secondary: GO, formal Alex hashes left untouched, VGG not promoted",
+      "bytes": 9536,
+      "sha256": "58eb20002ba07002eb66bf177a9ff99aca35a260d44edd468e2a894f756d1566"
     },
     {
       "id": "E-INIT-PREDECL",

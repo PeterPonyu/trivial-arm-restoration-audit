@@ -1,0 +1,24 @@
+{
+  "schema": "005.perceptual.vgg_fetch.v1",
+  "written_utc": "2026-09-10T02:05:40Z",
+  "url": "https://download.pytorch.org/models/vgg16-397923af.pth",
+  "route": "SC_FETCH_PROXY=http://127.0.0.1:7890 + research/pipelines/fetch_gate.py --yes-large (per-request opener; os.environ http_proxy left on 7897)",
+  "head": {
+    "ok": true,
+    "status": 200,
+    "content_length": 553433881,
+    "content_type": "binary/octet-stream"
+  },
+  "bytes": 553433881,
+  "sha256": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+  "filename_hash_prefix_ok": true,
+  "path": "source-tree/005-dit-blind-restoration/results/perceptual_vgg_20260909/torch_home/hub/checkpoints/vgg16-397923af.pth",
+  "tag_ports_used": false,
+  "desktop_http_proxy_unchanged": "http://127.0.0.1:7897",
+  "home_cache_truncated_vgg16_left_untouched": {
+    "path": "~/.cache/torch/hub/checkpoints/vgg16-397923af.pth",
+    "bytes": 155730036,
+    "sha256_known": "8bdcf25ede9624f91b1de255a3a1b4401dc9255f02e45a7f806fc88500e3e58b"
+  },
+  "formal_alex_dir_not_written": "source-tree/005-dit-blind-restoration/results/perceptual_20260909/"
+}

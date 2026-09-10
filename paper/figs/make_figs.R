@@ -63,6 +63,17 @@ perc_rows <- read_bound_lines("E-PERCEPTUAL-RAW")
 perc_receipt <- read_bound("E-PERCEPTUAL-RECEIPT")
 perc_prov <- read_bound("E-PERCEPTUAL-PROVENANCE")
 
+# Later dated VGG secondary. Formal Alex files stay the primary record; these
+# rows are a backbone-sensitivity check and must not rewrite the thesis.
+vgg <- read_bound("E-PERCEPTUAL-VGG")
+vgg_rows <- read_bound_lines("E-PERCEPTUAL-VGG-RAW")
+vgg_receipt <- read_bound("E-PERCEPTUAL-VGG-RECEIPT")
+vgg_fetch <- read_bound("E-PERCEPTUAL-VGG-FETCH")
+vgg_weights <- read_bound("E-PERCEPTUAL-VGG-WEIGHTS")
+if (!"E-PERCEPTUAL-VGG-REPORT" %in% manifest$entries$id) {
+  stop("the VGG write-in report is not bound")
+}
+
 init_predecl <- read_bound("E-INIT-PREDECL")
 init_sum <- read_bound("E-INIT")
 init_analysis <- read_bound("E-INIT-ANALYSIS")
@@ -373,9 +384,9 @@ if (quad$loss_win != recorded_quad$psnr_loss_perceptual_win ||
 }
 
 # Provenance the manuscript discloses. The amendment was made after a
-# provisional run had been seen; the formal run must reproduce it, and the
-# secondary backbone must be recorded as not computed rather than quietly
-# missing.
+# provisional run had been seen; the formal run must reproduce it. The formal
+# Alex files still record the secondary backbone as not computed; a later
+# dated directory holds the VGG check and must not overwrite those files.
 if (!isTRUE(perc$formal_equals_provisional) ||
     !isTRUE(perc$cross_check_vs_provisional$formal_equals_provisional)) {
   stop("the formal perceptual run does not reproduce the provisional run it was amended after")
@@ -387,10 +398,94 @@ if (!isTRUE(perc_amend$provisional_result_seen_before_amendment) ||
   stop("the amendment record, the summary and the receipt do not describe one run")
 }
 if (!startsWith(perc$secondary_status, "NOT_COMPUTED")) {
-  stop("the secondary perceptual backbone is recorded as something other than not computed; the methods text is stale")
+  stop("the formal Alex summary no longer records VGG as not computed; the formal files were overwritten")
 }
 if (any(!is.na(perc_rows$lpips_vgg_dit)) || any(!is.na(perc_rows$lpips_vgg_bicubic))) {
-  stop("per-crop rows carry a secondary perceptual value the summary says was not computed")
+  stop("formal Alex per-crop rows now carry a VGG value; the formal files were overwritten")
+}
+
+# VGG secondary: same crops, Alex primary reproduced, VGG scored, thesis
+# still the Alex reversal. A significant VGG split would still be secondary;
+# a non-significant one must not be promoted into a verdict.
+if (!identical(vgg$thesis_case, "REVERSAL") || !identical(perc$thesis_case, "REVERSAL")) {
+  stop("the VGG run or the formal Alex record no longer holds the Alex reversal")
+}
+if (!identical(vgg$secondary_status, "COMPUTED") ||
+    !identical(vgg_receipt$secondary_lpips_vgg, "COMPUTED")) {
+  stop("the later VGG directory does not record the secondary backbone as computed")
+}
+if (nrow(vgg_rows) != SUBSET_N || !setequal(vgg_rows$crop, crops$stem)) {
+  stop("the VGG secondary pass scored different crops from the bound subset")
+}
+vgg_rows <- vgg_rows[match(crops$stem, vgg_rows$crop), ]
+if (any(abs(vgg_rows$lpips_alex_dit - perc_rows$lpips_alex_dit) > 1e-6) ||
+    any(abs(vgg_rows$lpips_alex_bicubic - perc_rows$lpips_alex_bicubic) > 1e-6)) {
+  stop("the VGG run does not reproduce the formal Alex distances crop for crop")
+}
+if (any(is.na(vgg_rows$lpips_vgg_dit)) || any(is.na(vgg_rows$lpips_vgg_bicubic))) {
+  stop("VGG per-crop rows still carry a null secondary value")
+}
+vgg_lp <- vgg$secondary_lpips_vgg
+vgg_rows$d_lpips_vgg <- vgg_rows$lpips_vgg_bicubic - vgg_rows$lpips_vgg_dit
+if (any(abs(vgg_rows$d_lpips_vgg - vgg_rows$delta_lpips_vgg_bicubic_minus_dit) > 1e-9)) {
+  stop("the recorded VGG difference is not bicubic minus the released model")
+}
+assert_recorded_mean(vgg_rows$lpips_vgg_dit, vgg_lp$dit_mean, "VGG, released model")
+assert_recorded_mean(vgg_rows$lpips_vgg_bicubic, vgg_lp$bicubic_mean, "VGG, bicubic")
+assert_recorded_mean(vgg_rows$d_lpips_vgg, vgg_lp$mean_delta, "VGG, paired difference")
+vgg_wins <- win_counts(vgg_rows$lpips_vgg_bicubic, vgg_rows$lpips_vgg_dit)
+if (!identical(as.integer(vgg_wins$wins), as.integer(vgg_lp$dit_wins)) ||
+    !identical(as.integer(vgg_wins$losses), as.integer(vgg_lp$bicubic_wins)) ||
+    !identical(as.integer(vgg_wins$ties), as.integer(vgg_lp$ties))) {
+  stop("the recorded VGG win and loss counts do not come from the per-crop rows")
+}
+vgg_sign <- sign_test(vgg_rows$d_lpips_vgg)
+if (abs(vgg_sign$p - vgg_lp$sign_test$p_two_sided) > 1e-6) {
+  stop("the recorded VGG sign test does not reproduce from the per-crop rows")
+}
+if (isTRUE(vgg_lp$sign_test$significant) || vgg_lp$sign_test$p_two_sided < 0.05) {
+  stop("VGG now meets alpha; the manuscript must not silently keep the not-significant wording")
+}
+vgg_ci <- bootstrap_mean(vgg_rows$d_lpips_vgg)
+if (!(vgg_ci[1] <= vgg_lp$mean_delta && vgg_lp$mean_delta <= vgg_ci[2])) {
+  stop("VGG bootstrap interval does not contain its paired mean")
+}
+vgg_quad <- list(
+  loss_win = sum(perc_rows$d_psnr_local < 0 & vgg_rows$d_lpips_vgg > 0),
+  loss_loss = sum(perc_rows$d_psnr_local < 0 & vgg_rows$d_lpips_vgg < 0),
+  win_win = sum(perc_rows$d_psnr_local > 0 & vgg_rows$d_lpips_vgg > 0),
+  win_loss = sum(perc_rows$d_psnr_local > 0 & vgg_rows$d_lpips_vgg < 0)
+)
+recorded_vgg_quad <- vgg$psnr_vs_perceptual_quadrants$lpips_vgg
+if (vgg_quad$loss_win != recorded_vgg_quad$psnr_loss_perceptual_win ||
+    vgg_quad$loss_loss != recorded_vgg_quad$psnr_loss_perceptual_loss ||
+    vgg_quad$win_win != recorded_vgg_quad$psnr_win_perceptual_win ||
+    vgg_quad$win_loss != recorded_vgg_quad$psnr_win_perceptual_loss ||
+    sum(unlist(vgg_quad)) != SUBSET_N) {
+  stop("the recorded VGG quadrant counts do not come from the per-crop rows")
+}
+if (!identical(as.integer(vgg$primary_lpips_alex$dit_wins), as.integer(lp$dit_wins)) ||
+    !identical(as.integer(vgg$primary_lpips_alex$bicubic_wins), as.integer(lp$bicubic_wins)) ||
+    !isTRUE(all.equal(vgg$primary_lpips_alex$dit_mean, lp$dit_mean)) ||
+    !isTRUE(vgg$formal_equals_provisional)) {
+  stop("the later VGG run no longer reproduces the formal Alex primary")
+}
+if (!identical(vgg_receipt$compute_script$sha256, perc_amend$new_script_sha256)) {
+  stop("the VGG run was not scored with the amended registered script")
+}
+if (!identical(as.integer(vgg_fetch$bytes), 553433881L) ||
+    !identical(as.integer(vgg_weights$weights_loaded$torchvision_vgg16$bytes), 553433881L) ||
+    !identical(vgg_fetch$sha256, vgg_weights$weights_loaded$torchvision_vgg16$sha256) ||
+    !startsWith(vgg_fetch$sha256, "397923af")) {
+  stop("the VGG fetch receipt and the loaded-weights sidecar do not name one complete checkpoint")
+}
+if (!identical(bound_digest(manifest, "E-PERCEPTUAL"),
+               "22202fd033acc2e94303e59ea1123640a9b49096962482b8641c0a267b468689") ||
+    !identical(bound_digest(manifest, "E-PERCEPTUAL-RECEIPT"),
+               "b099f394e5ced1ea329e0a5b0ae5db30fa3bdb1752014718d7ad5785de10936e") ||
+    !identical(bound_digest(manifest, "E-PERCEPTUAL-RAW"),
+               "8fc8c0ea51110475eb6fea05c3dc07bcd99885901dae1754c766e248257b05ca")) {
+  stop("formal Alex perceptual hashes drifted; VGG must not overwrite that directory")
 }
 LPIPS_SEED <- perc_prov$dit4sr_seed20260909$inference$seed
 if (!is.numeric(LPIPS_SEED) || length(LPIPS_SEED) != 1L) stop("the sampling seed of the fresh sample is not recorded")
@@ -601,6 +696,23 @@ write_generated(c(
   macro("GapBicubicLocal", signed(anchor$local_mean_delta_vs_bicubic_rgb_psnr)),
   macro("LpipsSeed", format(LPIPS_SEED, scientific = FALSE)),
   macro("LpipsSteps", perc_prov$dit4sr_seed20260909$inference$num_inference_steps),
+
+  # VGG16 backbone-sensitivity secondary. Never used to rewrite the Alex thesis.
+  macro("LpipsVggDit", fmt(vgg_lp$dit_mean, 3)),
+  macro("LpipsVggBicubic", fmt(vgg_lp$bicubic_mean, 3)),
+  macro("LpipsVggDelta", signed(vgg_lp$mean_delta, 3)),
+  macro("LpipsVggDeltaLo", fmt(vgg_ci[1], 3)),
+  macro("LpipsVggDeltaHi", fmt(vgg_ci[2], 3)),
+  macro("LpipsVggWins", vgg_lp$dit_wins),
+  macro("LpipsVggLosses", vgg_lp$bicubic_wins),
+  macro("LpipsVggTies", vgg_lp$ties),
+  macro("LpipsVggSignP", formatC(vgg_lp$sign_test$p_two_sided, format = "f", digits = 4)),
+  macro("LpipsVggCanonWins", vgg_lp$camera_strata$Canon$dit_wins),
+  macro("LpipsVggNikonWins", vgg_lp$camera_strata$Nikon$dit_wins),
+  macro("QuadVggLossWin", vgg_quad$loss_win),
+  macro("QuadVggLossLoss", vgg_quad$loss_loss),
+  macro("QuadVggWinWin", vgg_quad$win_win),
+  macro("QuadVggWinLoss", vgg_quad$win_loss),
 
   # The initialisation ablation on the toy transformer.
   macro("InitCells", nrow(init_cells)),
