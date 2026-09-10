@@ -1,7 +1,7 @@
 {
   "schema": "evidence-manifest/v1",
   "state": "BOUND",
-  "bound_utc": "2026-09-10T02:49:04Z",
+  "bound_utc": "2026-09-10T13:26:48Z",
   "allowed_roots": [
     "data",
     "paper/evidence"
@@ -295,6 +295,62 @@
       "note": "the run receipt for the ablation: frozen source digests re-hashed after the run, the commit drift during the run, environment and wall clock",
       "bytes": 6787,
       "sha256": "0ec809ed0df89017edbabbbb8fe70a7fd78c8aa7475164d355bb8d4ad28712c7"
+    },
+    {
+      "id": "E-PUBTABLE-PREDECL",
+      "path": "data/e-pubtable-predecl/PREDECLARATION.json",
+      "role": "recorded_state",
+      "note": "the frozen predeclaration for the labelled published-table check: hashed supplement, RealSR cell, local protocol, extra-sample rule and the statement that this is not a thesis rewrite",
+      "bytes": 4327,
+      "sha256": "2faef17b5df00fa25a8b6e0a482f75233b283a8163337992be04fb9b0a8e41e2"
+    },
+    {
+      "id": "E-PUBTABLE",
+      "path": "data/e-pubtable/published_table_check.json",
+      "role": "derived_table",
+      "note": "the labelled alignment of the bound luma-with-shave mean against the published DiT4SR RealSR cell, with the later local sample as an extra-sample check and the StableSR collision disclosed",
+      "bytes": 3865,
+      "sha256": "dfa46dd346fb62a6ecec62a08e72cb8e34840c053c81400c7691eb4de565f77d"
+    },
+    {
+      "id": "E-PUBTABLE-PDF",
+      "path": "data/e-pubtable-pdf/DiT4SR_supp.pdf",
+      "role": "recorded_state",
+      "note": "the hashed ICCV 2025 supplementary PDF from which Table 1 was transcribed",
+      "bytes": 3665162,
+      "sha256": "eef21f0722775b5c349f730848ea489ca10d7a5e227b513a72d818b94bb3bbcc"
+    },
+    {
+      "id": "E-PUBTABLE-RECEIPT",
+      "path": "data/e-pubtable-receipt/RECEIPT.json",
+      "role": "recorded_state",
+      "note": "the run receipt for the published-table check: script digest, output digests, no downloads and formal Alex hashes left untouched",
+      "bytes": 844,
+      "sha256": "51ae36d99c7a65d134783f937a00b8127f298bc4ed91f040ecd831926be0c831"
+    },
+    {
+      "id": "E-CENSUS-LEFTOVER-PREDECL",
+      "path": "data/e-census-leftover-predecl/PREDECLARATION.json",
+      "role": "recorded_state",
+      "note": "the frozen predeclaration for the leftover census-versus-crop128 stem-name check: intersection, size-class split and the ban on scoring the thirteen orphan outputs",
+      "bytes": 2106,
+      "sha256": "508af4d3e0a70526c1738e88e31cf52adeb52c88d1de782e608399387ae63264"
+    },
+    {
+      "id": "E-CENSUS-LEFTOVER",
+      "path": "data/e-census-leftover/leftover_check.json",
+      "role": "derived_table",
+      "note": "the leftover check: every scored crop128 name appears on the census skip list, the names are not joined, and the thirteen orphan outputs remain without references",
+      "bytes": 5859,
+      "sha256": "054074dfb6dcb477e2613a7ba9ca8f6ee097c1c425c0aba51f72aabfb58126e8"
+    },
+    {
+      "id": "E-CENSUS-LEFTOVER-RECEIPT",
+      "path": "data/e-census-leftover-receipt/RECEIPT.json",
+      "role": "recorded_state",
+      "note": "the run receipt for the leftover census-versus-crop128 check: script digest, output digest and the statement that no quality number was invented",
+      "bytes": 701,
+      "sha256": "6167f6f8ed2b367decec827bbea12a28d784b2f477ea5c5e1810eb136683ffc4"
     }
   ]
 }

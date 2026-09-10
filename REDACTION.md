@@ -66,3 +66,8 @@ checks.
 | `data/e-init-predecl/PREDECLARATION.json` | 20 | 0 | `6b28545954179bb8…` | `2d09abb6bfe534fb…` |
 | `data/e-init/init_summary.json` | 0 | 2 | `e70d43f9e34a2690…` | `fb54927b93c48d7b…` |
 | `data/e-init-receipt/RECEIPT.json` | 13 | 2 | `34f24b6859f72a79…` | `0ec809ed0df89017…` |
+| `data/e-pubtable-predecl/PREDECLARATION.json` | 7 | 0 | `336e7a70a64e7a0f…` | `2faef17b5df00fa2…` |
+| `data/e-pubtable/published_table_check.json` | 1 | 0 | `5200700d433b336d…` | `dfa46dd346fb62a6…` |
+| `data/e-pubtable-receipt/RECEIPT.json` | 2 | 0 | `bbae5c25998ab741…` | `51ae36d99c7a65d1…` |
+| `data/e-census-leftover-predecl/PREDECLARATION.json` | 6 | 0 | `c757840e1bcbe7fc…` | `508af4d3e0a70526…` |
+| `data/e-census-leftover-receipt/RECEIPT.json` | 2 | 0 | `4c12236ee2f5bbe7…` | `6167f6f8ed2b367d…` |

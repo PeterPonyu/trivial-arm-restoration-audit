@@ -79,6 +79,18 @@ init_sum <- read_bound("E-INIT")
 init_analysis <- read_bound("E-INIT-ANALYSIS")
 init_receipt <- read_bound("E-INIT-RECEIPT")
 
+# 2026-09-10 leftover labelled checks. Secondary / sensitivity only. The PDF
+# is bound but is not JSON, so it is digest-checked rather than parsed here.
+pub_predecl <- read_bound("E-PUBTABLE-PREDECL")
+pub <- read_bound("E-PUBTABLE")
+pub_receipt <- read_bound("E-PUBTABLE-RECEIPT")
+leftover_predecl <- read_bound("E-CENSUS-LEFTOVER-PREDECL")
+leftover <- read_bound("E-CENSUS-LEFTOVER")
+leftover_receipt <- read_bound("E-CENSUS-LEFTOVER-RECEIPT")
+if (!"E-PUBTABLE-PDF" %in% manifest$entries$id) {
+  stop("the hashed supplementary PDF is not bound")
+}
+
 ## ---------------------------------------------------------------------------
 ## Checks that must hold before anything is drawn. Each one is a sentence the
 ## manuscript makes, enforced here so it cannot survive the evidence changing.
@@ -557,6 +569,53 @@ if (abs(repro$mean_last10_loss - toy_rows$last10_loss[4]) > 5e-4 ||
     abs(repro$restored_psnr_mean - toy_rows$psnr[4]) > 0.05) {
   stop("the ablation's default cell does not reproduce the bound toy record")
 }
+
+## ---------------------------------------------------------------------------
+## Leftover labelled checks (2026-09-10). Secondary / sensitivity only.
+## ---------------------------------------------------------------------------
+
+if (!identical(pub$role, "labelled_sensitivity_not_thesis") || isTRUE(pub$paper_promotion)) {
+  stop("the published-table check is no longer a labelled sensitivity")
+}
+if (!isTRUE(all.equal(pub$realsr$psnr[[length(pub$realsr$psnr)]], 23.378)) ||
+    !isTRUE(all.equal(pub$source$sha256,
+                      bound_digest(manifest, "E-PUBTABLE-PDF"))) ||
+    !identical(bound_digest(manifest, "E-PUBTABLE-PDF"),
+               "eef21f0722775b5c349f730848ea489ca10d7a5e227b513a72d818b94bb3bbcc")) {
+  stop("the published DiT4SR cell or the hashed supplement drifted")
+}
+if (!isTRUE(all.equal(pub$alignment_bound$local_dit_y_psnr,
+                      dit$bootstrap$y_psnr_shave4$mean)) ||
+    !isTRUE(all.equal(pub$alignment_bound$published_dit_psnr, 23.378)) ||
+    !isTRUE(all.equal(pub$alignment_bound$delta_y_db,
+                      dit$bootstrap$y_psnr_shave4$mean - 23.378))) {
+  stop("the published-table alignment no longer restates the bound luma mean")
+}
+if (!isTRUE(all.equal(pub$alignment_local_sample$local_dit_y_psnr,
+                      perc$anchor_check$local_fidelity_bootstrap$y_psnr_shave4$mean))) {
+  stop("the extra-sample published-table alignment no longer restates the local luma mean")
+}
+if (!identical(pub$drealsr$local_alignment, "not_computed")) {
+  stop("a DrealSR local alignment was invented; extra scale without DiT outputs stays not computed")
+}
+if (!isTRUE(leftover$joined == FALSE) ||
+    as.integer(leftover$stem_name_intersection_with_skip) != SUBSET_N ||
+    as.integer(leftover$stem_name_intersection_with_ran) != 0L ||
+    !setequal(leftover$stem_name_intersection, crops$stem)) {
+  stop("the leftover census-versus-crop128 name check no longer matches the scored stems")
+}
+if (!isTRUE(leftover$orphans$any_gt == FALSE) ||
+    !isTRUE(leftover$orphans$any_metric_computed == FALSE) ||
+    as.integer(leftover$orphans$n) != nrow(orphans$stems)) {
+  stop("the leftover orphan check invented a reference or a quality number")
+}
+if (isTRUE(leftover_receipt$quality_numbers_invented)) {
+  stop("the leftover receipt no longer says no quality number was invented")
+}
+if (!identical(pub_predecl$declared_utc < pub$computed_utc, TRUE) ||
+    !identical(leftover_predecl$declared_utc < leftover$computed_utc, TRUE)) {
+  stop("a leftover predeclaration postdates its computation")
+}
 init_mode_loss <- tapply(init_cells$mean_last10_loss, init_cells$mode, mean)
 init_mode_psnr <- tapply(init_cells$restored_psnr_mean, init_cells$mode, mean)
 stalled_cells <- init_cells[init_cells$stalls, ]
@@ -730,6 +789,18 @@ write_generated(c(
   macro("InitStallPsnr", fmt(mean(stalled_cells$restored_psnr_mean), 1)),
   macro("InitZeroGain", fmt(init_mode_psnr[["dit_zero"]] - mean(stalled_cells$restored_psnr_mean), 1)),
   macro("IdentityPsnr", fmt(IDENTITY_PSNR)),
+
+  # Labelled published-table alignment and census-versus-crop128 leftover.
+  # Secondary / sensitivity only; not a ranking of other methods.
+  macro("PublishedDitPsnr", fmt(pub$alignment_bound$published_dit_psnr, 3)),
+  macro("PublishedAlignDelta", fmt(pub$alignment_bound$abs_delta_y_db, 3)),
+  macro("PublishedAlignLocalDelta", fmt(pub$alignment_local_sample$abs_delta_y_db, 3)),
+  macro("PublishedStableSR", fmt(pub$collision$published_stablesr_psnr, 3)),
+  macro("PublishedCollisionDelta", fmt(pub$collision$abs_delta_db, 3)),
+  macro("PublishedDitSsim", fmt(pub$alignment_bound$published_dit_ssim, 3)),
+  macro("PublishedSsimDelta", fmt(abs(pub$alignment_bound$delta_ssim), 3)),
+  macro("CensusNameOverlap", leftover$stem_name_intersection_with_skip),
+  macro("CensusNameOverlapRan", leftover$stem_name_intersection_with_ran),
 
   macro("NEvidence", nrow(manifest$entries)),
   macro("EvidenceBytes", format(sum(manifest$entries$bytes), big.mark = ","))

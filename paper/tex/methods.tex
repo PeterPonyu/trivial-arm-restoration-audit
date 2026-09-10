@@ -5,7 +5,11 @@ that finished before this analysis began: three comparisons, none of which was
 generated for this paper. The second is two computations made for this paper
 under written predeclarations, each frozen and hashed before its first result
 existed: a perceptual scoring pass over the subset crops, and a
-three-initialisation ablation of the toy transformer. Every quantity in both
+three-initialisation ablation of the toy transformer. Two later labelled
+checks, also predeclared and hashed before they were computed, sit beside
+those results as sensitivity only: an alignment against one published
+supplementary cell, and a stem-name leftover between the census and the
+scored crop128 protocol. Every quantity in both
 layers is tied to the manuscript by an evidence-manifest binding; the figure
 code verifies each bound file before reading it, re-derives the summaries from
 the per-crop or per-cell rows, holds each result to its own predeclaration, and
@@ -266,3 +270,36 @@ strongest published method that would follow it --- and the subset is reported
 as the subset, with completing it leaving both where they were. The scored
 \SubsetN{} crops are the published crop128 protocol; the memory skip belongs to
 the earlier census.
+
+A leftover stem-name check on those two populations finds
+\CensusNameOverlap{} shared names between the scored crop128 stems and the
+census skip list, and \CensusNameOverlapRan{} shared names with the
+\CensusRan{} outputs that ran. The shared names belong to different size
+classes --- the scored protocol is 128-class; the skipped census inputs are
+recorded as 512-class --- and they are not joined. The \OrphanStems{} census
+outputs remain without references; the check records their presence on disk
+and computes no quality number for them.
+
+\subsection{A labelled published-table check}
+
+The released model's own supplementary Table~1 reports a RealSR PSNR cell of
+\PublishedDitPsnr{} for that model, transcribed from a hashed copy of the
+supplement and checked so that the token appears on the table page. A labelled
+alignment, written down before it was computed, compares that cell to the
+already-bound luma-with-shave mean on the same crop128 protocol. The
+supplement states that its metrics were implemented in a public image-quality
+toolbox and that the tabulated methods produced $512\times 512$ outputs from
+$128\times 128$ inputs; it does not state colour space or border shave. The
+closer of the two local conventions is luma-with-shave, at
+\PublishedAlignDelta{} decibels from the published cell; the RGB convention
+is farther. The later local sample of the same protocol sits
+\PublishedAlignLocalDelta{} decibels from the same cell. The published
+StableSR cell on that row is \PublishedStableSR{}, which lies
+\PublishedCollisionDelta{} decibels from the bound local mean; that collision
+is disclosed so the published DiT4SR cell is not mistaken for it. A second
+benchmark row in the same table was transcribed and is not locally aligned:
+those crops exist only inside a test-set archive and this study has no local
+outputs for them. The other ten tabulated methods were not re-run. This check
+is a labelled sensitivity. It does not rewrite the thesis, and it is not a
+ranking of those methods.
+

@@ -1,0 +1,140 @@
+{
+  "schema": "005.published-table-check.v1",
+  "role": "labelled_sensitivity_not_thesis",
+  "paper_promotion": false,
+  "computed_utc": "2026-09-10T13:21:53Z",
+  "predeclaration_sha256": "336e7a70a64e7a0f27a9ae6ddd657ca6fc90a9b6ba4e3fdb43fa863647cb7fa0",
+  "source": {
+    "document": "DiT4SR_supp.pdf",
+    "path": "data/e-pubtable-pdf/DiT4SR_supp.pdf",
+    "sha256": "eef21f0722775b5c349f730848ea489ca10d7a5e227b513a72d818b94bb3bbcc",
+    "bytes": 3665162,
+    "pages": 13,
+    "venue": "ICCV 2025 supplementary",
+    "arxiv": "2503.23580",
+    "table_id": "Table 1",
+    "page": 6,
+    "section": "6. PSNR and SSIM Performance",
+    "metric_note_quoted": "All the evaluation metrics are implemented by PyIQA",
+    "resolution_note_quoted": "each method generates 512×512 results from 128×128 inputs",
+    "color_and_shave": "not stated in the supplement"
+  },
+  "columns_ordered": [
+    "Real-ESRGAN",
+    "SwinIR",
+    "ResShift",
+    "StableSR",
+    "SeeSR",
+    "DiffBIR",
+    "OSEDiff",
+    "SUPIR",
+    "DreamClear",
+    "SD3-ControlNet",
+    "DiT4SR"
+  ],
+  "realsr": {
+    "psnr": [
+      25.686,
+      26.308,
+      26.387,
+      23.437,
+      25.188,
+      24.24,
+      25.148,
+      23.679,
+      24.847,
+      24.004,
+      23.378
+    ],
+    "ssim": [
+      0.761,
+      0.773,
+      0.756,
+      0.692,
+      0.722,
+      0.665,
+      0.734,
+      0.664,
+      0.699,
+      0.685,
+      0.664
+    ]
+  },
+  "drealsr": {
+    "psnr": [
+      28.615,
+      28.497,
+      28.692,
+      28.407,
+      28.074,
+      25.929,
+      27.915,
+      24.988,
+      28.394,
+      27.205,
+      25.806
+    ],
+    "ssim": [
+      0.805,
+      0.804,
+      0.787,
+      0.795,
+      0.768,
+      0.652,
+      0.783,
+      0.647,
+      0.745,
+      0.734,
+      0.682
+    ],
+    "local_alignment": "not_computed",
+    "reason": "DrealSRVal_crop128 exists only inside StableSR_testsets.zip; no local DiT outputs"
+  },
+  "alignment_bound": {
+    "local_protocol": "RGB-full + BT.601-Y shave-4",
+    "local_dit_y_psnr": 23.43597199280975,
+    "local_dit_rgb_psnr": 21.87899226775902,
+    "published_dit_psnr": 23.378,
+    "delta_y_db": 0.05797199280975107,
+    "abs_delta_y_db": 0.05797199280975107,
+    "delta_rgb_db": -1.4990077322409796,
+    "abs_delta_rgb_db": 1.4990077322409796,
+    "closer_convention": "y_psnr_shave4",
+    "local_dit_y_ssim": 0.6579756454729717,
+    "published_dit_ssim": 0.664,
+    "delta_ssim": -0.006024354527028319
+  },
+  "alignment_local_sample": {
+    "pixel_set": "dit4sr_seed20260909",
+    "local_dit_y_psnr": 23.517334422892876,
+    "published_dit_psnr": 23.378,
+    "delta_y_db": 0.13933442289287612,
+    "abs_delta_y_db": 0.13933442289287612
+  },
+  "collision": {
+    "published_stablesr_psnr": 23.437,
+    "bound_dit_y_psnr": 23.43597199280975,
+    "abs_delta_db": 0.0010280071902499799,
+    "note": "coincidence; the published DiT4SR cell is the last column 23.378, not StableSR 23.437"
+  },
+  "descriptive_not_the_finding": {
+    "bound_bicubic_y_psnr": 27.11402319467435,
+    "bound_nearest_y_psnr": 26.22583325499199,
+    "n_published_realsr_cells": 11,
+    "n_published_realsr_cells_below_bicubic": 11,
+    "n_published_realsr_cells_below_nearest": 9
+  },
+  "formal_alex_hashes_untouched": {
+    "RECEIPT.json": "b099f394e5ced1ea329e0a5b0ae5db30fa3bdb1752014718d7ad5785de10936e",
+    "perceptual_summary.json": "22202fd033acc2e94303e59ea1123640a9b49096962482b8641c0a267b468689",
+    "per_crop.jsonl": "8fc8c0ea51110475eb6fea05c3dc07bcd99885901dae1754c766e248257b05ca"
+  },
+  "forbidden_readings_honoured": [
+    "the model is worse or better",
+    "bicubic beats eleven published methods as the paper's finding",
+    "the published cell is RGB PSNR",
+    "the published protocol is proven to be Y-shave-4; the closer local convention is reported, not assumed as theirs",
+    "VGG promoted",
+    "DrealSR locally aligned"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "005.published-table-check.predeclaration.v1",
+  "declared_utc": "2026-09-10T13:17:03Z",
+  "frozen": true,
+  "freeze_rule": "This file is not edited after the first computed result file lands. Verify: mtime of PREDECLARATION.json < mtime of published_table_check.json and RECEIPT.json. The copied supplement PDF is an input, not a computed result.",
+  "authority": {
+    "item": "REGISTERED leftover science 005: published-number check for supplementary Table 1 RealSR cell 23.378",
+    "scout": "docs/reports/2026-09-09-scout-005-lpips-init.md section 5",
+    "writein3_was": "docs/specs/2026-09-09-writein3-spec.md section 3.5 NO-GO that night because the PDF was then believed absent; the vendor supplementary PDF is on disk and is hashed here",
+    "does_not_sign_gates": true
+  },
+  "repo": {
+    "path": ".",
+    "head": "5a7453aff09dabc362bf5397860fb4227c868ad4"
+  },
+  "role": "labelled_sensitivity_not_thesis",
+  "paper_promotion": false,
+  "primary_of_this_check": "alignment of the already-bound E-DIT luma-with-shave mean against the published DiT4SR RealSR PSNR cell",
+  "extra_sample_of_this_check": "alignment of the later local seed-20260909 luma-with-shave mean (E-PERCEPTUAL anchor) against the same published cell; descriptive only",
+  "inputs": {
+    "supplement_pdf": {
+      "copied_to": "data/e-pubtable-pdf/DiT4SR_supp.pdf",
+      "copied_from": "source-tree/005-dit-blind-restoration/vendor/DiT4SR/assets/DiT4SR_supp.pdf",
+      "sha256": "eef21f0722775b5c349f730848ea489ca10d7a5e227b513a72d818b94bb3bbcc",
+      "bytes": 3665162,
+      "pages": 13
+    },
+    "bound_dit": "data/e-dit/sota_dit4sr_metrics_today_dit.json",
+    "bound_bicubic": "data/e-bicubic/sota_dit4sr_metrics_today_bicubic.json",
+    "bound_nearest": "data/e-nearest/sota_dit4sr_metrics_today_nearest.json",
+    "bound_perceptual_local": "data/e-perceptual/perceptual_summary.json"
+  },
+  "source_to_transcribe": {
+    "document": "DiT4SR ICCV 2025 supplementary",
+    "arxiv": "2503.23580",
+    "table_id": "Table 1",
+    "page": 6,
+    "section": "6. PSNR and SSIM Performance",
+    "row_primary": "RealSR",
+    "row_secondary_transcribed_only": "DrealSR",
+    "columns_ordered": [
+      "Real-ESRGAN",
+      "SwinIR",
+      "ResShift",
+      "StableSR",
+      "SeeSR",
+      "DiffBIR",
+      "OSEDiff",
+      "SUPIR",
+      "DreamClear",
+      "SD3-ControlNet",
+      "DiT4SR"
+    ],
+    "expected_realsr_dit4sr_psnr": 23.378,
+    "verification": "pdftotext of the hashed PDF page 6 must contain the token 23.378 and the eleven RealSR PSNR cells in the declared order"
+  },
+  "local_protocol": "RGB-full + BT.601-Y shave-4, already bound; the supplement states PyIQA metrics and 512 from 128 inputs, and does not state colour space or shave",
+  "endpoints": {
+    "primary": "absolute difference between E-DIT y_psnr_shave4 bootstrap mean and the published DiT4SR RealSR PSNR cell",
+    "extra_sample": "same difference using E-PERCEPTUAL local y_psnr_shave4 mean",
+    "ssim_descriptive": "E-DIT y_ssim_shave4 mean versus published DiT4SR RealSR SSIM",
+    "collision_disclosure": "published StableSR RealSR PSNR versus E-DIT y_psnr_shave4 mean"
+  },
+  "not_computed": [
+    "DrealSR local DiT or bicubic scores (DrealSRVal_crop128 exists only inside StableSR_testsets.zip; no local DiT outputs)",
+    "DPED or DIV2K extra datasets",
+    "re-run of the other ten tabulated methods",
+    "any new DiT inference",
+    "any overwrite of formal Alex receipts"
+  ],
+  "reading_rules": {
+    "this_is_not_a_thesis_rewrite": true,
+    "this_is_not_a_ranking_of_other_methods": true,
+    "bicubic_versus_eleven_stays_descriptive_in_the_json_and_is_not_the_finding": true,
+    "vgg_stays_secondary": true,
+    "formal_alex_hashes_must_remain": [
+      "b099f394e5ced1ea329e0a5b0ae5db30fa3bdb1752014718d7ad5785de10936e",
+      "22202fd033acc2e94303e59ea1123640a9b49096962482b8641c0a267b468689",
+      "8fc8c0ea51110475eb6fea05c3dc07bcd99885901dae1754c766e248257b05ca"
+    ]
+  },
+  "forbidden_readings": [
+    "the model is worse or better",
+    "bicubic beats eleven published methods as the paper's finding",
+    "the published cell is RGB PSNR",
+    "the published protocol is proven to be Y-shave-4; the closer local convention is reported, not assumed as theirs",
+    "VGG promoted",
+    "DrealSR locally aligned"
+  ]
+}

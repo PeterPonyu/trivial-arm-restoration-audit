@@ -351,6 +351,17 @@ similarity, \MethodSSIM{} against \BicubicSSIM{} for bicubic and
 those of \GapSSIM{}. All four measures agree, which
 is not surprising --- they are four views of the same kind of quantity --- but it
 does remove the possibility that the ordering is an artifact of one convention.
+A labelled check, not a re-run and not a ranking of other methods, places that
+luma-with-shave mean \PublishedAlignDelta{} decibels from the published RealSR
+cell \PublishedDitPsnr{} in the released model's own supplement; the later
+local sample of the same protocol sits \PublishedAlignLocalDelta{} decibels
+from the same cell. The published StableSR cell on that row is
+\PublishedStableSR{}, \PublishedCollisionDelta{} decibels from the bound local
+mean, and is disclosed so the two cells are not swapped. The published
+structural-similarity cell on the same row is \PublishedDitSsim{},
+\PublishedSsimDelta{} from the bound luma-with-shave structural mean. The
+other ten tabulated methods were not re-run, and this alignment does not
+rewrite the thesis.
 
 Fig.~\ref{fig:subset} plots the comparison crop by crop. The model is behind
 bicubic on \LossesBicubic{} of \SubsetN{} crops and behind nearest-neighbour on
@@ -722,7 +733,10 @@ code stops if any of them ever acquires a reference, because their absence is
 the reason they cannot be scored. The \CensusSkipped{} skipped inputs were
 never processed, so what is known about them is their size and their source
 group, and the statement made about them is about the selection rule that
-removed them.
+removed them. A leftover stem-name check finds \CensusNameOverlap{} shared
+names between the scored crop128 stems and that skip list, and
+\CensusNameOverlapRan{} shared names with the outputs that ran; the names
+belong to different size classes and are not joined.
 
 \section{Conclusion}
 
@@ -808,8 +822,10 @@ manifests for both attempts, the skip census and its size and source-group
 breakdowns, the recorded status of the two unproduced comparisons, the
 predeclaration, amendment, per-crop rows, summary, receipt and input provenance
 of the perceptual pass, the later VGG secondary scoring pass in a separate
-dated directory, and the predeclaration, nine-cell summary, independent
-analysis and receipt of the initialisation ablation accompany the manuscript
+dated directory, the predeclaration, nine-cell summary, independent
+analysis and receipt of the initialisation ablation, the labelled
+published-table alignment and its hashed supplement, and the leftover
+census-versus-crop128 stem-name check accompany the manuscript
 source. Each artifact is recorded under an evidence ID in a manifest, and the
 figure code verifies the bound bytes before reading them, so the build fails
 rather than silently reporting stale numbers. The low-resolution inputs and

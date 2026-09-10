@@ -1,0 +1,15 @@
+{
+  "schema": "005.census-crop128-leftover.receipt.v1",
+  "computed_utc": "2026-09-10T13:21:53Z",
+  "interpreter": "~/miniconda3/envs/dl/bin/python",
+  "script": "source-tree/005-dit-blind-restoration/results/census_crop128_20260910/compute_census_crop128_leftover.py",
+  "script_sha256": "f19e26ff47a6a37ae3c9349c9c37dd3cb76903b1f288d84c1d38ceb00807d7ed",
+  "predeclaration_sha256": "c757840e1bcbe7fcb4352f125ec71b5430d7aaf054b67ab8faa011f6cf112378",
+  "outputs": {
+    "leftover_check.json": "054074dfb6dcb477e2613a7ba9ca8f6ee097c1c425c0aba51f72aabfb58126e8"
+  },
+  "downloads_performed": [],
+  "quality_numbers_invented": false,
+  "formal_alex_hashes_untouched": true,
+  "paper_promotion": false
+}

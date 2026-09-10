@@ -45,6 +45,13 @@ the build instead of producing a stale number.
 | `data/e-init/init_summary.json` | derived_table | 17059 | `fb54927b93c48d7b…` |
 | `data/e-init-analysis/analysis.json` | derived_table | 4457 | `d53ac8e580b1eca2…` |
 | `data/e-init-receipt/RECEIPT.json` | recorded_state | 6787 | `0ec809ed0df89017…` |
+| `data/e-pubtable-predecl/PREDECLARATION.json` | recorded_state | 4327 | `2faef17b5df00fa2…` |
+| `data/e-pubtable/published_table_check.json` | derived_table | 3865 | `dfa46dd346fb62a6…` |
+| `data/e-pubtable-pdf/DiT4SR_supp.pdf` | recorded_state | 3665162 | `eef21f0722775b5c…` |
+| `data/e-pubtable-receipt/RECEIPT.json` | recorded_state | 844 | `51ae36d99c7a65d1…` |
+| `data/e-census-leftover-predecl/PREDECLARATION.json` | recorded_state | 2106 | `508af4d3e0a70526…` |
+| `data/e-census-leftover/leftover_check.json` | derived_table | 5859 | `054074dfb6dcb477…` |
+| `data/e-census-leftover-receipt/RECEIPT.json` | recorded_state | 701 | `6167f6f8ed2b367d…` |
 
 Some of these files recorded the paths of the machine that produced them. Those path strings and source links were refreshed before deposit; `REDACTION.md` states the rules, lists every file touched with both digests, and describes the check that proves no number changed.
 

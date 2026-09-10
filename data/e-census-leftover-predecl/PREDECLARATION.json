@@ -1,0 +1,45 @@
+{
+  "schema": "005.census-crop128-leftover.predeclaration.v1",
+  "declared_utc": "2026-09-10T13:17:03Z",
+  "frozen": true,
+  "freeze_rule": "This file is not edited after the first computed result file lands. Verify: mtime of PREDECLARATION.json < mtime of leftover_check.json and RECEIPT.json.",
+  "authority": {
+    "item": "REGISTERED leftover science 005: census versus crop128 leftovers that have on-disk crops",
+    "gate": "SUBSET_IS_NOT_THE_TABLE_REVIEW and ledger F-02: the two populations are not one union",
+    "does_not_sign_gates": true
+  },
+  "repo": {
+    "path": ".",
+    "head": "5a7453aff09dabc362bf5397860fb4227c868ad4"
+  },
+  "role": "labelled_sensitivity_not_thesis",
+  "paper_promotion": false,
+  "inputs": {
+    "bound_dit": "data/e-dit/sota_dit4sr_metrics_today_dit.json",
+    "census": "data/e-skip/complement_dit4sr_skip_census.json",
+    "history_eval": "data/e-eval-earlier/sota_dit4sr_eval_20260816T062908Z.json",
+    "sizes": "data/e-sizes/complement_dit4sr_lq_size_histogram.json",
+    "orphans": "data/e-orphans/complement_dit4sr_13stem_identity.json"
+  },
+  "endpoints": {
+    "stem_name_intersection": "set intersection of the 100 scored crop128 stems with the 206-input census stem names (ran union skipped)",
+    "size_class": "crop128 LQ is 128-class; census skipped inputs are recorded as 512 to 2048; intersection names are not joined",
+    "orphan_existence": "the 13 census outputs exist on disk, each with gt_path null and metric not_computed; no quality number is computed"
+  },
+  "kill": [
+    "any orphan recorded with a reference image",
+    "any quality metric invented for the 13 outputs",
+    "any join of crop128 rows to census rows on stem name",
+    "any claim that the 100 scored crops are the remnant of the 193 skips"
+  ],
+  "not_computed": [
+    "PSNR/SSIM/LPIPS on the 13 orphan PNGs",
+    "imputation of skipped 512 px inputs from crop128 scores",
+    "extra-scale DrealSR/DPED/DIV2K scoring"
+  ],
+  "reading_rules": {
+    "name_overlap_is_not_file_identity": true,
+    "populations_stay_unjoined": true,
+    "orphans_remain_unscored": true
+  }
+}

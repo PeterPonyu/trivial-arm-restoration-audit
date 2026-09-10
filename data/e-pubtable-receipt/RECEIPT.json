@@ -1,0 +1,16 @@
+{
+  "schema": "005.published-table-check.receipt.v1",
+  "computed_utc": "2026-09-10T13:21:53Z",
+  "interpreter": "~/miniconda3/envs/dl/bin/python",
+  "script": "source-tree/005-dit-blind-restoration/results/published_table_20260910/compute_published_table_check.py",
+  "script_sha256": "3d9292a220be2360a7a020125497bf06d44d8c0b9e77488a01e611e21e37cda8",
+  "predeclaration_sha256": "336e7a70a64e7a0f27a9ae6ddd657ca6fc90a9b6ba4e3fdb43fa863647cb7fa0",
+  "outputs": {
+    "published_table_check.json": "5200700d433b336d0a21c5dca7676c86a4fb5341bc94947ccc8c107e37fd99d9",
+    "page6.txt": "afe1c29677bfc431545d484c6fe713e1067828a21458440695aada8fd7a4d49a",
+    "DiT4SR_supp.pdf": "eef21f0722775b5c349f730848ea489ca10d7a5e227b513a72d818b94bb3bbcc"
+  },
+  "downloads_performed": [],
+  "formal_alex_hashes_untouched": true,
+  "paper_promotion": false
+}
